@@ -1,4 +1,9 @@
+import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/dropdown.dart';
+import 'package:rentwise/common_widgets/long_button.dart';
+import 'package:rentwise/common_widgets/section_header.dart';
+import 'package:rentwise/common_widgets/text_link_button.dart';
+import 'package:rentwise/constants/colours.dart';
 import 'package:rentwise/layouts/form/form_layout.dart';
 import 'package:rentwise/models/Property.dart';
 import 'package:flutter/material.dart';
@@ -51,10 +56,30 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
                   _selectedRoom = value;
                 });
               },
-            )
+            ),
+          TextLinkButton(onPressed: () {}, text: "Add Room"),
+          const SizedBox(height: 20,),
+          const SectionHeader(text: "Room Details"),
+          const SizedBox(height: 10,),
+          DropdownInput(
+            labelText: "Occupancy",
+            items: const ["1", "2", "3", "4"],
+            onChanged: (value) {},
+            starter: "Select Occupancy",
+          ),
+          const SizedBox(height: 10,),
+          const SectionHeader(text: "Rooms"),
+          const SizedBox(height: 20,),
+          const DescriptiveText(text: "No Rooms Selected", color: MyConstants.greyColor),
         ],
       ),
-      buttonContainer: Container(), // Optionally add buttons here
+      buttonContainer: LongButton(
+              text: "Configure Room",
+              onPressed: () {
+              },
+              buttonColor: MyConstants.accentColor,
+              textColor: MyConstants.whiteColor,
+            ), 
       formKey: _formKey,
     );
   }
