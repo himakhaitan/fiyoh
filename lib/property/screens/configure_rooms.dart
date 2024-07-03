@@ -21,6 +21,7 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
   String _selectedFloor = "";
   String _selectedRoom = "";
   List<String> roomItems = [];
+  List<String> addedRooms = [];
 
   @override
   void initState() {
@@ -57,29 +58,81 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
                 });
               },
             ),
-          TextLinkButton(onPressed: () {}, text: "Add Room"),
-          const SizedBox(height: 20,),
+          TextLinkButton(
+            onPressed: () {
+              if (_selectedRoom.isNotEmpty && _selectedRoom != "Select Room") {
+                if (!addedRooms.contains(_selectedRoom)) {
+                  setState(() {
+                    addedRooms.add(_selectedRoom);
+                  });
+                }
+              }
+            },
+            text: "Add Room",
+          ),
+          const SizedBox(
+            height: 20,
+          ),
           const SectionHeader(text: "Room Details"),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           DropdownInput(
             labelText: "Occupancy",
             items: const ["1", "2", "3", "4"],
             onChanged: (value) {},
             starter: "Select Occupancy",
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           const SectionHeader(text: "Rooms"),
-          const SizedBox(height: 20,),
-          const DescriptiveText(text: "No Rooms Selected", color: MyConstants.greyColor),
+          const SizedBox(
+            height: 20,
+          ),
+         
+          ListView.builder(
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: DescriptiveText(
+                          text: "Room ${addedRooms[index]}",
+                          color: MyConstants.primaryColor,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            addedRooms.removeAt(index);
+                          });
+                        },
+                        icon: const Icon(Icons.close_outlined),
+                      ),
+                    ],
+                  ),
+                  const Divider(
+                    color: MyConstants.greyColor,
+                  ),
+                ],
+              );
+            },
+            itemCount: addedRooms.length,
+          ),
         ],
       ),
       buttonContainer: LongButton(
-              text: "Configure Room",
-              onPressed: () {
-              },
-              buttonColor: MyConstants.accentColor,
-              textColor: MyConstants.whiteColor,
-            ), 
+        text: "Configure Room",
+        onPressed: () {},
+        buttonColor: MyConstants.accentColor,
+        textColor: MyConstants.whiteColor,
+      ),
       formKey: _formKey,
     );
   }
