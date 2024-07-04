@@ -50,7 +50,7 @@ class _ManageScreenState extends State<ManageScreen> {
                   );
                 } else {
                   return const Center(
-                    child: Text('Unknown state'),
+                    child: CircularProgressIndicator(),
                   );
                 }
               },
