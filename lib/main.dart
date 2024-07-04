@@ -6,6 +6,7 @@ import 'package:rentwise/home/screens/dashboard.dart';
 import 'package:rentwise/app_entry/new_pages/screens/forgot_password_screen.dart';
 import 'package:rentwise/models/Property.dart';
 import 'package:rentwise/property/screens/add_new_property_screen.dart';
+import 'package:rentwise/property/screens/add_new_tenant_screen.dart';
 import 'package:rentwise/property/screens/configure_rooms.dart';
 import 'package:rentwise/services/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +66,7 @@ class MyApp extends StatelessWidget {
               child: const Dashboard(),
             ),
         '/property/add': (context) => const AddNewPropertyScreen(),
+        '/tenant/add': (context) =>  const AddNewTenantScreen(),
       },
     );
   }
