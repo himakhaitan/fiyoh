@@ -69,6 +69,7 @@ class _AddNewPropertyScreenState extends State<AddNewPropertyScreen> {
         selectedPaymentOptions,
         selectedAmenities,
       );
+      
     }
   }
 

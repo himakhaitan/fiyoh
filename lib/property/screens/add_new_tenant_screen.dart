@@ -44,8 +44,7 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
             propertyItems =
                 state.properties.map((e) => e.propertyName).toList();
           });
-        } else {   
-        }
+        } else {}
       },
       child: FormLayout(
         title: "Add new Tenant",
@@ -92,22 +91,22 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
             ),
             if (_selectedProperty.isNotEmpty &&
                 _selectedProperty != "Select Property")
-            DropdownInput(
-              labelText: "Floor Number",
-              items: floorItems,
-              onChanged: (value) {
-                setState(() {
-                  _selectedFloor = value;
-                  if (_selectedFloor != "Select Floor") {
-                    roomItems = _getRoomsOnFloor(_selectedProperty, value);
-                  } else {
-                    roomItems = [];
-                  }
-                  _selectedRoom = "Select Room";
-                });
-              },
-              starter: "Select Floor",
-            ),
+              DropdownInput(
+                labelText: "Floor Number",
+                items: floorItems,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedFloor = value;
+                    if (_selectedFloor != "Select Floor") {
+                      roomItems = _getRoomsOnFloor(_selectedProperty, value);
+                    } else {
+                      roomItems = [];
+                    }
+                    _selectedRoom = "Select Room";
+                  });
+                },
+                starter: "Select Floor",
+              ),
             if (_selectedFloor.isNotEmpty && _selectedFloor != "Select Floor")
               DropdownInput(
                 labelText: "Room Number",
@@ -132,7 +131,42 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
         buttonContainer: LongButton(
           text: "Add Tenant",
           onPressed: () {
-            if (_formKey.currentState!.validate()) {}
+            if (_formKey.currentState!.validate()) {
+              if (_selectedProperty == "Select Property" ||
+                  _selectedFloor == "Select Floor" ||
+                  _selectedRoom == "Select Room") {
+                setState(() {
+                  _error = "Please select a property, floor and room";
+                });
+              } else {
+                // Add tenant to the selected room
+                setState(() {
+                  _error = "";
+                });
+                // Fetch the property id of the selected property
+                final state = context.read<PropertyBloc>().state;
+                if (state is PropertyLoaded) {
+                  final selectedProperty = state.properties.firstWhere(
+                      (property) => property.propertyName == _selectedProperty);
+
+                  // Add tenant to the selected room
+                  setState(() {
+                    _error = "";
+                  });
+
+                  context.read<PropertyBloc>().add(
+                        AddTenant(
+                          tenantEmail: _emailController.text,
+                          tenantPhone: _phoneController.text,
+                          tenantRoom: _selectedRoom,
+                          propertyId: selectedProperty.propertyId,
+                        ),
+                      );
+                  
+                  Navigator.pop(context);
+                }
+              }
+            }
           },
           buttonColor: MyConstants.accentColor,
           textColor: MyConstants.whiteColor,

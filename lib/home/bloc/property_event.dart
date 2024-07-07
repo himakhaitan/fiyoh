@@ -33,3 +33,15 @@ class AdjustProperty extends PropertyEvent {
   @override
   List<Object> get props => [propertyId, rooms, occupancy];
 }
+
+class AddTenant extends PropertyEvent {
+  final String propertyId;
+  final String tenantEmail;
+  final String tenantPhone;
+  final String tenantRoom;
+
+  AddTenant({required this.propertyId, required this.tenantEmail, required this.tenantPhone, required this.tenantRoom});
+
+  @override
+  List<Object> get props => [propertyId, tenantEmail, tenantPhone, tenantRoom];
+}

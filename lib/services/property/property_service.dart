@@ -107,7 +107,6 @@ class PropertyService {
             DocumentReference roomRef = await propertyRef.collection('rooms').add({
               'room_number': formatRoomNumber(roomNumber),
               'floor': floor,
-              'tenantId': null,
             });
             roomsByFloor[floor.toString()]!.add(roomRef.id);
           } catch (e) {
