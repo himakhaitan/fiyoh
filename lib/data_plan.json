@@ -1,0 +1,114 @@
+{
+  "BOOKINGS": {
+    "DESCRIPTION": "Data Structure of Bookings",
+    "STRUCTURE": {
+      "booking_id": "ID",
+      "property_id": "ID",
+      "room_id": "ID",
+      "user_id": "ID",
+      "checkin_date": "Date",
+      "checkout_date": "Date",
+      "status": {
+        "type": "String",
+        "enum": ["BOOKED", "CANCELLED", "CHECKEDIN", "CHECKEDOUT"]
+      },
+      "transactions": ["ID"]
+    }
+  },
+  "TRANSACTIONS": {
+    "DESCRIPTION": "Data Structure of Transactions",
+    "STRUCTURE": {
+      "transaction_id": "ID",
+      "trasaction_type": {
+        "type": "String",
+        "enum": ["RENT", "DEPOSIT"]
+      },
+      "amount": "Int",
+      "booking_id": "ID",
+      "user_id": "ID",
+      "status": {
+        "type": "String",
+        "enum": ["PENDING", "SUCCESS", "FAILED"]
+      },
+      "payment_date": "Date",
+      "rent_month": "String",
+      "rent_year": "String"
+    }
+  },
+  "USERS": {
+    "DESCRIPTION": "Data Structure of Users",
+    "STRUCTURE": {
+      "user_id": "ID",
+      "first_name": "String",
+      "last_name": "String",
+      "email": "String",
+      "phone_number": "String",
+      "user_type": {
+        "type": "String",
+        "enum": ["OWNER", "TENANT"]
+      },
+      "properties": ["ID"],
+      "bookings": ["ID"],
+      "created_at": "Date",
+      "updated_at": "Date",
+      "transactions": ["ID"],
+      "active_booking": "ID"
+    }
+  },
+  "PROPERTIES": {
+    "DESCRIPTION": "Data Structure of Properties",
+    "STRUCTURE": {
+      "property_id": "ID",
+      "property_name": "String",
+      "property_type": {
+        "type": "String",
+        "enum": ["Coliving", "Female", "Male"]
+      },
+      "city": "String",
+      "state": "String",
+      "street_address": "String",
+      "amenities": {
+        "isac": "Boolean",
+        "ischair": "Boolean",
+        "iscupboard": "Boolean",
+        "isfridge": "Boolean",
+        "isgeyser": "Boolean",
+        "ismattress": "Boolean",
+        "istable": "Boolean"
+      },
+      "facilities": {
+        "iscctv": "Boolean",
+        "isgym": "Boolean",
+        "iscleaning": "Boolean",
+        "iscommonarea": "Boolean",
+        "isfood": "Boolean",
+        "islaundry": "Boolean",
+        "isparking": "Boolean",
+        "ispowerbackup": "Boolean",
+        "issecurity": "Boolean",
+        "iswifi": "Boolean"
+      },
+      "owner_id": "ID",
+      "payment_options": {
+        "isbanktransfer": "Boolean",
+        "iscash": "Boolean",
+        "iscreditcard": "Boolean",
+        "isdebitcard": "Boolean",
+        "isupi": "Boolean"
+      },
+      "pincode": "String",
+      "rules": ["String"],
+      "rooms": [["ID"]],
+      "ROOMS": {
+        "DESCRIPTION": "Data Structure of Rooms",
+        "STRUCTURE": {
+          "room_id": "ID",
+          "floor": "Int",
+          "occupancy": "Int",
+          "room_number": "String",
+          "tenants": ["ID"]
+        }
+      }
+    }
+  }
+}

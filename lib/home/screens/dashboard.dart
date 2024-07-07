@@ -1,5 +1,6 @@
 import 'package:rentwise/constants/colours.dart';
 import 'package:rentwise/home/screens/manage_screen.dart';
+import 'package:rentwise/home/screens/rent_screen.dart';
 import 'package:rentwise/home/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:rentwise/home/widgets/custom_bottom_bar.dart';
@@ -52,12 +53,7 @@ class _DashboardState extends State<Dashboard> {
               child: Text('Home'),
             ),
           ),
-          Container(
-            color: Colors.white,
-            child: Center(
-              child: Text('Business'),
-            ),
-          ),
+          const RentScreen(),
           Container(
             color: Colors.white,
             child: Center(
