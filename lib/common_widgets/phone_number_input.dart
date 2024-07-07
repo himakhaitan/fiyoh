@@ -43,7 +43,7 @@ class PhoneNumberInput extends StatelessWidget {
               borderRadius: BorderRadius.circular(5), // Rounded corners
             ),
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           Expanded(
             child: FormInput(
               labelText: labelText,

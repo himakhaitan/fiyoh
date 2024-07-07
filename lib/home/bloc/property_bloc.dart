@@ -16,6 +16,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
     on<GetProperties>((event, emit) => _handleGetProperties(event, emit));
     on<AddProperty>((event, emit) => _handleAddProperty(event, emit));
     on<AdjustProperty>((event, emit) => _handleAdjustProperty(event, emit));
+    
   }
 
   Future<List<Property>> _fetchProperties(String userId) async {
@@ -38,6 +39,8 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
 
     return properties;
   }
+
+  
 
   Future<void> _handleGetProperties(
       GetProperties event, Emitter<PropertyState> emit) async {
@@ -69,7 +72,6 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
       }
 
       List<Property> properties = await _fetchProperties(user.uid);
-
       emit(PropertyLoaded(properties: properties));
     } catch (e) {
       emit(PropertyFailed(error: e.toString()));

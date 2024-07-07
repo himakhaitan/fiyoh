@@ -31,88 +31,140 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
   String _selectedProperty = "";
   String _selectedRoom = "";
   String _error = "";
+  List<String> propertyItems = [];
+  List<String> floorItems = [];
   List<String> roomItems = ["1"];
 
   @override
   Widget build(BuildContext context) {
-    return FormLayout(
-      title: "Add new Tenant",
-      description:
-          "Welcome the new tenant to your property by adding their details below.",
-      form: Column(
-        children: [
-          FormInput(
-            labelText: "Email",
-            hintText: "Tenant's Email",
-            obscureText: false,
-            controller: _emailController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Email is required";
-              }
-              return null;
-            },
-          ),
-          PhoneNumberInput(
-            labelText: 'Phone Number',
-            hintText: "Tenant's Phone Number",
-            controller: _phoneController,
-            validator: (value) {
-              return null;
-            },
-          ),
-          DropdownInput(
-            labelText: "Property",
-            items: const ["1", "2"],
-            onChanged: (value) {
-              setState(() {
-                _selectedProperty = value;
-              });
-            },
-            starter: "Select Property",
-          ),
-          DropdownInput(
-            labelText: "Floor Number",
-            items: const ["1", "2"],
-            onChanged: (value) {
-              setState(() {
-                _selectedFloor = value;
-                roomItems = ["1", "2"];
-                _selectedRoom = "Select Room";
-              });
-            },
-            starter: "Select Floor",
-          ),
-          if (_selectedFloor.isNotEmpty && _selectedFloor != "Select Floor")
+    return BlocListener<PropertyBloc, PropertyState>(
+      listener: (context, state) {
+        if (state is PropertyLoaded) {
+          setState(() {
+            propertyItems =
+                state.properties.map((e) => e.propertyName).toList();
+          });
+        } else {   
+        }
+      },
+      child: FormLayout(
+        title: "Add new Tenant",
+        description:
+            "Welcome the new tenant to your property by adding their details below.",
+        form: Column(
+          children: [
+            FormInput(
+              labelText: "Email",
+              hintText: "Tenant's Email",
+              obscureText: false,
+              controller: _emailController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Email is required";
+                }
+                return null;
+              },
+            ),
+            PhoneNumberInput(
+              labelText: 'Phone Number',
+              hintText: "Tenant's Phone Number",
+              controller: _phoneController,
+              validator: (value) {
+                return null;
+              },
+            ),
             DropdownInput(
-              labelText: "Room Number",
-              items: roomItems,
+              labelText: "Property",
+              items: propertyItems,
               onChanged: (value) {
                 setState(() {
-                  _selectedRoom = value;
+                  _selectedProperty = value;
+                  if (_selectedProperty != "Select Property") {
+                    floorItems = _getFloorsForProperty(value);
+                  } else {
+                    floorItems = [];
+                  }
+                  _selectedFloor = "Select Floor";
+                  _selectedRoom = "Select Room";
                 });
               },
-              starter: "Select Room",
+              starter: "Select Property",
             ),
-          if (_error.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: DescriptiveText(
-                text: _error,
-                color: MyConstants.redColor,
+            if (_selectedProperty.isNotEmpty &&
+                _selectedProperty != "Select Property")
+            DropdownInput(
+              labelText: "Floor Number",
+              items: floorItems,
+              onChanged: (value) {
+                setState(() {
+                  _selectedFloor = value;
+                  if (_selectedFloor != "Select Floor") {
+                    roomItems = _getRoomsOnFloor(_selectedProperty, value);
+                  } else {
+                    roomItems = [];
+                  }
+                  _selectedRoom = "Select Room";
+                });
+              },
+              starter: "Select Floor",
+            ),
+            if (_selectedFloor.isNotEmpty && _selectedFloor != "Select Floor")
+              DropdownInput(
+                labelText: "Room Number",
+                items: roomItems,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedRoom = value;
+                  });
+                },
+                starter: "Select Room",
               ),
-            ),
-        ],
+            if (_error.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: DescriptiveText(
+                  text: _error,
+                  color: MyConstants.redColor,
+                ),
+              ),
+          ],
+        ),
+        buttonContainer: LongButton(
+          text: "Add Tenant",
+          onPressed: () {
+            if (_formKey.currentState!.validate()) {}
+          },
+          buttonColor: MyConstants.accentColor,
+          textColor: MyConstants.whiteColor,
+        ),
+        formKey: _formKey,
       ),
-      buttonContainer: LongButton(
-        text: "Add Tenant",
-        onPressed: () {
-          if (_formKey.currentState!.validate()) {}
-        },
-        buttonColor: MyConstants.accentColor,
-        textColor: MyConstants.whiteColor,
-      ),
-      formKey: _formKey,
     );
+  }
+
+  List<String> _getFloorsForProperty(String propertyName) {
+    // Logic to get floors for the selected property
+    final state = context.read<PropertyBloc>().state;
+
+    if (state is PropertyLoaded) {
+      final selectedProperty = state.properties
+          .firstWhere((property) => property.propertyName == propertyName);
+      return selectedProperty.rooms.keys.toList();
+    } else {
+      return [];
+    }
+  }
+
+  List<String> _getRoomsOnFloor(String propertyName, String floor) {
+    // Logic to get rooms on the selected floor
+    final state = context.read<PropertyBloc>().state;
+
+    if (state is PropertyLoaded) {
+      final selectedProperty = state.properties
+          .firstWhere((property) => property.propertyName == propertyName);
+      return selectedProperty.rooms[floor]!.toList();
+    } else {
+      return [];
+    }
   }
 }
