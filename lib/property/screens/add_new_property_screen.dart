@@ -70,7 +70,6 @@ class _AddNewPropertyScreenState extends State<AddNewPropertyScreen> {
         selectedAmenities,
       );
     }
-    print("Property Added");
   }
 
   @override

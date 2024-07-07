@@ -1,7 +1,7 @@
 import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/constants/colours.dart';
-import 'package:rentwise/home/bloc/data_bloc.dart';
-import 'package:rentwise/models/Property.dart';
+import 'package:rentwise/home/bloc/property_bloc.dart';
+import 'package:rentwise/models/property.dart';
 import 'package:rentwise/property/screens/configure_rooms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -92,7 +92,7 @@ class PropertyTile extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => BlocProvider(
-                          create: (context) => DataBloc(),
+                          create: (context) => PropertyBloc(),
                           child: ConfigureRooms(
                             property: property,
                           ),

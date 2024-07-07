@@ -1,13 +1,11 @@
 import 'package:rentwise/app_entry/new_pages/screens/login_screen.dart';
 import 'package:rentwise/app_entry/new_pages/screens/welcome_screen.dart';
 import 'package:rentwise/app_entry/new_pages/screens/signup_screen.dart';
-import 'package:rentwise/home/bloc/data_bloc.dart';
+import 'package:rentwise/home/bloc/property_bloc.dart';
 import 'package:rentwise/home/screens/dashboard.dart';
 import 'package:rentwise/app_entry/new_pages/screens/forgot_password_screen.dart';
-import 'package:rentwise/models/Property.dart';
 import 'package:rentwise/property/screens/add_new_property_screen.dart';
 import 'package:rentwise/property/screens/add_new_tenant_screen.dart';
-import 'package:rentwise/property/screens/configure_rooms.dart';
 import 'package:rentwise/services/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -62,11 +60,14 @@ class MyApp extends StatelessWidget {
               child: const ForgotPasswordScreen(),
             ),
         '/home': (context) => BlocProvider(
-              create: (context) => DataBloc(),
+              create: (context) => PropertyBloc(),
               child: const Dashboard(),
             ),
         '/property/add': (context) => const AddNewPropertyScreen(),
-        '/tenant/add': (context) =>  const AddNewTenantScreen(),
+        '/tenant/add': (context) => BlocProvider(
+              create: (context) => PropertyBloc(),
+              child: const AddNewTenantScreen(),
+            ),
       },
     );
   }

@@ -5,9 +5,9 @@ import 'package:rentwise/common_widgets/long_button.dart';
 import 'package:rentwise/common_widgets/section_header.dart';
 import 'package:rentwise/common_widgets/text_link_button.dart';
 import 'package:rentwise/constants/colours.dart';
-import 'package:rentwise/home/bloc/data_bloc.dart';
+import 'package:rentwise/home/bloc/property_bloc.dart';
 import 'package:rentwise/layouts/form/form_layout.dart';
-import 'package:rentwise/models/Property.dart';
+import 'package:rentwise/models/property.dart';
 import 'package:flutter/material.dart';
 
 class ConfigureRooms extends StatefulWidget {
@@ -34,18 +34,18 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<DataBloc, DataState>(
+    return BlocListener<PropertyBloc, PropertyState>(
       listener: (context, state) {
-        if (state is DataLoading) {
+        if (state is PropertyLoading) {
           setState(() {
             _isLoading = true;
           });
-        } else if (state is DataLoaded) {
+        } else if (state is PropertyLoaded) {
           setState(() {
             _isLoading = false;
           });
           Navigator.pop(context);
-        } else if (state is DataFailure) {
+        } else if (state is PropertyFailed) {
           setState(() {
             _isLoading = false;
           });
@@ -173,10 +173,10 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               // Call the bloc to update the rooms
-              context.read<DataBloc>().add(
-                    AdjustRoomsDetails(
-                      property: widget.property,
-                      addedRooms: addedRooms,
+              context.read<PropertyBloc>().add(
+                    AdjustProperty(
+                      propertyId: widget.property.propertyId,
+                      rooms: addedRooms,
                       occupancy: _selectedOccupancy,
                     ),
                   );

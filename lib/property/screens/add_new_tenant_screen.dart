@@ -5,7 +5,9 @@ import 'package:rentwise/common_widgets/form_input.dart';
 import 'package:rentwise/common_widgets/long_button.dart';
 import 'package:rentwise/common_widgets/phone_number_input.dart';
 import 'package:rentwise/constants/colours.dart';
+import 'package:rentwise/home/bloc/property_bloc.dart';
 import 'package:rentwise/layouts/form/form_layout.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddNewTenantScreen extends StatefulWidget {
   const AddNewTenantScreen({super.key});
@@ -15,6 +17,13 @@ class AddNewTenantScreen extends StatefulWidget {
 }
 
 class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Ensure this is called after the widget is fully built
+    context.read<PropertyBloc>().add(GetProperties());
+  }
+
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
@@ -52,7 +61,7 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
               return null;
             },
           ),
-           DropdownInput(
+          DropdownInput(
             labelText: "Property",
             items: const ["1", "2"],
             onChanged: (value) {
@@ -98,9 +107,7 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
       buttonContainer: LongButton(
         text: "Add Tenant",
         onPressed: () {
-          if (_formKey.currentState!.validate()) {
-
-          }
+          if (_formKey.currentState!.validate()) {}
         },
         buttonColor: MyConstants.accentColor,
         textColor: MyConstants.whiteColor,
