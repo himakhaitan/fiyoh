@@ -106,7 +106,7 @@
           "floor": "Int",
           "occupancy": "Int",
           "room_number": "String",
-          "tenants": ["ID"]
+          "tenants": [{ "booking_id": "ID", "user_id": "ID" }]
         }
       }
     }
