@@ -13,7 +13,7 @@ class RentScreen extends StatefulWidget {
 
 class _RentScreenState extends State<RentScreen> {
   String _selectedStatus = "";
-
+  String _selectedPeriod = "";
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -25,10 +25,11 @@ class _RentScreenState extends State<RentScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SectionHeader(text: "Filters"),
-                // TextLinkButton(onPressed: () {}, text: "Search"),
                 IconButton.filledTonal(
-                  onPressed: () {},
-                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    // Perform search
+                  },
+                  icon: const Icon(Icons.search),
                   // Change tone color
                   style: ButtonStyle(
                     backgroundColor: WidgetStateProperty.all(Colors.grey[200]),
@@ -43,7 +44,11 @@ class _RentScreenState extends State<RentScreen> {
                   child: DropdownInput(
                     labelText: "Period",
                     items: const ["Last Month", "Last 3 Months"],
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedPeriod = value;
+                      });
+                    },
                     starter: "Current Month",
                   ),
                 ),
