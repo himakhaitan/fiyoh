@@ -51,7 +51,6 @@
       "bookings": ["ID"],
       "created_at": "Date",
       "updated_at": "Date",
-      "transactions": ["ID"],
       "active_booking": "ID"
     }
   },

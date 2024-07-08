@@ -9,7 +9,7 @@ class FormInput extends StatelessWidget {
   final IconData? icon;
   final TextEditingController controller;
   final FormFieldValidator<String>? validator;
-
+  final TextInputType? keyboardType;
   const FormInput({
     super.key,
     required this.labelText,
@@ -17,6 +17,7 @@ class FormInput extends StatelessWidget {
     required this.obscureText,
     required this.controller,
     this.icon,
+    this.keyboardType = TextInputType.text,
     required this.validator
   });
 
@@ -25,6 +26,8 @@ class FormInput extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(bottom: 15),
       child: TextFormField(
+        // Keyboard type should be text
+        keyboardType: keyboardType,
         controller: controller,
         decoration: InputDecoration(
           icon: icon != null

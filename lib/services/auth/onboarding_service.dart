@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rentwise/constants/enums.dart';
 
 class OnboardingService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -12,7 +13,8 @@ class OnboardingService {
         'last_name': lastName,
         'phone_number': phoneNumber,
         'email': email,
-        'user_type': 'owner',
+        'properties': [],
+        'user_type': USERTYPE.OWNER.value,
         'created_at': FieldValue.serverTimestamp(),
         'updated_at': FieldValue.serverTimestamp(),
       });

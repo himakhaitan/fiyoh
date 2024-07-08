@@ -51,6 +51,7 @@ class PhoneNumberInput extends StatelessWidget {
               obscureText: obscureText,
               controller: controller,
               validator: validator,
+              keyboardType: TextInputType.phone,
             ),
           ),
         ],

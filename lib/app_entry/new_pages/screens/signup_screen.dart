@@ -111,6 +111,9 @@ class SignUpOptions extends StatelessWidget {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your first name';
                     }
+                    if (value.length < 3) {
+                      return 'First name must be at least 3 characters';
+                    }
                     return null;
                   },
                 ),
@@ -125,6 +128,9 @@ class SignUpOptions extends StatelessWidget {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your last name';
+                    }
+                    if (value.length < 3) {
+                      return 'Last name must be at least 3 characters';
                     }
                     return null;
                   },
