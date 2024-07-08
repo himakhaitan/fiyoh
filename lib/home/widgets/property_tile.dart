@@ -72,35 +72,29 @@ class PropertyTile extends StatelessWidget {
                 color: MyConstants.primaryColor,
                 fontWeight: FontWeight.w600,
               ),
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: Colors.grey[200]!, // Set the background color here
-                  shape:
-                      BoxShape.circle, // If you want the button to be circular
+              IconButton.filledTonal(
+                icon: const Icon(
+                  Icons.room_preferences_outlined,
+                  color: MyConstants.primaryColor,
+                  size: 20,
                 ),
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.room_preferences_outlined,
-                    color: MyConstants.primaryColor,
-                    size: 20,
-                  ),
-                  onPressed: () {
-                    // Navigate to the configure rooms screen
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BlocProvider(
-                          create: (context) => PropertyBloc(),
-                          child: ConfigureRooms(
-                            property: property,
-                          ),
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(Colors.grey[200]),
+                ),
+                onPressed: () {
+                  // Navigate to the configure rooms screen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                        create: (context) => PropertyBloc(),
+                        child: ConfigureRooms(
+                          property: property,
                         ),
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
             ],
           ),
