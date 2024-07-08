@@ -1,4 +1,6 @@
+import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/dropdown.dart';
+import 'package:rentwise/common_widgets/info_item.dart';
 import 'package:rentwise/common_widgets/section_header.dart';
 import 'package:flutter/material.dart';
 import 'package:rentwise/common_widgets/text_link_button.dart';
@@ -67,15 +69,15 @@ class _RentScreenState extends State<RentScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             const SectionHeader(text: "Rent Details"),
             const SizedBox(height: 10),
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: 1,
+              itemCount: 20,
               itemBuilder: (context, index) {
-                return Container();
+                return const RentRoomTile();
               },
             )
           ],
@@ -85,16 +87,69 @@ class _RentScreenState extends State<RentScreen> {
   }
 }
 
-/*
+class RentRoomTile extends StatelessWidget {
+  const RentRoomTile({super.key});
 
-  Details that need to be displayed in the RoomTile:
-  Header: Property Name
-  - Room Number
-  - Tenants List
-    - Bed Status (Empty, Paid, Pending)
-    
-  - Status of Payment for everyone in the room
-  - Button to Add Rent Payment
-
-
-*/
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+      margin: const EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: MyConstants.greyColor,
+            width: 1,
+          ),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.grey[200],
+            ),
+            child: const DescriptiveText(
+              text: "101",
+              fontSize: 18,
+              color: MyConstants.primaryColor,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(width: 30),
+          const Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                InfoItems(
+                  text: "Green Homes Platina",
+                  icon: Icons.home_outlined,
+                ),
+                InfoItems(
+                  text: "2 Tenants",
+                  icon: Icons.people_outline,
+                ),
+                InfoItems(
+                  text: "Pending",
+                  icon: Icons.monetization_on_outlined,
+                  color: MyConstants.errorMetallic,
+                ),
+              ],
+            ),
+          ),
+          IconButton.filledTonal(
+            onPressed: () {},
+            icon: const Icon(Icons.navigate_next),
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all(Colors.grey[100]),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

@@ -1,4 +1,5 @@
 import 'package:rentwise/common_widgets/descriptive_text.dart';
+import 'package:rentwise/common_widgets/info_item.dart';
 import 'package:rentwise/constants/colours.dart';
 import 'package:rentwise/home/bloc/property_bloc.dart';
 import 'package:rentwise/models/property.dart';
@@ -49,14 +50,14 @@ class PropertyTile extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          IconItems(
+          InfoItems(
             text: '${property.city}, ${property.state}',
             icon: Icons.location_on,
           ),
           const SizedBox(
             height: 10,
           ),
-          IconItems(
+          InfoItems(
             text: property.propertyType,
             icon: Icons.home,
           ),
@@ -104,33 +105,3 @@ class PropertyTile extends StatelessWidget {
   }
 }
 
-class IconItems extends StatelessWidget {
-  final String text;
-  final IconData icon;
-  const IconItems({
-    super.key,
-    required this.text,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Icon(
-          icon,
-          color: MyConstants.primaryColor.withOpacity(0.6),
-          size: 20,
-        ),
-        const SizedBox(width: 10),
-        DescriptiveText(
-          text: text,
-          fontSize: 16,
-          color: MyConstants.primaryColor.withOpacity(0.6),
-          fontWeight: FontWeight.w700,
-        ),
-      ],
-    );
-  }
-}
