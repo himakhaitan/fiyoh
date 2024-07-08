@@ -78,7 +78,11 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
               onChanged: (value) {
                 setState(() {
                   _selectedFloor = value;
-                  roomItems = widget.property.rooms[value]!.toList();
+                  if (value != "Select Floor") {
+                    roomItems = widget.property.rooms[value]!.toList();
+                  } else {
+                    roomItems = [];
+                  }
                   _selectedRoom = "Select Room";
                 });
               },

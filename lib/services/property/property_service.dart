@@ -35,9 +35,6 @@ class PropertyService {
     List<bool> selectedAmenities,
   ) async {
     // Add the property to the firestore
-    print(selectedFacilities);
-    print(selectedPaymentOptions);
-    print(selectedAmenities);
     try {
       // get the user id
       User? user = _auth.currentUser;

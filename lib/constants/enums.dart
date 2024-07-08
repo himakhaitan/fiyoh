@@ -1,9 +1,9 @@
-enum USERTYPE {
+enum USER {
   OWNER,
   TENANT,
 }
 
-extension UserTypeExtension on USERTYPE {
+extension UserExtension on USER {
   String get value {
     return toString().split('.').last;
   }

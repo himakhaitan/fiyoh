@@ -89,7 +89,18 @@ class _FloorInputState extends State<FloorInput> {
               labelText: 'Start',
               obscureText: false,
               controller: _startController,
+              keyboardType: TextInputType.number,
               validator: (value) {
+
+                if (value == null || value.isEmpty) {
+                  return 'Please enter the starting room number';
+                }
+                if (!RegExp(r'^[0-9]*$').hasMatch(value)) {
+                  return 'Room number must be a number';
+                }
+                if (value.length < 3) {
+                  return 'Room number must be at least 3 characters';
+                }
                 return null;
               },
             ),
@@ -107,7 +118,19 @@ class _FloorInputState extends State<FloorInput> {
               labelText: 'End',
               obscureText: false,
               controller: _endController,
+              keyboardType: TextInputType.number,
               validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter the ending room number';
+                }
+                // Should only be digits
+                if (!RegExp(r'^[0-9]*$').hasMatch(value)) {
+                  return 'Room number must be a number';
+                }
+                if (value.length < 3) {
+                  return 'Room number must be at least 3 characters';
+                }
+
                 return null;
               },
             ),

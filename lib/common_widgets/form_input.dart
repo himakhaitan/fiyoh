@@ -10,6 +10,7 @@ class FormInput extends StatelessWidget {
   final TextEditingController controller;
   final FormFieldValidator<String>? validator;
   final TextInputType? keyboardType;
+  
   const FormInput({
     super.key,
     required this.labelText,

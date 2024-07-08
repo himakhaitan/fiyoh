@@ -63,7 +63,10 @@ class MyApp extends StatelessWidget {
               create: (context) => PropertyBloc(),
               child: const Dashboard(),
             ),
-        '/property/add': (context) => const AddNewPropertyScreen(),
+        '/property/add': (context) => BlocProvider(
+              create: (context) => PropertyBloc(),
+              child: const AddNewPropertyScreen(),
+            ),
         '/tenant/add': (context) => BlocProvider(
               create: (context) => PropertyBloc(),
               child: const AddNewTenantScreen(),

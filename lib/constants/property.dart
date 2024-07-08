@@ -56,11 +56,12 @@ const List<String> paymentOptions = [
 // List of Amenities
 const List<String> amenities = [
   "Mattress",
-  "Cupboard",
+  "Wardrobe",
   "Fridge",
   "Table",
   "Chair",
   "AC",
   "Geyser",
   "TV",
+  "Washing Machine",
 ];

@@ -14,12 +14,49 @@ class GetProperties extends PropertyEvent {
 }
 
 class AddProperty extends PropertyEvent {
-  final Property property;
+  String propertyName;
+  String streetAddress;
+  String pincode;
+  String city;
+  String state;
+  String propertyType;
+  List<String> startRooms;
+  List<String> endRooms;
+  List<String> rules;
+  List<bool> selectedFacilities;
+  List<bool> selectedPaymentOptions;
+  List<bool> selectedAmenities;
 
-  AddProperty({required this.property});
+  AddProperty({
+    required this.propertyName,
+    required this.streetAddress,
+    required this.pincode,
+    required this.city,
+    required this.state,
+    required this.propertyType,
+    required this.startRooms,
+    required this.endRooms,
+    required this.rules,
+    required this.selectedFacilities,
+    required this.selectedPaymentOptions,
+    required this.selectedAmenities,
+  });
 
   @override
-  List<Object> get props => [property];
+  List<Object> get props => [
+        propertyName,
+        streetAddress,
+        pincode,
+        city,
+        state,
+        propertyType,
+        startRooms,
+        endRooms,
+        rules,
+        selectedFacilities,
+        selectedPaymentOptions,
+        selectedAmenities,
+      ];
 }
 
 class AdjustProperty extends PropertyEvent {
@@ -28,7 +65,8 @@ class AdjustProperty extends PropertyEvent {
   final List<String> rooms;
   final String occupancy;
 
-  AdjustProperty({required this.propertyId, required this.rooms, required this.occupancy});
+  AdjustProperty(
+      {required this.propertyId, required this.rooms, required this.occupancy});
 
   @override
   List<Object> get props => [propertyId, rooms, occupancy];
@@ -40,7 +78,11 @@ class AddTenant extends PropertyEvent {
   final String tenantPhone;
   final String tenantRoom;
 
-  AddTenant({required this.propertyId, required this.tenantEmail, required this.tenantPhone, required this.tenantRoom});
+  AddTenant(
+      {required this.propertyId,
+      required this.tenantEmail,
+      required this.tenantPhone,
+      required this.tenantRoom});
 
   @override
   List<Object> get props => [propertyId, tenantEmail, tenantPhone, tenantRoom];
