@@ -177,7 +177,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
                 await propertyRef.collection('rooms').add({
               'room_number': formatRoomNumber(roomNumber),
               'floor': floor,
-              'occupancy': null,
+              'occupancy': 2,
               'tenants': [],
               'created_at': FieldValue.serverTimestamp(),
               'updated_at': FieldValue.serverTimestamp(),
@@ -234,7 +234,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
                 roomDoc.reference.update(
                   {
                     'occupancy': occupancyInt,
-                    'tenants': [],
+                    'updated_at': FieldValue.serverTimestamp(),
                   },
                 );
               },
