@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
+import 'package:rentwise/constants/enums.dart';
 import 'package:rentwise/models/property.dart';
 
 part 'property_event.dart';
@@ -49,17 +50,30 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
         return;
       }
 
+      // Create a Booking
+      DocumentReference bookingRef =
+          await _firestore.collection('bookings').add({
+        'property_id': event.propertyId,
+        'room_id': event.tenantRoom,
+        'user_id': event.tenantEmail,
+        'check_in': FieldValue.serverTimestamp(),
+        'check_out': null,
+        'status': BOOKING_STATUS.CHECKED_IN.value,
+        'created_at': FieldValue.serverTimestamp(),
+        'updated_at': FieldValue.serverTimestamp(),
+        'transactions': [],
+      });
+
       // Create a new user with email id as the tenant email
       await _firestore.collection('users').doc(event.tenantEmail).set(
         {
+          'first_name': event.tenantFirstName,
+          'last_name': event.tenantLastName,
           'email': event.tenantEmail,
-          'phone': event.tenantPhone,
-          'user_type': "tenant",
+          'phone_number': event.tenantPhone,
+          'user_type': USER.TENANT.value,
           'bookings': FieldValue.arrayUnion([
-            {
-              'property_id': event.propertyId,
-              'room_id': event.tenantRoom,
-            }
+            bookingRef.id,
           ]),
           'created_at': FieldValue.serverTimestamp(),
           'updated_at': FieldValue.serverTimestamp(),
@@ -73,7 +87,13 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
           .doc(event.tenantRoom)
           .update(
         {
-          'tenants': FieldValue.arrayUnion([event.tenantEmail]),
+          'tenants': FieldValue.arrayUnion([
+            {
+              'user_id': event.tenantEmail,
+              'booking_id': bookingRef.id,
+            }
+          ]),
+          'updated_at': FieldValue.serverTimestamp(),
         },
       );
     } catch (e) {

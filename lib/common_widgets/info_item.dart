@@ -30,7 +30,7 @@ class InfoItems extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             color: color,
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
           child: DescriptiveText(
             text: text,
             fontSize: 14,

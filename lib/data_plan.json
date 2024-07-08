@@ -6,8 +6,8 @@
       "property_id": "ID",
       "room_id": "ID",
       "user_id": "ID",
-      "checkin_date": "Date",
-      "checkout_date": "Date",
+      "check_in": "Date",
+      "check_out": "Date",
       "status": {
         "type": "String",
         "enum": ["BOOKED", "CANCELLED", "CHECKEDIN", "CHECKEDOUT"]

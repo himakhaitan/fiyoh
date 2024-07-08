@@ -110,6 +110,11 @@ class SignInOptions extends StatelessWidget {
               if (value == null || value.isEmpty) {
                 return "Email is required";
               }
+              bool isValid =
+                  RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value);
+              if (!isValid) {
+                return 'Please enter a valid email address';
+              }
               return null;
             },
           ),

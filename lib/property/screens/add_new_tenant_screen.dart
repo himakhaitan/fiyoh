@@ -27,6 +27,9 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+
   String _selectedFloor = "";
   String _selectedProperty = "";
   String _selectedRoom = "";
@@ -52,10 +55,51 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
             "Welcome the new tenant to your property by adding their details below.",
         form: Column(
           children: [
+            Row(
+            children: [
+              Expanded(
+                child: FormInput(
+                  labelText: "First Name",
+                  hintText: "First Name",
+                  obscureText: false,
+                  icon: Icons.person_2_outlined,
+                  controller: _firstNameController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your first name';
+                    }
+                    if (value.length < 3) {
+                      return 'First name must be at least 3 characters';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              const SizedBox(width: 20),
+              Expanded(
+                child: FormInput(
+                  labelText: "Last Name",
+                  hintText: "Last Name",
+                  obscureText: false,
+                  controller: _lastNameController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your last name';
+                    }
+                    if (value.length < 3) {
+                      return 'Last name must be at least 3 characters';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+            ],
+          ),
             FormInput(
               labelText: "Email",
               hintText: "Tenant's Email",
               obscureText: false,
+              icon: Icons.alternate_email_outlined,
               controller: _emailController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -160,6 +204,8 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
                           tenantPhone: _phoneController.text,
                           tenantRoom: _selectedRoom,
                           propertyId: selectedProperty.propertyId,
+                          tenantFirstName: _firstNameController.text,
+                          tenantLastName: _lastNameController.text,
                         ),
                       );
                   

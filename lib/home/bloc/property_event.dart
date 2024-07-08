@@ -77,12 +77,17 @@ class AddTenant extends PropertyEvent {
   final String tenantEmail;
   final String tenantPhone;
   final String tenantRoom;
+  final String tenantFirstName;
+  final String tenantLastName;
 
-  AddTenant(
-      {required this.propertyId,
-      required this.tenantEmail,
-      required this.tenantPhone,
-      required this.tenantRoom});
+  AddTenant({
+    required this.propertyId,
+    required this.tenantEmail,
+    required this.tenantPhone,
+    required this.tenantRoom,
+    required this.tenantFirstName,
+    required this.tenantLastName,
+  });
 
   @override
   List<Object> get props => [propertyId, tenantEmail, tenantPhone, tenantRoom];
