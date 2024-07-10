@@ -34,6 +34,7 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
   String _selectedProperty = "";
   String _selectedRoom = "";
   String _error = "";
+  bool _isLoading = false;
   List<String> propertyItems = [];
   List<String> floorItems = [];
   List<String> roomItems = ["1"];
@@ -44,10 +45,26 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
       listener: (context, state) {
         if (state is PropertyLoaded) {
           setState(() {
+            _error = "";
+            _isLoading = false;
             propertyItems =
                 state.properties.map((e) => e.propertyName).toList();
           });
-        } else {}
+        } else if (state is PropertyLoading) {
+          setState(() {
+            _isLoading = true;
+          });
+        } else if (state is PropertyAPICompleted) {
+          setState(() {
+            _isLoading = false;
+          });
+          Navigator.pop(context);
+        } else if (state is PropertyFailed) {
+          setState(() {
+            _isLoading = false;
+            _error = state.error;
+          });
+        }
       },
       child: FormLayout(
         title: "Add new Tenant",
@@ -103,7 +120,12 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
               controller: _emailController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return "Email is required";
+                  return 'Please enter your email';
+                }
+                bool isValid =
+                    RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value);
+                if (!isValid) {
+                  return 'Please enter a valid email address';
                 }
                 return null;
               },
@@ -113,6 +135,12 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
               hintText: "Tenant's Phone Number",
               controller: _phoneController,
               validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your phone number';
+                }
+                if (value.length != 10) {
+                  return 'Please enter a valid phone number';
+                }
                 return null;
               },
             ),
@@ -172,61 +200,65 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
               ),
           ],
         ),
-        buttonContainer: LongButton(
-          text: "Add Tenant",
-          onPressed: () {
-            if (_formKey.currentState!.validate()) {
-              if (_selectedProperty == "Select Property" ||
-                  _selectedFloor == "Select Floor" ||
-                  _selectedRoom == "Select Room") {
-                setState(() {
-                  _error = "Please select a property, floor and room";
-                });
-              } else {
-                // Add tenant to the selected room
-                setState(() {
-                  _error = "";
-                });
-                // Fetch the property id of the selected property
-                final state = context.read<PropertyBloc>().state;
-                if (state is PropertyLoaded) {
-                  final selectedProperty = state.properties.firstWhere(
-                      (property) => property.propertyName == _selectedProperty);
+        buttonContainer: _isLoading
+            ? const CircularProgressIndicator.adaptive(
+                valueColor:
+                    AlwaysStoppedAnimation<Color>(MyConstants.accentColor),
+              )
+            : LongButton(
+                text: "Add Tenant",
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    if (_selectedProperty == "Select Property" ||
+                        _selectedFloor == "Select Floor" ||
+                        _selectedRoom == "Select Room") {
+                      setState(() {
+                        _error = "Please select a property, floor and room";
+                      });
+                    } else {
+                      // Add tenant to the selected room
+                      setState(() {
+                        _error = "";
+                      });
+                      // Fetch the property id of the selected property
+                      final state = context.read<PropertyBloc>().state;
+                      if (state is PropertyLoaded) {
+                        final selectedProperty = state.properties.firstWhere(
+                            (property) =>
+                                property.propertyName == _selectedProperty);
 
-                  // Add tenant to the selected room
-                  setState(() {
-                    _error = "";
-                  });
+                        // Add tenant to the selected room
+                        setState(() {
+                          _error = "";
+                        });
 
-                  // Fetch the room id of the selected room
+                        // Fetch the room id of the selected room
 
-                  final selectedRoomID = state.properties
-                      .firstWhere(
-                          (property) => property.propertyName == _selectedProperty)
-                      .rooms[_selectedFloor]!
-                      .firstWhere(
-                          (room) => room.roomNumber == _selectedRoom)
-                      .roomId;
+                        final selectedRoomID = state.properties
+                            .firstWhere((property) =>
+                                property.propertyName == _selectedProperty)
+                            .rooms[_selectedFloor]!
+                            .firstWhere(
+                                (room) => room.roomNumber == _selectedRoom)
+                            .roomId;
 
-                  context.read<PropertyBloc>().add(
-                        AddTenant(
-                          tenantEmail: _emailController.text,
-                          tenantPhone: _phoneController.text,
-                          tenantRoom: selectedRoomID,
-                          propertyId: selectedProperty.propertyId,
-                          tenantFirstName: _firstNameController.text,
-                          tenantLastName: _lastNameController.text,
-                        ),
-                      );
-
-                  Navigator.pop(context);
-                }
-              }
-            }
-          },
-          buttonColor: MyConstants.accentColor,
-          textColor: MyConstants.whiteColor,
-        ),
+                        context.read<PropertyBloc>().add(
+                              AddTenant(
+                                tenantEmail: _emailController.text,
+                                tenantPhone: _phoneController.text,
+                                tenantRoom: selectedRoomID,
+                                propertyId: selectedProperty.propertyId,
+                                tenantFirstName: _firstNameController.text,
+                                tenantLastName: _lastNameController.text,
+                              ),
+                            );
+                      }
+                    }
+                  }
+                },
+                buttonColor: MyConstants.accentColor,
+                textColor: MyConstants.whiteColor,
+              ),
         formKey: _formKey,
       ),
     );

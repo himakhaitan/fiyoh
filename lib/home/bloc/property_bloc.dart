@@ -73,6 +73,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
 
   Future<void> _handleAddTenant(
       AddTenant event, Emitter<PropertyState> emit) async {
+        emit(PropertyLoading());
     try {
       final user = _auth.currentUser;
 
@@ -127,6 +128,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
           'updated_at': FieldValue.serverTimestamp(),
         },
       );
+      emit(PropertyAPICompleted());
     } catch (e) {
       emit(PropertyFailed(error: e.toString()));
     }
