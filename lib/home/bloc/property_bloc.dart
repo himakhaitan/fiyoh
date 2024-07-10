@@ -73,7 +73,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
 
   Future<void> _handleAddTenant(
       AddTenant event, Emitter<PropertyState> emit) async {
-        emit(PropertyLoading());
+    emit(PropertyLoading());
     try {
       final user = _auth.currentUser;
 

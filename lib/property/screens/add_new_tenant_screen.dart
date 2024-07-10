@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/dropdown.dart';
@@ -38,6 +39,31 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
   List<String> propertyItems = [];
   List<String> floorItems = [];
   List<String> roomItems = ["1"];
+
+  bool? _roomAvailable; // State variable to track room availability
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<bool> _checkRoomAvailability(String propertyId, String roomId) async {
+    try {
+      DocumentSnapshot roomRef = await _firestore
+          .collection('properties')
+          .doc(propertyId)
+          .collection('rooms')
+          .doc(roomId)
+          .get();
+      if (roomRef.exists) {
+        if (roomRef['occupancy'] > roomRef['tenants'].length) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -157,6 +183,7 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
                   }
                   _selectedFloor = "Select Floor";
                   _selectedRoom = "Select Room";
+                  _error = "";
                 });
               },
               starter: "Select Property",
@@ -183,81 +210,120 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
               DropdownInput(
                 labelText: "Room Number",
                 items: roomItems,
-                onChanged: (value) {
+                onChanged: (value) async {
                   setState(() {
+                    _isLoading = true;
                     _selectedRoom = value;
                   });
-                },
-                starter: "Select Room",
-              ),
-            if (_error.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: DescriptiveText(
-                  text: _error,
-                  color: MyConstants.redColor,
-                ),
-              ),
-          ],
-        ),
-        buttonContainer: _isLoading
-            ? const CircularProgressIndicator.adaptive(
-                valueColor:
-                    AlwaysStoppedAnimation<Color>(MyConstants.accentColor),
-              )
-            : LongButton(
-                text: "Add Tenant",
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    if (_selectedProperty == "Select Property" ||
-                        _selectedFloor == "Select Floor" ||
-                        _selectedRoom == "Select Room") {
-                      setState(() {
-                        _error = "Please select a property, floor and room";
-                      });
-                    } else {
-                      // Add tenant to the selected room
-                      setState(() {
-                        _error = "";
-                      });
-                      // Fetch the property id of the selected property
-                      final state = context.read<PropertyBloc>().state;
-                      if (state is PropertyLoaded) {
-                        final selectedProperty = state.properties.firstWhere(
-                            (property) =>
-                                property.propertyName == _selectedProperty);
 
-                        // Add tenant to the selected room
+                  if (_selectedRoom != "Select Room") {
+                    final state = context.read<PropertyBloc>().state;
+                    if (state is PropertyLoaded) {
+                      final selectedProperty = state.properties
+                          .firstWhere((property) =>
+                              property.propertyName == _selectedProperty);
+
+                      final selectedRoomID = state.properties
+                          .firstWhere((property) =>
+                              property.propertyName == _selectedProperty)
+                          .rooms[_selectedFloor]!
+                          .firstWhere(
+                              (room) => room.roomNumber == _selectedRoom)
+                          .roomId;
+
+                      _roomAvailable = await _checkRoomAvailability(
+                          selectedProperty.propertyId, selectedRoomID);
+
+                      if (_roomAvailable!) {
                         setState(() {
                           _error = "";
+                          _isLoading = false;
                         });
-
-                        // Fetch the room id of the selected room
-
-                        final selectedRoomID = state.properties
-                            .firstWhere((property) =>
-                                property.propertyName == _selectedProperty)
-                            .rooms[_selectedFloor]!
-                            .firstWhere(
-                                (room) => room.roomNumber == _selectedRoom)
-                            .roomId;
-
-                        context.read<PropertyBloc>().add(
-                              AddTenant(
-                                tenantEmail: _emailController.text,
-                                tenantPhone: _phoneController.text,
-                                tenantRoom: selectedRoomID,
-                                propertyId: selectedProperty.propertyId,
-                                tenantFirstName: _firstNameController.text,
-                                tenantLastName: _lastNameController.text,
-                              ),
-                            );
+                      } else {
+                        setState(() {
+                          _error = "Room is already occupied";
+                          _isLoading = false;
+                        });
                       }
                     }
                   }
                 },
-                buttonColor: MyConstants.accentColor,
-                textColor: MyConstants.whiteColor,
+                starter: "Select Room",
+              ),
+          ],
+        ),
+        buttonContainer:  Column(
+                children: [
+                  _isLoading
+            ? const CircularProgressIndicator.adaptive(
+                valueColor:
+                    AlwaysStoppedAnimation<Color>(MyConstants.accentColor),
+              )
+            :LongButton(
+                    text: "Add Tenant",
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        if (_selectedProperty == "Select Property" ||
+                            _selectedFloor == "Select Floor" ||
+                            _selectedRoom == "Select Room") {
+                          setState(() {
+                            _error = "Please select a property, floor and room";
+                          });
+                        } else if (_roomAvailable == false) {
+                          setState(() {
+                            _error = "Room is already occupied";
+                          });
+                        } else {
+                          // Add tenant to the selected room
+                          setState(() {
+                            _error = "";
+                          });
+                          // Fetch the property id of the selected property
+                          final state = context.read<PropertyBloc>().state;
+                          if (state is PropertyLoaded) {
+                            final selectedProperty = state.properties
+                                .firstWhere((property) =>
+                                    property.propertyName == _selectedProperty);
+
+                            // Add tenant to the selected room
+                            setState(() {
+                              _error = "";
+                            });
+
+                            // Fetch the room id of the selected room
+
+                            final selectedRoomID = state.properties
+                                .firstWhere((property) =>
+                                    property.propertyName == _selectedProperty)
+                                .rooms[_selectedFloor]!
+                                .firstWhere(
+                                    (room) => room.roomNumber == _selectedRoom)
+                                .roomId;
+
+                            context.read<PropertyBloc>().add(
+                                  AddTenant(
+                                    tenantEmail: _emailController.text,
+                                    tenantPhone: _phoneController.text,
+                                    tenantRoom: selectedRoomID,
+                                    propertyId: selectedProperty.propertyId,
+                                    tenantFirstName: _firstNameController.text,
+                                    tenantLastName: _lastNameController.text,
+                                  ),
+                                );
+                          }
+                        }
+                      }
+                    },
+                    buttonColor: MyConstants.accentColor,
+                    textColor: MyConstants.whiteColor,
+                  ),
+                  if (_error.isNotEmpty) const SizedBox(height: 10),
+                  if (_error.isNotEmpty)
+                    DescriptiveText(
+                      text: _error,
+                      color: MyConstants.redColor,
+                    ),
+                ],
               ),
         formKey: _formKey,
       ),
