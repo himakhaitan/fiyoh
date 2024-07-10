@@ -1,3 +1,4 @@
+import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/common_widgets/section_header.dart';
 import 'package:rentwise/home/bloc/property_bloc.dart';
 import 'package:rentwise/home/widgets/property_tile.dart';
@@ -49,9 +50,7 @@ class _ManageScreenState extends State<ManageScreen> {
                     child: Text('Failed to load properties: ${state.error}'),
                   );
                 } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return const ProgressLoader();
                 }
               },
             ),

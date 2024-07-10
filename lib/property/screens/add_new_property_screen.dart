@@ -4,6 +4,7 @@ import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/dropdown.dart';
 import 'package:rentwise/common_widgets/form_input.dart';
 import 'package:rentwise/common_widgets/long_button.dart';
+import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/constants/colours.dart';
 import 'package:rentwise/home/bloc/property_bloc.dart';
 import 'package:rentwise/property/widgets/multi_input.dart';
@@ -98,10 +99,7 @@ class _AddNewPropertyScreenState extends State<AddNewPropertyScreen> {
           onPropertyTypeChange: onValueChangePropertyType,
         ),
         buttonContainer: _isLoading
-            ? const CircularProgressIndicator.adaptive(
-                valueColor:
-                    AlwaysStoppedAnimation<Color>(MyConstants.accentColor),
-              )
+            ? const ProgressLoader()
             : Column(
                 children: [
                   LongButton(

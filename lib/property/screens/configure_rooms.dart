@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/dropdown.dart';
 import 'package:rentwise/common_widgets/long_button.dart';
+import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/common_widgets/section_header.dart';
 import 'package:rentwise/common_widgets/text_link_button.dart';
 import 'package:rentwise/constants/colours.dart';
@@ -154,7 +155,7 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
             const SizedBox(
               height: 20,
             ),
-            if (_isLoading) const CircularProgressIndicator(),
+            if (_isLoading) const ProgressLoader(),
             ListView.builder(
               shrinkWrap: true,
               itemBuilder: (context, index) {

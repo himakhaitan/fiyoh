@@ -5,6 +5,7 @@ import 'package:rentwise/common_widgets/dropdown.dart';
 import 'package:rentwise/common_widgets/form_input.dart';
 import 'package:rentwise/common_widgets/long_button.dart';
 import 'package:rentwise/common_widgets/phone_number_input.dart';
+import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/constants/colours.dart';
 import 'package:rentwise/home/bloc/property_bloc.dart';
 import 'package:rentwise/layouts/form/form_layout.dart';
@@ -219,8 +220,8 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
                   if (_selectedRoom != "Select Room") {
                     final state = context.read<PropertyBloc>().state;
                     if (state is PropertyLoaded) {
-                      final selectedProperty = state.properties
-                          .firstWhere((property) =>
+                      final selectedProperty = state.properties.firstWhere(
+                          (property) =>
                               property.propertyName == _selectedProperty);
 
                       final selectedRoomID = state.properties
@@ -252,14 +253,11 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
               ),
           ],
         ),
-        buttonContainer:  Column(
-                children: [
-                  _isLoading
-            ? const CircularProgressIndicator.adaptive(
-                valueColor:
-                    AlwaysStoppedAnimation<Color>(MyConstants.accentColor),
-              )
-            :LongButton(
+        buttonContainer: Column(
+          children: [
+            _isLoading
+                ? const ProgressLoader()
+                : LongButton(
                     text: "Add Tenant",
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -317,14 +315,14 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
                     buttonColor: MyConstants.accentColor,
                     textColor: MyConstants.whiteColor,
                   ),
-                  if (_error.isNotEmpty) const SizedBox(height: 10),
-                  if (_error.isNotEmpty)
-                    DescriptiveText(
-                      text: _error,
-                      color: MyConstants.redColor,
-                    ),
-                ],
+            if (_error.isNotEmpty) const SizedBox(height: 10),
+            if (_error.isNotEmpty)
+              DescriptiveText(
+                text: _error,
+                color: MyConstants.redColor,
               ),
+          ],
+        ),
         formKey: _formKey,
       ),
     );
