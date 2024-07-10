@@ -46,32 +46,58 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: WelcomeScreen(),
-      routes: {
-        '/login': (context) => BlocProvider(
-              create: (context) => AuthBloc(),
-              child: const LoginScreen(),
-            ),
-        '/signup': (context) => BlocProvider(
-              create: (context) => AuthBloc(),
-              child: const SignupScreen(),
-            ),
-        '/forgot_password': (context) => BlocProvider(
-              create: (context) => AuthBloc(),
-              child: const ForgotPasswordScreen(),
-            ),
-        '/home': (context) => BlocProvider(
-              create: (context) => PropertyBloc(),
-              child: const Dashboard(),
-            ),
-        '/property/add': (context) => BlocProvider(
-              create: (context) => PropertyBloc(),
-              child: const AddNewPropertyScreen(),
-            ),
-        '/tenant/add': (context) => BlocProvider(
-              create: (context) => PropertyBloc(),
-              child: const AddNewTenantScreen(),
-            ),
-      },
+      onGenerateRoute: (settings) => generateRoute(settings),
     );
+  }
+
+  Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case '/login':
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => AuthBloc(),
+            child: const LoginScreen(),
+          ),
+        );
+      case '/signup':
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => AuthBloc(),
+            child: const SignupScreen(),
+          ),
+        );
+      case '/forgot_password':
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => AuthBloc(),
+            child: const ForgotPasswordScreen(),
+          ),
+        );
+      case '/home':
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => PropertyBloc(),
+            child: const Dashboard(),
+          ),
+        );
+      case '/property/add':
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => PropertyBloc(),
+            child: const AddNewPropertyScreen(),
+          ),
+        );
+      case '/tenant/add':
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => PropertyBloc(),
+            child: const AddNewTenantScreen(),
+          ),
+        );
+      default:
+        return MaterialPageRoute(
+          builder: (context) => WelcomeScreen(),
+        );
+    }
   }
 }

@@ -67,7 +67,6 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
     } catch (e) {
       print(e.toString());
     }
-    print(properties.length);
     return properties;
   }
 
