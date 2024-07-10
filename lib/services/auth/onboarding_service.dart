@@ -14,7 +14,7 @@ class OnboardingService {
         'phone_number': phoneNumber,
         'email': email,
         'properties': [],
-        'user_type': USER.OWNER.value,
+        'user_type': USER_TYPE.OWNER.value,
         'created_at': FieldValue.serverTimestamp(),
         'updated_at': FieldValue.serverTimestamp(),
       });

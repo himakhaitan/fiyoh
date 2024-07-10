@@ -23,13 +23,24 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
   String _selectedFloor = "";
   String _selectedRoom = "";
   List<String> roomItems = [];
-  List<String> addedRooms = [];
+  List<Map<String, String>> addedRooms = [];
   String _selectedOccupancy = "";
   bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
+  }
+
+  List<String> _getRoomsOnFloor(String floor) {
+    return widget.property.rooms[floor]!
+        .map((room) => {
+              'roomId': room.roomId,
+              'roomNumber': room.roomNumber,
+            })
+        .toList()
+        .map((room) => room['roomNumber']!)
+        .toList();
   }
 
   @override
@@ -52,14 +63,14 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              title: Text('Error'),
-              content: Text("Error Occurred. Please try again."),
+              title: const Text('Error'),
+              content: const Text("Error Occurred. Please try again."),
               actions: [
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 ),
               ],
             ),
@@ -78,8 +89,9 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
               onChanged: (value) {
                 setState(() {
                   _selectedFloor = value;
+
                   if (value != "Select Floor") {
-                    roomItems = widget.property.rooms[value]!.toList();
+                    roomItems = _getRoomsOnFloor(value);
                   } else {
                     roomItems = [];
                   }
@@ -102,9 +114,16 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
               onPressed: () {
                 if (_selectedRoom.isNotEmpty &&
                     _selectedRoom != "Select Room") {
-                  if (!addedRooms.contains(_selectedRoom)) {
+                  String selectedRoomID = widget.property.rooms[_selectedFloor]!.firstWhere((element) =>
+                      element.roomNumber == _selectedRoom).roomId;
+
+                  if (!addedRooms
+                      .any((element) => element['roomId'] == selectedRoomID)) {
                     setState(() {
-                      addedRooms.add(_selectedRoom);
+                      addedRooms.add({
+                        'roomId': selectedRoomID,
+                        'roomNumber': _selectedRoom,
+                      });
                     });
                   }
                 }
@@ -135,7 +154,7 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
             const SizedBox(
               height: 20,
             ),
-            if (_isLoading) CircularProgressIndicator(),
+            if (_isLoading) const CircularProgressIndicator(),
             ListView.builder(
               shrinkWrap: true,
               itemBuilder: (context, index) {
@@ -145,7 +164,7 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
                       children: [
                         Expanded(
                           child: DescriptiveText(
-                            text: "Room ${addedRooms[index]}",
+                            text: "Room ${addedRooms[index]['roomNumber']}",
                             color: MyConstants.primaryColor,
                           ),
                         ),
@@ -180,7 +199,7 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
               context.read<PropertyBloc>().add(
                     AdjustProperty(
                       propertyId: widget.property.propertyId,
-                      rooms: addedRooms,
+                      rooms: addedRooms.map((room) => room['roomId']!).toList(),
                       occupancy: _selectedOccupancy,
                     ),
                   );

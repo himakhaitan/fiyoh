@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:rentwise/constants/enums.dart';
 import 'package:rentwise/models/property.dart';
+import 'package:rentwise/models/room.dart';
 
 part 'property_event.dart';
 part 'property_state.dart';
@@ -21,22 +22,52 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
 
   Future<List<Property>> _fetchProperties(String userId) async {
     List<Property> properties = [];
-    await _firestore
-        .collection('users')
-        .doc(userId)
-        .get()
-        .then((userDoc) async {
-      List<String> propertyIds =
-          List<String>.from(userDoc.data()!['properties']);
+    try {
+      DocumentSnapshot userDoc =
+          await _firestore.collection('users').doc(userId).get();
+      Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
+      List<String> propertyIds = List<String>.from(userData['properties']);
 
-      for (int i = 0; i < propertyIds.length; i++) {
+      for (String propertyId in propertyIds) {
         DocumentSnapshot propertyDoc =
-            await _firestore.collection('properties').doc(propertyIds[i]).get();
+            await _firestore.collection('properties').doc(propertyId).get();
 
-        properties.add(Property.fromDocument(propertyDoc));
+        Map<String, List<Room>> rooms = {};
+
+        if (propertyDoc.exists) {
+          Map<String, List<String>> roomIdsMap = {};
+
+          propertyDoc['rooms'].forEach((key, value) {
+            roomIdsMap[key] = List<String>.from(value);
+          });
+
+          for (String floor in roomIdsMap.keys) {
+            List<String> roomIds = roomIdsMap[floor]!;
+
+            List<Room> roomList = [];
+
+            for (String roomId in roomIds) {
+              DocumentSnapshot roomDoc = await _firestore
+                  .collection('properties')
+                  .doc(propertyId)
+                  .collection('rooms')
+                  .doc(roomId)
+                  .get();
+
+              if (roomDoc.exists) {
+                roomList.add(Room.fromDocumentSnapshot(roomDoc));
+              }
+            }
+            rooms[floor] = roomList;
+          }
+
+          properties.add(Property.fromDocumentSnapshot(propertyDoc, rooms));
+        }
       }
-    });
-
+    } catch (e) {
+      print(e.toString());
+    }
+    print(properties.length);
     return properties;
   }
 
@@ -55,7 +86,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
           await _firestore.collection('bookings').add({
         'property_id': event.propertyId,
         'room_id': event.tenantRoom,
-        'user_id': event.tenantEmail,
+        'tenant_id': event.tenantEmail,
         'check_in': FieldValue.serverTimestamp(),
         'check_out': null,
         'status': BOOKING_STATUS.CHECKED_IN.value,
@@ -71,7 +102,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
           'last_name': event.tenantLastName,
           'email': event.tenantEmail,
           'phone_number': event.tenantPhone,
-          'user_type': USER.TENANT.value,
+          'user_type': USER_TYPE.TENANT.value,
           'bookings': FieldValue.arrayUnion([
             bookingRef.id,
           ]),

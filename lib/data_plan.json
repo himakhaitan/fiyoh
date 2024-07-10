@@ -5,14 +5,16 @@
       "booking_id": "ID",
       "property_id": "ID",
       "room_id": "ID",
-      "user_id": "ID",
+      "tenant_id": "ID",
       "check_in": "Date",
       "check_out": "Date",
       "status": {
         "type": "String",
         "enum": ["BOOKED", "CANCELLED", "CHECKEDIN", "CHECKEDOUT"]
       },
-      "transactions": ["ID"]
+      "transactions": ["ID"],
+      "created_at": "Date",
+      "updated_at": "Date"
     }
   },
   "TRANSACTIONS": {

@@ -56,45 +56,45 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
         form: Column(
           children: [
             Row(
-            children: [
-              Expanded(
-                child: FormInput(
-                  labelText: "First Name",
-                  hintText: "First Name",
-                  obscureText: false,
-                  icon: Icons.person_2_outlined,
-                  controller: _firstNameController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your first name';
-                    }
-                    if (value.length < 3) {
-                      return 'First name must be at least 3 characters';
-                    }
-                    return null;
-                  },
+              children: [
+                Expanded(
+                  child: FormInput(
+                    labelText: "First Name",
+                    hintText: "First Name",
+                    obscureText: false,
+                    icon: Icons.person_2_outlined,
+                    controller: _firstNameController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your first name';
+                      }
+                      if (value.length < 3) {
+                        return 'First name must be at least 3 characters';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
-              ),
-              const SizedBox(width: 20),
-              Expanded(
-                child: FormInput(
-                  labelText: "Last Name",
-                  hintText: "Last Name",
-                  obscureText: false,
-                  controller: _lastNameController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your last name';
-                    }
-                    if (value.length < 3) {
-                      return 'Last name must be at least 3 characters';
-                    }
-                    return null;
-                  },
+                const SizedBox(width: 20),
+                Expanded(
+                  child: FormInput(
+                    labelText: "Last Name",
+                    hintText: "Last Name",
+                    obscureText: false,
+                    controller: _lastNameController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your last name';
+                      }
+                      if (value.length < 3) {
+                        return 'Last name must be at least 3 characters';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
             FormInput(
               labelText: "Email",
               hintText: "Tenant's Email",
@@ -198,17 +198,27 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
                     _error = "";
                   });
 
+                  // Fetch the room id of the selected room
+
+                  final selectedRoomID = state.properties
+                      .firstWhere(
+                          (property) => property.propertyName == _selectedProperty)
+                      .rooms[_selectedFloor]!
+                      .firstWhere(
+                          (room) => room.roomNumber == _selectedRoom)
+                      .roomId;
+
                   context.read<PropertyBloc>().add(
                         AddTenant(
                           tenantEmail: _emailController.text,
                           tenantPhone: _phoneController.text,
-                          tenantRoom: _selectedRoom,
+                          tenantRoom: selectedRoomID,
                           propertyId: selectedProperty.propertyId,
                           tenantFirstName: _firstNameController.text,
                           tenantLastName: _lastNameController.text,
                         ),
                       );
-                  
+
                   Navigator.pop(context);
                 }
               }
@@ -236,13 +246,19 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
   }
 
   List<String> _getRoomsOnFloor(String propertyName, String floor) {
-    // Logic to get rooms on the selected floor
     final state = context.read<PropertyBloc>().state;
 
     if (state is PropertyLoaded) {
       final selectedProperty = state.properties
           .firstWhere((property) => property.propertyName == propertyName);
-      return selectedProperty.rooms[floor]!.toList();
+      return selectedProperty.rooms[floor]!
+          .map((room) => {
+                'roomId': room.roomId,
+                'roomNumber': room.roomNumber,
+              })
+          .toList()
+          .map((room) => room['roomNumber']!)
+          .toList();
     } else {
       return [];
     }
