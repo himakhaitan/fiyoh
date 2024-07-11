@@ -1,4 +1,5 @@
 import 'package:rentwise/common_widgets/descriptive_text.dart';
+import 'package:rentwise/common_widgets/error_message.dart';
 import 'package:rentwise/common_widgets/form_input.dart';
 import 'package:rentwise/common_widgets/phone_number_input.dart';
 import 'package:rentwise/common_widgets/progress_loader.dart';
@@ -63,10 +64,7 @@ class _SignupScreenState extends State<SignupScreen> {
         button: Column(
           children: [
             if (_error.isNotEmpty)
-              DescriptiveText(
-                text: _error,
-                color: MyConstants.redColor,
-              ),
+              ErrorMessage(message: _error),
             if (_error.isNotEmpty) const SizedBox(height: 10),
             _isLoading
                 ? const ProgressLoader()

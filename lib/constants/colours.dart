@@ -9,7 +9,7 @@ class MyConstants {
   static const Color secondaryColor = Color.fromRGBO(249, 134, 132, 1);
   static const Color whiteColor = Color.fromRGBO(255, 255, 255, 1);
   static const Color greyColor = Color.fromRGBO(153, 153, 153, 1);
-  static const Color redColor = Color.fromRGBO(255, 0, 0, 1);
+  static const Color redColor = Color.fromRGBO(255, 108, 108, 1);
   static const Color successMetallic = Color.fromRGBO(190, 255, 192, 1);
   static const Color errorMetallic = Color.fromRGBO(250, 192, 192, 1);
 }

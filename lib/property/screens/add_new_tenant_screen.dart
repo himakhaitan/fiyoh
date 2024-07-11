@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/dropdown.dart';
+import 'package:rentwise/common_widgets/error_message.dart';
 import 'package:rentwise/common_widgets/form_input.dart';
 import 'package:rentwise/common_widgets/long_button.dart';
 import 'package:rentwise/common_widgets/phone_number_input.dart';
@@ -316,11 +317,7 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
                     textColor: MyConstants.whiteColor,
                   ),
             if (_error.isNotEmpty) const SizedBox(height: 10),
-            if (_error.isNotEmpty)
-              DescriptiveText(
-                text: _error,
-                color: MyConstants.redColor,
-              ),
+            if (_error.isNotEmpty) ErrorMessage(message: _error),
           ],
         ),
         formKey: _formKey,

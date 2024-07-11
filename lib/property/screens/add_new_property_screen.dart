@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rentwise/common_widgets/checkbox_list.dart';
 import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/dropdown.dart';
+import 'package:rentwise/common_widgets/error_message.dart';
 import 'package:rentwise/common_widgets/form_input.dart';
 import 'package:rentwise/common_widgets/long_button.dart';
 import 'package:rentwise/common_widgets/progress_loader.dart';
@@ -129,10 +130,7 @@ class _AddNewPropertyScreenState extends State<AddNewPropertyScreen> {
                   ),
                   if (_isError) const SizedBox(height: 10),
                   if (_isError)
-                    const DescriptiveText(
-                      text: "An error occurred. Please try again",
-                      color: MyConstants.redColor,
-                    ),
+                    const ErrorMessage(message: "An error occurred. Please try again"),
                 ],
               ),
       ),
