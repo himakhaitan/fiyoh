@@ -141,7 +141,14 @@ class RentRoomTile extends StatelessWidget {
             ),
           ),
           IconButton.filledTonal(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  child: 
+                ),
+              );
+            },
             icon: const Icon(Icons.navigate_next),
             style: ButtonStyle(
               backgroundColor: WidgetStateProperty.all(Colors.grey[100]),

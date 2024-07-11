@@ -7,7 +7,7 @@ import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/common_widgets/section_header.dart';
 import 'package:rentwise/common_widgets/text_link_button.dart';
 import 'package:rentwise/constants/colours.dart';
-import 'package:rentwise/home/bloc/property_bloc.dart';
+import 'package:rentwise/property/bloc/property_bloc.dart';
 import 'package:rentwise/layouts/form/form_layout.dart';
 import 'package:rentwise/models/property.dart';
 import 'package:flutter/material.dart';

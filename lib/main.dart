@@ -1,7 +1,7 @@
 import 'package:rentwise/app_entry/new_pages/screens/login_screen.dart';
 import 'package:rentwise/app_entry/new_pages/screens/welcome_screen.dart';
 import 'package:rentwise/app_entry/new_pages/screens/signup_screen.dart';
-import 'package:rentwise/home/bloc/property_bloc.dart';
+import 'package:rentwise/property/bloc/property_bloc.dart';
 import 'package:rentwise/home/screens/dashboard.dart';
 import 'package:rentwise/app_entry/new_pages/screens/forgot_password_screen.dart';
 import 'package:rentwise/property/screens/add_new_property_screen.dart';

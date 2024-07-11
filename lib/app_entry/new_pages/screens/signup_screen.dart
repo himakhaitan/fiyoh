@@ -1,4 +1,3 @@
-import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/error_message.dart';
 import 'package:rentwise/common_widgets/form_input.dart';
 import 'package:rentwise/common_widgets/phone_number_input.dart';

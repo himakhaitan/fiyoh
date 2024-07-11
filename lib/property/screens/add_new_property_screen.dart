@@ -1,13 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rentwise/common_widgets/checkbox_list.dart';
-import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/dropdown.dart';
 import 'package:rentwise/common_widgets/error_message.dart';
 import 'package:rentwise/common_widgets/form_input.dart';
 import 'package:rentwise/common_widgets/long_button.dart';
 import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/constants/colours.dart';
-import 'package:rentwise/home/bloc/property_bloc.dart';
+import 'package:rentwise/property/bloc/property_bloc.dart';
 import 'package:rentwise/property/widgets/multi_input.dart';
 import 'package:rentwise/property/widgets/property_rules.dart';
 import 'package:flutter/material.dart';

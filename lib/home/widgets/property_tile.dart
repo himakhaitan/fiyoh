@@ -1,7 +1,7 @@
 import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/info_item.dart';
 import 'package:rentwise/constants/colours.dart';
-import 'package:rentwise/home/bloc/property_bloc.dart';
+import 'package:rentwise/property/bloc/property_bloc.dart';
 import 'package:rentwise/models/property.dart';
 import 'package:rentwise/property/screens/configure_rooms.dart';
 import 'package:flutter/material.dart';
