@@ -1,5 +1,7 @@
+import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/form_input.dart';
 import 'package:rentwise/common_widgets/phone_number_input.dart';
+import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/services/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:rentwise/layouts/auth/auth_layout.dart';
@@ -23,17 +25,27 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  bool _isLoading = false;
+  String _error = "";
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
+          setState(() {
+            _isLoading = false;
+          });
           Navigator.pushNamed(context, '/home');
         } else if (state is AuthFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.error)),
-          );
+          setState(() {
+            _isLoading = false;
+            _error = state.error;
+          });
+        } else if (state is AuthLoading) {
+          setState(() {
+            _isLoading = true;
+          });
         }
       },
       child: AuthLayout(
@@ -48,23 +60,35 @@ class _SignupScreenState extends State<SignupScreen> {
           passwordController: _passwordController,
           confirmPasswordController: _confirmPasswordController,
         ),
-        button: LongButton(
-          text: "Sign Up",
-          onPressed: () {
-            if (_formKey.currentState!.validate()) {
-              context.read<AuthBloc>().add(
-                    SignUpEvent(
-                      email: _emailController.text.trim(),
-                      password: _passwordController.text.trim(),
-                      firstName: _firstNameController.text.trim(),
-                      lastName: _lastNameController.text.trim(),
-                      phoneNumber: _phoneNumberController.text.trim(),
-                    ),
-                  );
-            }
-          },
-          buttonColor: MyConstants.accentColor,
-          textColor: MyConstants.whiteColor,
+        button: Column(
+          children: [
+            if (_error.isNotEmpty)
+              DescriptiveText(
+                text: _error,
+                color: MyConstants.redColor,
+              ),
+            if (_error.isNotEmpty) const SizedBox(height: 10),
+            _isLoading
+                ? const ProgressLoader()
+                : LongButton(
+                    text: "Sign Up",
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        context.read<AuthBloc>().add(
+                              SignUpEvent(
+                                email: _emailController.text.trim(),
+                                password: _passwordController.text.trim(),
+                                firstName: _firstNameController.text.trim(),
+                                lastName: _lastNameController.text.trim(),
+                                phoneNumber: _phoneNumberController.text.trim(),
+                              ),
+                            );
+                      }
+                    },
+                    buttonColor: MyConstants.accentColor,
+                    textColor: MyConstants.whiteColor,
+                  ),
+          ],
         ),
       ),
     );

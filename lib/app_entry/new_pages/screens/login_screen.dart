@@ -1,6 +1,7 @@
 import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/form_input.dart';
 import 'package:rentwise/common_widgets/long_button.dart';
+import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/constants/colours.dart';
 import 'package:rentwise/layouts/auth/auth_layout.dart';
 import 'package:rentwise/services/auth/auth_bloc.dart';
@@ -19,17 +20,27 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
+  String _error = "";
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
+          setState(() {
+            _isLoading = false;
+          });
           Navigator.pushNamed(context, '/home');
         } else if (state is AuthFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.error)),
-          );
+          setState(() {
+            _isLoading = false;
+            _error = state.error;
+          });
+        } else if (state is AuthLoading) {
+          setState(() {
+            _isLoading = true;
+          });
         }
       },
       child: AuthLayout(
@@ -42,21 +53,29 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         button: Column(
           children: [
-            LongButton(
-              text: "Log In",
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  context.read<AuthBloc>().add(
-                        SignInEvent(
-                          email: _emailController.text.trim(),
-                          password: _passwordController.text.trim(),
-                        ),
-                      ); 
-                }
-              },
-              buttonColor: MyConstants.accentColor,
-              textColor: MyConstants.whiteColor,
-            ),
+            if (_error.isNotEmpty)
+              DescriptiveText(
+                text: _error,
+                color: MyConstants.redColor,
+              ),
+            if (_error.isNotEmpty) const SizedBox(height: 10),
+            _isLoading
+                ? const ProgressLoader()
+                : LongButton(
+                    text: "Log In",
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        context.read<AuthBloc>().add(
+                              SignInEvent(
+                                email: _emailController.text.trim(),
+                                password: _passwordController.text.trim(),
+                              ),
+                            );
+                      }
+                    },
+                    buttonColor: MyConstants.accentColor,
+                    textColor: MyConstants.whiteColor,
+                  ),
             const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
