@@ -42,25 +42,25 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       backgroundColor: MyConstants.whiteColor,
       appBar: CustomAppBar(),
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
       body: PageView(
         controller: _pageController, 
         onPageChanged: onPageChanged,
         children: [
           Container(
             color: Colors.white,
-            child: Center(
+            child: const Center(
               child: Text('Home'),
             ),
           ),
           const RentScreen(),
           Container(
             color: Colors.white,
-            child: Center(
+            child: const Center(
               child: Text('School'),
             ),
           ),
-         ManageScreen(),
+         const ManageScreen(),
         ],
       ),
       bottomNavigationBar: CustomBottomBar(
