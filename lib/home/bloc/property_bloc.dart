@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -264,8 +266,9 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
     emit(PropertyLoading());
     try {
       int occupancyInt = int.parse(event.occupancy);
-
+      List<String> roomNumbers = [];
       for (int i = 0; i < event.rooms.length; i += 10) {
+        
         List<String> chunk;
         if (i + 10 > event.rooms.length) {
           chunk = event.rooms.sublist(i, event.rooms.length);
@@ -283,6 +286,10 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
           (roomDocs) {
             roomDocs.docs.forEach(
               (roomDoc) {
+                // Check if the room is already occupied
+                if (roomDoc['tenants'].length > occupancyInt) {
+                  roomNumbers.add(roomDoc['room_number']);
+                }
                 roomDoc.reference.update(
                   {
                     'occupancy': occupancyInt,
@@ -293,6 +300,13 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
             );
           },
         );
+        if (roomNumbers.isNotEmpty) {
+          emit(PropertyFailed(
+              error:
+                  'These rooms have tenants inside: ${roomNumbers.join(', ')}'));
+        } else {
+          emit(PropertyAPICompleted());
+        }
       }
     } catch (e) {
       emit(PropertyFailed(error: e.toString()));

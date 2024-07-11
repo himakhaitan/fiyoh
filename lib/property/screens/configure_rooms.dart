@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/dropdown.dart';
+import 'package:rentwise/common_widgets/error_message.dart';
 import 'package:rentwise/common_widgets/long_button.dart';
 import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/common_widgets/section_header.dart';
@@ -27,6 +28,7 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
   List<Map<String, String>> addedRooms = [];
   String _selectedOccupancy = "";
   bool _isLoading = false;
+  String _error = "";
 
   @override
   void initState() {
@@ -54,28 +56,18 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
           });
         } else if (state is PropertyLoaded) {
           setState(() {
+            _error = "";
             _isLoading = false;
           });
-          Navigator.pop(context);
         } else if (state is PropertyFailed) {
           setState(() {
+            _error = state.error;
             _isLoading = false;
           });
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: const Text('Error'),
-              content: const Text("Error Occurred. Please try again."),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            ),
-          );
+        } else if (state is PropertyAPICompleted) {
+          if (_error.isNotEmpty) {
+            Navigator.pop(context);
+          }
         }
       },
       child: FormLayout(
@@ -115,8 +107,10 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
               onPressed: () {
                 if (_selectedRoom.isNotEmpty &&
                     _selectedRoom != "Select Room") {
-                  String selectedRoomID = widget.property.rooms[_selectedFloor]!.firstWhere((element) =>
-                      element.roomNumber == _selectedRoom).roomId;
+                  String selectedRoomID = widget.property.rooms[_selectedFloor]!
+                      .firstWhere(
+                          (element) => element.roomNumber == _selectedRoom)
+                      .roomId;
 
                   if (!addedRooms
                       .any((element) => element['roomId'] == selectedRoomID)) {
@@ -192,23 +186,35 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
             ),
           ],
         ),
-        buttonContainer: LongButton(
-          text: "Configure Room",
-          onPressed: () {
-            if (_formKey.currentState!.validate()) {
-              // Call the bloc to update the rooms
-              context.read<PropertyBloc>().add(
-                    AdjustProperty(
-                      propertyId: widget.property.propertyId,
-                      rooms: addedRooms.map((room) => room['roomId']!).toList(),
-                      occupancy: _selectedOccupancy,
-                    ),
-                  );
-              Navigator.pop(context);
-            }
-          },
-          buttonColor: MyConstants.accentColor,
-          textColor: MyConstants.whiteColor,
+        buttonContainer: Column(
+          children: [
+            if (_error.isNotEmpty) ErrorMessage(message: _error),
+            if (_error.isNotEmpty)
+              const SizedBox(
+                height: 10,
+              ),
+            _isLoading
+                ? const ProgressLoader()
+                : LongButton(
+                    text: "Configure Room",
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        // Call the bloc to update the rooms
+                        context.read<PropertyBloc>().add(
+                              AdjustProperty(
+                                propertyId: widget.property.propertyId,
+                                rooms: addedRooms
+                                    .map((room) => room['roomId']!)
+                                    .toList(),
+                                occupancy: _selectedOccupancy,
+                              ),
+                            );
+                      }
+                    },
+                    buttonColor: MyConstants.accentColor,
+                    textColor: MyConstants.whiteColor,
+                  ),
+          ],
         ),
         formKey: _formKey,
       ),
