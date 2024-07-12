@@ -1,9 +1,14 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/dropdown.dart';
+import 'package:rentwise/common_widgets/error_message.dart';
 import 'package:rentwise/common_widgets/info_item.dart';
+import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/common_widgets/section_header.dart';
 import 'package:flutter/material.dart';
 import 'package:rentwise/constants/colours.dart';
+import 'package:rentwise/models/rent_data.dart';
+import 'package:rentwise/rent/bloc/rent_bloc.dart';
 import 'package:rentwise/rent/screens/rent_detail_screen.dart';
 
 class RentScreen extends StatefulWidget {
@@ -16,6 +21,14 @@ class RentScreen extends StatefulWidget {
 class _RentScreenState extends State<RentScreen> {
   String _selectedStatus = "";
   String _selectedPeriod = "";
+
+  @override
+  void initState() {
+    super.initState();
+
+    context.read<RentBloc>().add(GetRentData());
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -72,14 +85,25 @@ class _RentScreenState extends State<RentScreen> {
             const SizedBox(height: 20),
             const SectionHeader(text: "Rent Details"),
             const SizedBox(height: 10),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 20,
-              itemBuilder: (context, index) {
-                return const RentRoomTile();
+            BlocBuilder<RentBloc, RentState>(
+              builder: (context, state) {
+                if (state is RentLoaded) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: state.rentDataList.length,
+                    itemBuilder: (context, index) {
+                      return RentRoomTile(rentData: state.rentDataList[index]);
+                    },
+                  );
+                } else if (state is RentFailed) {
+                  return ErrorMessage(message: state.error);
+                } else if (state is RentLoading) {
+                  return const ProgressLoader();
+                }
+                return Container();
               },
-            )
+            ),
           ],
         ),
       ),
@@ -88,7 +112,11 @@ class _RentScreenState extends State<RentScreen> {
 }
 
 class RentRoomTile extends StatelessWidget {
-  const RentRoomTile({super.key});
+  final RentData rentData;
+  const RentRoomTile({
+    super.key,
+    required this.rentData,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -113,30 +141,34 @@ class RentRoomTile extends StatelessWidget {
               shape: BoxShape.circle,
               color: Colors.grey[200],
             ),
-            child: const DescriptiveText(
-              text: "101",
-              fontSize: 18,
-              color: MyConstants.primaryColor,
-              fontWeight: FontWeight.w600,
+            child: Center(
+              child: DescriptiveText(
+                text: rentData.roomNumber,
+                fontSize: 18,
+                color: MyConstants.primaryColor,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
-          const SizedBox(width: 30),
-          const Expanded(
+          const SizedBox(width: 20),
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 InfoItems(
-                  text: "Green Homes Platina",
+                  text: rentData.propertyName,
                   icon: Icons.home_outlined,
                 ),
                 InfoItems(
-                  text: "2 Tenants",
+                  text: "${rentData.tenants.length} Tenants",
                   icon: Icons.people_outline,
                 ),
                 InfoItems(
-                  text: "Pending",
+                  text: rentData.roomStatus,
                   icon: Icons.monetization_on_outlined,
-                  color: MyConstants.errorMetallic,
+                  color: (rentData.roomStatus == 'Pending')
+                      ? MyConstants.errorMetallic
+                      : MyConstants.successMetallic,
                 ),
               ],
             ),

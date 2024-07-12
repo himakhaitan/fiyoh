@@ -22,6 +22,7 @@ class Room {
       Map<String, String> tenant = {};
       tenant['user_id'] = value['user_id'];
       tenant['booking_id'] = value['booking_id'];
+      tenants.add(tenant);
     });
 
     return Room(

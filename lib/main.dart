@@ -6,6 +6,7 @@ import 'package:rentwise/home/screens/dashboard.dart';
 import 'package:rentwise/app_entry/new_pages/screens/forgot_password_screen.dart';
 import 'package:rentwise/property/screens/add_new_property_screen.dart';
 import 'package:rentwise/property/screens/add_new_tenant_screen.dart';
+import 'package:rentwise/rent/bloc/rent_bloc.dart';
 import 'package:rentwise/services/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -80,8 +81,15 @@ class MyApp extends StatelessWidget {
         );
       case '/home':
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => PropertyBloc(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => PropertyBloc(),
+              ),
+              BlocProvider(
+                create: (context) => RentBloc(),
+              ),
+            ],
             child: const Dashboard(),
           ),
         );
