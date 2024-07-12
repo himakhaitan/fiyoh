@@ -94,7 +94,7 @@ class RentRoomTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
       margin: const EdgeInsets.only(bottom: 10),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
             color: MyConstants.greyColor,
@@ -145,7 +145,7 @@ class RentRoomTile extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  child: 
+                  builder: (context) => Container(),
                 ),
               );
             },

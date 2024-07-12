@@ -54,12 +54,12 @@ class _DashboardState extends State<Dashboard> {
             ),
           ),
           const RentScreen(),
-          Container(
-            color: Colors.white,
-            child: const Center(
-              child: Text('School'),
-            ),
-          ),
+          // Container(
+          //   color: Colors.white,
+          //   child: const Center(
+          //     child: Text('School'),
+          //   ),
+          // ),
          const ManageScreen(),
         ],
       ),
