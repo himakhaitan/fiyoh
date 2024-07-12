@@ -4,6 +4,7 @@ import 'package:rentwise/common_widgets/info_item.dart';
 import 'package:rentwise/common_widgets/section_header.dart';
 import 'package:flutter/material.dart';
 import 'package:rentwise/constants/colours.dart';
+import 'package:rentwise/rent/screens/rent_detail_screen.dart';
 
 class RentScreen extends StatefulWidget {
   const RentScreen({super.key});
@@ -145,7 +146,7 @@ class RentRoomTile extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Container(),
+                  builder: (context) => const RentDetailScreen(),
                 ),
               );
             },

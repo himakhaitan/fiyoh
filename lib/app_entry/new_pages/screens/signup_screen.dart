@@ -1,3 +1,4 @@
+// Packages: Imports
 import 'package:rentwise/common_widgets/error_message.dart';
 import 'package:rentwise/common_widgets/form_input.dart';
 import 'package:rentwise/common_widgets/phone_number_input.dart';
@@ -9,23 +10,43 @@ import 'package:rentwise/common_widgets/long_button.dart';
 import 'package:rentwise/constants/colours.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// A screen for handling the signup functionality.
 class SignupScreen extends StatefulWidget {
+  /// Creates a [SignupScreen] widget.
   const SignupScreen({super.key});
 
   @override
   State<SignupScreen> createState() => _SignupScreenState();
 }
 
+/// The state of the [SignupScreen] widget.
 class _SignupScreenState extends State<SignupScreen> {
+  /// Form key for the signup form.
   final _formKey = GlobalKey<FormState>();
+
+  /// Controller for the first name input field.
   final TextEditingController _firstNameController = TextEditingController();
+
+  /// Controller for the last name input field.
   final TextEditingController _lastNameController = TextEditingController();
+
+  /// Controller for the phone number input field.
   final TextEditingController _phoneNumberController = TextEditingController();
+
+  /// Controller for the email input field.
   final TextEditingController _emailController = TextEditingController();
+
+  /// Controller for the password input field.
   final TextEditingController _passwordController = TextEditingController();
+
+  /// Controller for the confirm password input field.
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+
+  /// Boolean to check if the signup process is loading.
   bool _isLoading = false;
+
+  /// Error message to display if the signup process fails.
   String _error = "";
 
   @override
@@ -33,16 +54,19 @@ class _SignupScreenState extends State<SignupScreen> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
+          /// If the signup event is successful, navigate to the home screen.
           setState(() {
             _isLoading = false;
           });
           Navigator.pushNamed(context, '/home');
         } else if (state is AuthFailure) {
+          /// If the signup event fails, show an error message.
           setState(() {
             _isLoading = false;
             _error = state.error;
           });
         } else if (state is AuthLoading) {
+          /// If the signup event is loading, show a progress loader.
           setState(() {
             _isLoading = true;
           });
@@ -69,6 +93,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ? const ProgressLoader()
                 : LongButton(
                     text: "Sign Up",
+                    /// The onPressed function triggers the signup event.
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         context.read<AuthBloc>().add(
@@ -92,15 +117,31 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 }
 
+/// A widget that contains the input fields for the signup form.
 class SignUpOptions extends StatelessWidget {
+
+  /// The form key for the signup form.
   final GlobalKey<FormState> formKey;
+
+  /// The controller for the first name input field.
   final TextEditingController firstNameController;
+
+  /// The controller for the last name input field.
   final TextEditingController lastNameController;
+
+  /// The controller for the phone number input field.
   final TextEditingController phoneNumberController;
+
+  /// The controller for the email input field.
   final TextEditingController emailController;
+
+  /// The controller for the password input field.
   final TextEditingController passwordController;
+
+  /// The controller for the confirm password input field.
   final TextEditingController confirmPasswordController;
 
+  /// Creates a [SignUpOptions] widget.
   const SignUpOptions({
     super.key,
     required this.formKey,
@@ -118,7 +159,6 @@ class SignUpOptions extends StatelessWidget {
       key: formKey,
       child: Column(
         children: [
-          // const SizedBox(height: 20),
           Row(
             children: [
               Expanded(

@@ -1,3 +1,4 @@
+// Packages: Imports
 import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/error_message.dart';
 import 'package:rentwise/common_widgets/form_input.dart';
@@ -10,18 +11,42 @@ import 'package:flutter/material.dart';
 import 'package:rentwise/common_widgets/text_link_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// A screen for handling the login functionality.
+/// 
+/// The [LoginScreen] displays a form where the user can enter their
+/// email and password to login in to their account. It uses [AuthBloc] to handle
+/// the authentication process.
+/// 
+/// Example usage:
+/// ```dart
+/// Navigator.push(
+///   context,
+///   MaterialPageRoute(builder: (context) => LoginScreen())
+/// );
+/// ```
 class LoginScreen extends StatefulWidget {
+  /// Creates a [LoginScreen] widget.
   const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
+/// The state of the [LoginScreen] widget.
 class _LoginScreenState extends State<LoginScreen> {
+  /// Form key for the login form.
   final _formKey = GlobalKey<FormState>();
+
+  /// Controller for the email input field.
   final TextEditingController _emailController = TextEditingController();
+
+  /// Controller for the password input field.
   final TextEditingController _passwordController = TextEditingController();
+
+  /// Boolean to check if the login process is loading.
   bool _isLoading = false;
+
+  /// Error message to display if the login process fails.
   String _error = "";
 
   @override
@@ -29,16 +54,19 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
+          /// If the login event is successful, navigate to the home screen.
           setState(() {
             _isLoading = false;
           });
           Navigator.pushNamed(context, '/home');
         } else if (state is AuthFailure) {
+          /// If the login event fails, show an error message.
           setState(() {
             _isLoading = false;
             _error = state.error;
           });
         } else if (state is AuthLoading) {
+          /// If the login event is loading, show a progress loader.
           setState(() {
             _isLoading = true;
           });
@@ -61,6 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ? const ProgressLoader()
                 : LongButton(
                     text: "Log In",
+                    /// The onPressed function triggers the login event.
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         context.read<AuthBloc>().add(
@@ -84,6 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: MyConstants.primaryColor,
                 ),
                 TextLinkButton(
+                  /// Navigate to the sign up screen.
                   onPressed: () {
                     Navigator.pushNamed(context, '/signup');
                   },
@@ -98,11 +128,19 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
+/// A widget that contains the input fields for the login form.
 class SignInOptions extends StatelessWidget {
+
+  /// The form key for the login form.
   final GlobalKey<FormState> formKey;
+
+  /// The controller for the email input field.
   final TextEditingController emailController;
+
+  /// The controller for the password input field.
   final TextEditingController passwordController;
 
+  /// Creates a [SignInOptions] widget.
   const SignInOptions({
     super.key,
     required this.formKey,
@@ -151,6 +189,7 @@ class SignInOptions extends StatelessWidget {
           Container(
             alignment: Alignment.centerRight,
             child: TextLinkButton(
+              /// Navigate to the forgot password screen.
               onPressed: () {
                 Navigator.pushNamed(context, '/forgot_password');
               },

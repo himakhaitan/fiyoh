@@ -1,9 +1,14 @@
+// Packages: Imports
 import 'package:rentwise/common_widgets/duotone_text.dart';
 import 'package:rentwise/common_widgets/long_button.dart';
 import 'package:rentwise/constants/colours.dart';
 import 'package:flutter/material.dart';
 
+/// A screen for welcoming users to the app.
 class WelcomeScreen extends StatelessWidget {
+  /// Creates a [WelcomeScreen] widget.
+  const WelcomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +33,7 @@ class WelcomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.4,
             width: double.infinity,
             child: Column(
@@ -54,9 +59,13 @@ class WelcomeScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Center(
-                child: LongButton(text: "Get Started", onPressed: () {
-                  Navigator.pushNamed(context, '/login');
-                }),
+                child: LongButton(
+                  text: "Get Started",
+                  /// Navigate to the login screen.
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
+                ),
               ),
             ),
           ),

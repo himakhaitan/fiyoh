@@ -28,6 +28,7 @@ class ForgotPasswordScreen extends StatefulWidget {
   State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
+/// The state of the [ForgotPasswordScreen] widget.
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   /// Controller for the email input field.
   final TextEditingController emailController = TextEditingController();
@@ -59,7 +60,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ),
         button: LongButton(
           text: "Reset Password",
-
           /// The onPressed function triggers the reset password event.
           onPressed: () {
             if (_formKey.currentState!.validate()) {
