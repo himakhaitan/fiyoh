@@ -70,11 +70,18 @@ class RentBloc extends Bloc<RentEvent, RentState> {
               }
               String firstName = userDoc['first_name'];
               String lastName = userDoc['last_name'];
+              // Get the data 3 months back
+              DateTime currentDate = DateTime.now();
+              DateTime threeMonthsAgo = DateTime(currentDate.year, currentDate.month - 2, 1);
+
 
               QuerySnapshot transactionsSnapshot = await _firestore
                   .collection('transactions')
-                  .where('bookingId', isEqualTo: tenant['booking_id'])
-                  .where('status', isEqualTo: 'paid')
+                  .where('booking_id', isEqualTo: tenant['booking_id'])
+                  .where('status', isEqualTo: 'SUCCESS')
+                  .where('transaction_type', isEqualTo: 'RENT')
+                  .where('rent_start_date', isGreaterThanOrEqualTo: threeMonthsAgo)
+                  .where('rent_start_date', isLessThanOrEqualTo: currentDate)
                   .get();
               if (transactionsSnapshot.docs.isEmpty) {
                 tenantsData.add({
@@ -83,7 +90,7 @@ class RentBloc extends Bloc<RentEvent, RentState> {
                   'last_name': lastName,
                   'payment_status': 'Pending',
                   'booking_id': tenant['booking_id']!,
-                  'payment_amount': '0', 
+                  'payment_amount': '0',
                 });
                 allPaid = false;
               } else {

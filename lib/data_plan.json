@@ -33,8 +33,9 @@
         "enum": ["PENDING", "SUCCESS", "FAILED"]
       },
       "payment_date": "Date",
-      "rent_month": "String",
-      "rent_year": "String"
+      "rent_start_date": "Date",
+      "created_at": "Date",
+      "updated_at": "Date"
     }
   },
   "USERS": {
