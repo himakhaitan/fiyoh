@@ -1,6 +1,8 @@
 import 'package:rentwise/constants/colours.dart';
+import 'package:rentwise/home/screens/home_screen.dart';
 import 'package:rentwise/home/screens/manage_screen.dart';
-import 'package:rentwise/home/screens/rent_screen.dart';
+import 'package:rentwise/home/screens/rooms_screen.dart';
+import 'package:rentwise/home/screens/tenants_screen.dart';
 import 'package:rentwise/home/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:rentwise/home/widgets/custom_bottom_bar.dart';
@@ -44,23 +46,13 @@ class _DashboardState extends State<Dashboard> {
       appBar: CustomAppBar(),
       drawer: const CustomDrawer(),
       body: PageView(
-        controller: _pageController, 
+        controller: _pageController,
         onPageChanged: onPageChanged,
         children: [
-          Container(
-            color: Colors.white,
-            child: const Center(
-              child: Text('Home'),
-            ),
-          ),
-          const RentScreen(),
-          // Container(
-          //   color: Colors.white,
-          //   child: const Center(
-          //     child: Text('School'),
-          //   ),
-          // ),
-         const ManageScreen(),
+          const HomeScreen(),
+          const RoomsScreen(),
+          const TenantsScreen(),
+          const ManageScreen(),
         ],
       ),
       bottomNavigationBar: CustomBottomBar(

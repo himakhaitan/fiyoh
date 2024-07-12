@@ -61,13 +61,13 @@ class CustomBottomBar extends StatelessWidget {
           icon: Icons.home_outlined,
         ),
         _bottomNavigationBarItem(
-          title: 'Rent',
-          icon: Icons.monetization_on_outlined,
+          title: 'Rooms',
+          icon: Icons.meeting_room_outlined,
         ),
-        // _bottomNavigationBarItem(
-        //   title: 'Requests',
-        //   icon: Icons.notifications_outlined,
-        // ),
+        _bottomNavigationBarItem(
+          title: 'Tenants',
+          icon: Icons.people_alt_outlined,
+        ),
         _bottomNavigationBarItem(
           title: 'Manage',
           icon: Icons.home_work_outlined,
