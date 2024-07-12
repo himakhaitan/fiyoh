@@ -2,6 +2,7 @@
 import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/error_message.dart';
 import 'package:rentwise/common_widgets/form_input.dart';
+import 'package:rentwise/common_widgets/google_button.dart';
 import 'package:rentwise/common_widgets/long_button.dart';
 import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/constants/colours.dart';
@@ -12,11 +13,11 @@ import 'package:rentwise/common_widgets/text_link_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// A screen for handling the login functionality.
-/// 
+///
 /// The [LoginScreen] displays a form where the user can enter their
 /// email and password to login in to their account. It uses [AuthBloc] to handle
 /// the authentication process.
-/// 
+///
 /// Example usage:
 /// ```dart
 /// Navigator.push(
@@ -63,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
           /// If the login event fails, show an error message.
           setState(() {
             _isLoading = false;
+            print(state.error);
             _error = state.error;
           });
         } else if (state is AuthLoading) {
@@ -82,13 +84,13 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         button: Column(
           children: [
-            if (_error.isNotEmpty)
-              ErrorMessage(message: _error),
+            if (_error.isNotEmpty) ErrorMessage(message: _error),
             if (_error.isNotEmpty) const SizedBox(height: 10),
             _isLoading
                 ? const ProgressLoader()
                 : LongButton(
                     text: "Log In",
+
                     /// The onPressed function triggers the login event.
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -121,6 +123,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             ),
+            const SizedBox(height: 20),
+            GoogleButton(
+              onPressed: () {
+                context.read<AuthBloc>().add(GoogleSignInEvent());
+              },
+            ),
           ],
         ),
       ),
@@ -130,7 +138,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
 /// A widget that contains the input fields for the login form.
 class SignInOptions extends StatelessWidget {
-
   /// The form key for the login form.
   final GlobalKey<FormState> formKey;
 
@@ -141,7 +148,7 @@ class SignInOptions extends StatelessWidget {
   final TextEditingController passwordController;
 
   /// Creates a [SignInOptions] widget.
-  /// 
+  ///
   /// The [formKey], [emailController], and [passwordController] are required.
   /// The [formKey], [emailController], and [passwordController] must not be null.
   /// The [formKey] must be a [GlobalKey] of type [FormState].

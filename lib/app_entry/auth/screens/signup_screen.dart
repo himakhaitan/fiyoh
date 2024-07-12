@@ -1,6 +1,7 @@
 // Packages: Imports
 import 'package:rentwise/common_widgets/error_message.dart';
 import 'package:rentwise/common_widgets/form_input.dart';
+import 'package:rentwise/common_widgets/google_button.dart';
 import 'package:rentwise/common_widgets/phone_number_input.dart';
 import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/app_entry/auth/bloc/auth_bloc.dart';
@@ -86,13 +87,13 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
         button: Column(
           children: [
-            if (_error.isNotEmpty)
-              ErrorMessage(message: _error),
+            if (_error.isNotEmpty) ErrorMessage(message: _error),
             if (_error.isNotEmpty) const SizedBox(height: 10),
             _isLoading
                 ? const ProgressLoader()
                 : LongButton(
                     text: "Sign Up",
+
                     /// The onPressed function triggers the signup event.
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -110,6 +111,12 @@ class _SignupScreenState extends State<SignupScreen> {
                     buttonColor: MyConstants.accentColor,
                     textColor: MyConstants.whiteColor,
                   ),
+            const SizedBox(height: 20),
+            GoogleButton(
+              onPressed: () {
+                context.read<AuthBloc>().add(GoogleSignUpEvent());
+              },
+            ),
           ],
         ),
       ),
@@ -119,7 +126,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
 /// A widget that contains the input fields for the signup form.
 class SignUpOptions extends StatelessWidget {
-
   /// The form key for the signup form.
   final GlobalKey<FormState> formKey;
 
@@ -142,7 +148,7 @@ class SignUpOptions extends StatelessWidget {
   final TextEditingController confirmPasswordController;
 
   /// Creates a [SignUpOptions] widget.
-  /// 
+  ///
   /// The [formKey], [firstNameController], [lastNameController], [phoneNumberController],
   /// [emailController], [passwordController], and [confirmPasswordController] parameters are required.
   /// The [formKey], [firstNameController], [lastNameController], [phoneNumberController],

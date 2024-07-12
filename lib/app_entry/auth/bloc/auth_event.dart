@@ -13,7 +13,12 @@ class SignUpEvent extends AuthEvent {
   final String lastName;
   final String phoneNumber;
 
-  SignUpEvent({required this.email, required this.password, required this.firstName, required this.lastName, required this.phoneNumber});
+  SignUpEvent(
+      {required this.email,
+      required this.password,
+      required this.firstName,
+      required this.lastName,
+      required this.phoneNumber});
 
   @override
   List<Object> get props => [email, password, firstName, lastName, phoneNumber];
@@ -38,4 +43,18 @@ class ResetPasswordEvent extends AuthEvent {
 
   @override
   List<Object> get props => [email];
+}
+
+class GoogleSignInEvent extends AuthEvent {
+  GoogleSignInEvent();
+
+  @override
+  List<Object> get props => [];
+}
+
+class GoogleSignUpEvent extends AuthEvent {
+  GoogleSignUpEvent();
+
+  @override
+  List<Object> get props => [];
 }

@@ -6,7 +6,7 @@ class OnboardingService {
 
   // Creating User Document while SignUp
   Future<void> signupUserDocument(String uid, String email, String firstName,
-      String lastName, String phoneNumber) async {
+      String lastName, String phoneNumber, String photoURL) async {
     try {
       await _firestore.collection('users').doc(uid).set({
         'first_name': firstName,
@@ -15,6 +15,7 @@ class OnboardingService {
         'email': email,
         'properties': [],
         'user_type': USER_TYPE.OWNER.value,
+        'photo_url': photoURL,
         'created_at': FieldValue.serverTimestamp(),
         'updated_at': FieldValue.serverTimestamp(),
       });

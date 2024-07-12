@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "45593094888-u8unfoqiu0jcatboi8i8ifj2qumuvhc4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rentwise.app",
+            "certificate_hash": "ceb32821d35edf03df57c0e5e01523f204badca9"
+          }
+        },
+        {
           "client_id": "45593094888-8cv8lm7t80ibasjetcerte0mbk9ojd6g.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -31,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "45593094888-gkcc84521eo0ioa3s35qaftolug3fdv1.apps.googleusercontent.com",
+              "client_id": "45593094888-24r7ebicvc4065cq94vt55v8pm02q9dv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.app"
+                "bundle_id": "com.rentwise.app"
               }
             }
           ]

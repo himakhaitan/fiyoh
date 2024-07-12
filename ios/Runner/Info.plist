@@ -41,6 +41,23 @@
     <string>UIInterfaceOrientationPortrait</string>
     <string>UIInterfaceOrientationPortraitUpsideDown</string>
 </array>
-
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleTypeRole</key>
+    <string>Editor</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>com.googleusercontent.apps.45593094888-24r7ebicvc4065cq94vt55v8pm02q9dv</string> 
+    </array>
+  </dict>
+</array>
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>googlechrome</string>
+  <string>com.google.chrome.ios</string>
+  <string>googlechromes</string>
+  <string>googlechrome-x-callback</string>
+</array>
 </dict>
 </plist>
