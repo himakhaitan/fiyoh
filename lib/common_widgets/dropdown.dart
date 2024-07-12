@@ -1,14 +1,41 @@
+// Packages: Imports
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rentwise/constants/colours.dart';
 
+/// A widget for displaying descriptive text.
+/// 
+/// The [DescriptiveText] widget displays text with a specified color, font size, and font weight.
+/// 
+/// Example usage:
+/// ```dart
+/// DropdownInput(
+///   labelText: 'Select an option',
+///   items: ['Option 1', 'Option 2', 'Option 3'],
+///   starter: 'Select an option',
+///   onChanged: (value) { // Handle the selected option
+///   },
+/// );
+/// ```
 class DropdownInput extends StatefulWidget {
+  /// The label text for the dropdown input field.
   final String labelText;
+  /// The list of items to display in the dropdown.
   final List<String> items;
+  /// The initial value for the dropdown input field.
   final String starter;
-
+  /// A callback function that is called when an item is selected.
   final void Function(String) onChanged;
 
+  /// Creates a [DropdownInput] widget.
+  /// 
+  /// The [labelText], [items], [starter], and [onChanged] parameters are required.
+  /// The [labelText], [items], [starter], and [onChanged] parameters must not be null.
+  /// The [onChanged] callback function must take a string as a parameter.
+  /// The [labelText] parameter must be a [String] value.
+  /// The [items] parameter must be a list of [String] values.
+  /// The [starter] parameter must be a [String] value.
+  /// The [onChanged] parameter must be a function.
   const DropdownInput({
     super.key,
     required this.labelText,
@@ -21,26 +48,40 @@ class DropdownInput extends StatefulWidget {
   State<DropdownInput> createState() => _DropdownInputState();
 }
 
+/// The state of the [DropdownInput] widget.
+/// 
+/// The state of the [DropdownInput] widget is mutable.
+/// The state of the [DropdownInput] widget can change based on user interaction.
 class _DropdownInputState extends State<DropdownInput> {
+  /// The selected item in the dropdown.
   String? _selectedItem;
+  /// The list of items to display in the dropdown.
   List<String> _items = [];
 
+  /// Updates the list of items in the dropdown.
   void _updateItems() {
+    /// Sets the selected item to the initial value.
     setState(() {
       _selectedItem = widget.starter;
       _items = widget.items.toList();
     });
   }
 
+  /// Initializes the state of the widget.
   @override
   void initState() {
+    /// Sets the initial state of the selected item and items.
     super.initState();
+    /// Updates the list of items in the dropdown.
     _updateItems();
   }
 
+  /// Updates the widget based on the new widget.
   @override
   void didUpdateWidget(DropdownInput oldWidget) {
+    /// Updates the list of items in the dropdown.
     super.didUpdateWidget(oldWidget);
+    /// Checks if the items in the dropdown have changed.
     if (widget.items != oldWidget.items) {
       _updateItems();
     }
@@ -51,6 +92,7 @@ class _DropdownInputState extends State<DropdownInput> {
     return Container(
       padding: const EdgeInsets.only(bottom: 15),
       child: DropdownButtonFormField<String>(
+        /// The selected item in the dropdown.
         onChanged: (String? value) {
           setState(() {
             _selectedItem = value;

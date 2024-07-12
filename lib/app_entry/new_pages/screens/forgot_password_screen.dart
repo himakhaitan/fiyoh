@@ -100,6 +100,10 @@ class ForgotPasswordOptions extends StatelessWidget {
   /// Creates a [ForgotPasswordOptions] widget.
   ///
   /// The [emailController] and [formKey] are required.
+  /// The [emailController] must not be null.
+  /// The [formKey] must not be null.
+  /// The [formKey] must be a [GlobalKey] of type [FormState].
+  /// The [emailController] must be a [TextEditingController].
   const ForgotPasswordOptions(
       {super.key, required this.emailController, required this.formKey});
 

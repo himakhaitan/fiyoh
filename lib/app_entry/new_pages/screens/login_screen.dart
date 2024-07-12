@@ -141,6 +141,11 @@ class SignInOptions extends StatelessWidget {
   final TextEditingController passwordController;
 
   /// Creates a [SignInOptions] widget.
+  /// 
+  /// The [formKey], [emailController], and [passwordController] are required.
+  /// The [formKey], [emailController], and [passwordController] must not be null.
+  /// The [formKey] must be a [GlobalKey] of type [FormState].
+  /// The [emailController] and [passwordController] must be of type [TextEditingController].
   const SignInOptions({
     super.key,
     required this.formKey,

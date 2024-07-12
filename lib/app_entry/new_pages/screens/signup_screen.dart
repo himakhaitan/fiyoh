@@ -142,6 +142,14 @@ class SignUpOptions extends StatelessWidget {
   final TextEditingController confirmPasswordController;
 
   /// Creates a [SignUpOptions] widget.
+  /// 
+  /// The [formKey], [firstNameController], [lastNameController], [phoneNumberController],
+  /// [emailController], [passwordController], and [confirmPasswordController] parameters are required.
+  /// The [formKey], [firstNameController], [lastNameController], [phoneNumberController],
+  /// [emailController], [passwordController], and [confirmPasswordController] parameters must not be null.
+  /// The [formKey] parameter must be a [GlobalKey] of type [FormState].
+  /// The [firstNameController], [lastNameController], [phoneNumberController],
+  /// [emailController], [passwordController], and [confirmPasswordController] parameters must be of type [TextEditingController].
   const SignUpOptions({
     super.key,
     required this.formKey,
