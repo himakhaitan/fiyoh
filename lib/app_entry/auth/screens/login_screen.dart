@@ -5,6 +5,7 @@ import 'package:rentwise/common_widgets/form_input.dart';
 import 'package:rentwise/common_widgets/google_button.dart';
 import 'package:rentwise/common_widgets/long_button.dart';
 import 'package:rentwise/common_widgets/progress_loader.dart';
+import 'package:rentwise/common_widgets/text_divider.dart';
 import 'package:rentwise/constants/colours.dart';
 import 'package:rentwise/layouts/auth/auth_layout.dart';
 import 'package:rentwise/app_entry/auth/bloc/auth_bloc.dart';
@@ -105,7 +106,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     buttonColor: MyConstants.accentColor,
                     textColor: MyConstants.whiteColor,
                   ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 15),
+            const TextDivider(),
+            const SizedBox(height: 15),
+            GoogleButton(
+              text: "Login with Google",
+              onPressed: () {
+                context.read<AuthBloc>().add(GoogleSignInEvent());
+              },
+            ),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -122,12 +132,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   text: "Sign Up",
                 ),
               ],
-            ),
-            const SizedBox(height: 20),
-            GoogleButton(
-              onPressed: () {
-                context.read<AuthBloc>().add(GoogleSignInEvent());
-              },
             ),
           ],
         ),

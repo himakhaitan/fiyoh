@@ -1,4 +1,5 @@
 // Packages: Imports
+import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/error_message.dart';
 import 'package:rentwise/common_widgets/form_input.dart';
 import 'package:rentwise/common_widgets/google_button.dart';
@@ -6,6 +7,8 @@ import 'package:rentwise/common_widgets/phone_number_input.dart';
 import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/app_entry/auth/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:rentwise/common_widgets/text_divider.dart';
+import 'package:rentwise/common_widgets/text_link_button.dart';
 import 'package:rentwise/layouts/auth/auth_layout.dart';
 import 'package:rentwise/common_widgets/long_button.dart';
 import 'package:rentwise/constants/colours.dart';
@@ -111,11 +114,32 @@ class _SignupScreenState extends State<SignupScreen> {
                     buttonColor: MyConstants.accentColor,
                     textColor: MyConstants.whiteColor,
                   ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 15),
+            const TextDivider(),
+            const SizedBox(height: 15),
             GoogleButton(
+              text: "Sign Up with Google",
               onPressed: () {
                 context.read<AuthBloc>().add(GoogleSignUpEvent());
               },
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const DescriptiveText(
+                  text: "Already have an account?",
+                  color: MyConstants.primaryColor,
+                ),
+                TextLinkButton(
+                  /// Navigate to the sign up screen.
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  text: "Sign In",
+                ),
+              ],
             ),
           ],
         ),
