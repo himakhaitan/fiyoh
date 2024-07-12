@@ -6,7 +6,7 @@ import 'package:rentwise/common_widgets/long_button.dart';
 import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/constants/colours.dart';
 import 'package:rentwise/layouts/auth/auth_layout.dart';
-import 'package:rentwise/services/auth/auth_bloc.dart';
+import 'package:rentwise/app_entry/auth/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:rentwise/common_widgets/text_link_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

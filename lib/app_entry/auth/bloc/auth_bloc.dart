@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:rentwise/services/auth/onboarding_service.dart';
+import 'package:rentwise/app_entry/auth/bloc/onboarding_service.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 

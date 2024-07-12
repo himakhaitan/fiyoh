@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -59,10 +50,42 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAqKgSJ7ykhbDWeAgKLUQ9f405yDJEy6H4',
-    appId: '1:45593094888:ios:60b962d700d1defd60f75d',
+    appId: '1:45593094888:ios:d76017d14a8a86ba60f75d',
     messagingSenderId: '45593094888',
     projectId: 'pg-connect-8ce02',
     storageBucket: 'pg-connect-8ce02.appspot.com',
-    iosBundleId: 'com.example.app',
+    iosClientId: '45593094888-24r7ebicvc4065cq94vt55v8pm02q9dv.apps.googleusercontent.com',
+    iosBundleId: 'com.rentwise.app',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyClVp4iRcNK7MRH6JfJQPtCGpK7Qi5KlNk',
+    appId: '1:45593094888:web:cf818b0da5869b0760f75d',
+    messagingSenderId: '45593094888',
+    projectId: 'pg-connect-8ce02',
+    authDomain: 'pg-connect-8ce02.firebaseapp.com',
+    storageBucket: 'pg-connect-8ce02.appspot.com',
+    measurementId: 'G-T5QD008J3L',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyAqKgSJ7ykhbDWeAgKLUQ9f405yDJEy6H4',
+    appId: '1:45593094888:ios:fe5c6e7df5d595a060f75d',
+    messagingSenderId: '45593094888',
+    projectId: 'pg-connect-8ce02',
+    storageBucket: 'pg-connect-8ce02.appspot.com',
+    iosClientId: '45593094888-8fk6oer3274cn3ae0ihpmdqv34v7gb85.apps.googleusercontent.com',
+    iosBundleId: 'com.example.rentwise',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyClVp4iRcNK7MRH6JfJQPtCGpK7Qi5KlNk',
+    appId: '1:45593094888:web:55507451b34a094060f75d',
+    messagingSenderId: '45593094888',
+    projectId: 'pg-connect-8ce02',
+    authDomain: 'pg-connect-8ce02.firebaseapp.com',
+    storageBucket: 'pg-connect-8ce02.appspot.com',
+    measurementId: 'G-MTR6CBNEDZ',
+  );
+
 }

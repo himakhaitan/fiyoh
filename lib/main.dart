@@ -1,12 +1,12 @@
-import 'package:rentwise/app_entry/new_pages/screens/login_screen.dart';
+import 'package:rentwise/app_entry/auth/screens/login_screen.dart';
 import 'package:rentwise/app_entry/new_pages/screens/welcome_screen.dart';
-import 'package:rentwise/app_entry/new_pages/screens/signup_screen.dart';
+import 'package:rentwise/app_entry/auth/screens/signup_screen.dart';
 import 'package:rentwise/property/bloc/property_bloc.dart';
 import 'package:rentwise/home/screens/dashboard.dart';
-import 'package:rentwise/app_entry/new_pages/screens/forgot_password_screen.dart';
+import 'package:rentwise/app_entry/auth/screens/forgot_password_screen.dart';
 import 'package:rentwise/property/screens/add_new_property_screen.dart';
 import 'package:rentwise/property/screens/add_new_tenant_screen.dart';
-import 'package:rentwise/services/auth/auth_bloc.dart';
+import 'package:rentwise/app_entry/auth/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
