@@ -3,11 +3,11 @@ import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/constants/colours.dart';
 
 
-class InfoItems extends StatelessWidget {
+class InfoItem extends StatelessWidget {
   final String text;
   final IconData icon;
   final Color color;
-  const InfoItems({
+  const InfoItem({
     super.key,
     required this.text,
     required this.icon,

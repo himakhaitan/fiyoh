@@ -1,7 +1,7 @@
 import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/common_widgets/section_header.dart';
 import 'package:rentwise/property/bloc/property_bloc.dart';
-import 'package:rentwise/home/widgets/property_tile.dart';
+import 'package:rentwise/dashboard/widgets/property_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rentwise/models/property.dart'; // Assuming this is where Property class is defined

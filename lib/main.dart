@@ -2,7 +2,7 @@ import 'package:rentwise/app_entry/auth/screens/login_screen.dart';
 import 'package:rentwise/app_entry/new_pages/screens/welcome_screen.dart';
 import 'package:rentwise/app_entry/auth/screens/signup_screen.dart';
 import 'package:rentwise/property/bloc/property_bloc.dart';
-import 'package:rentwise/home/screens/dashboard.dart';
+import 'package:rentwise/dashboard/screens/dashboard.dart';
 import 'package:rentwise/app_entry/auth/screens/forgot_password_screen.dart';
 import 'package:rentwise/property/screens/add_new_property_screen.dart';
 import 'package:rentwise/property/screens/add_new_tenant_screen.dart';
@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rentwise/room/screens/room_detail_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -85,6 +86,9 @@ class MyApp extends StatelessWidget {
               BlocProvider(
                 create: (context) => PropertyBloc(),
               ),
+              BlocProvider(
+                create: (context) => AuthBloc(),
+              ),
             ],
             child: const Dashboard(),
           ),
@@ -103,9 +107,13 @@ class MyApp extends StatelessWidget {
             child: const AddNewTenantScreen(),
           ),
         );
+      case '/room/details':
+        return MaterialPageRoute(
+          builder: (context) => const RoomDetailScreen(),
+        );
       default:
         return MaterialPageRoute(
-          builder: (context) => WelcomeScreen(),
+          builder: (context) => const WelcomeScreen(),
         );
     }
   }

@@ -6,20 +6,23 @@ class TextLinkButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String text;
   final Color color;
+  final Color bgColor;
+  final Widget? icon;
 
   const TextLinkButton(
-      {super.key, required this.onPressed, required this.text, this.color = Colors.blue});
+      {super.key, required this.onPressed, required this.text, this.color = Colors.blue, this.bgColor = Colors.transparent, this.icon});
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return TextButton.icon(
+      icon: icon,
       style: TextButton.styleFrom(
-        backgroundColor: Colors.transparent,
+        backgroundColor: bgColor,
         foregroundColor: Colors.transparent,
         overlayColor: MyConstants.accentColor,
       ),
       onPressed: onPressed,
-      child: Text(
+      label: Text(
         text,
         style: GoogleFonts.poppins(
           color: color,

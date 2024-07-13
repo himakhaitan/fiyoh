@@ -50,14 +50,14 @@ class PropertyTile extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          InfoItems(
+          InfoItem(
             text: '${property.city}, ${property.state}',
             icon: Icons.location_on,
           ),
           const SizedBox(
             height: 10,
           ),
-          InfoItems(
+          InfoItem(
             text: property.propertyType,
             icon: Icons.home,
           ),
