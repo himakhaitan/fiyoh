@@ -48,8 +48,6 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
   Future<bool> _checkRoomAvailability(String propertyId, String roomId) async {
     try {
       DocumentSnapshot roomRef = await _firestore
-          .collection('properties')
-          .doc(propertyId)
           .collection('rooms')
           .doc(roomId)
           .get();

@@ -27,6 +27,8 @@ class DropdownInput extends StatefulWidget {
   /// A callback function that is called when an item is selected.
   final void Function(String) onChanged;
 
+  final String? initialValue;
+
   /// Creates a [DropdownInput] widget.
   /// 
   /// The [labelText], [items], [starter], and [onChanged] parameters are required.
@@ -42,6 +44,7 @@ class DropdownInput extends StatefulWidget {
     required this.items,
     required this.onChanged,
     required this.starter,
+    this.initialValue,
   });
 
   @override
@@ -62,7 +65,7 @@ class _DropdownInputState extends State<DropdownInput> {
   void _updateItems() {
     /// Sets the selected item to the initial value.
     setState(() {
-      _selectedItem = widget.starter;
+      _selectedItem = widget.initialValue ?? widget.starter;
       _items = widget.items.toList();
     });
   }
@@ -82,7 +85,7 @@ class _DropdownInputState extends State<DropdownInput> {
     /// Updates the list of items in the dropdown.
     super.didUpdateWidget(oldWidget);
     /// Checks if the items in the dropdown have changed.
-    if (widget.items != oldWidget.items) {
+    if (widget.items != oldWidget.items ||  widget.initialValue != oldWidget.initialValue) {
       _updateItems();
     }
   }

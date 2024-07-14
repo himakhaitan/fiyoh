@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/info_item.dart';
 import 'package:rentwise/constants/colours.dart';
+import 'package:rentwise/models/room.dart';
 
 class RoomTile extends StatelessWidget {
-  const RoomTile({super.key});
+  final Room room;
+  final String propertyName;
+
+  const RoomTile({super.key, required this.room, required this.propertyName});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +33,9 @@ class RoomTile extends StatelessWidget {
               shape: BoxShape.circle,
               color: MyConstants.primaryColor.withOpacity(0.8),
             ),
-            child: const Center(
+            child: Center(
               child: DescriptiveText(
-                text: "101",
+                text: room.roomNumber,
                 fontSize: 18,
                 color: MyConstants.whiteColor,
                 fontWeight: FontWeight.w600,
@@ -39,30 +43,26 @@ class RoomTile extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 20),
-          const Expanded(
+          Expanded(
             child: Column(
               children: [
-                 InfoItem(
+                InfoItem(
                   text: "Green Homes Platina",
                   icon: Icons.apartment_outlined,
-                  
                 ),
                 InfoItem(
-                  text: "Empty",
+                  text: (room.occupancy > room.tenants!.length)
+                      ? "Empty"
+                      : "Filled",
                   icon: Icons.king_bed_outlined,
                   color: MyConstants.yellowMetallic,
                 ),
-               
               ],
             ),
           ),
           IconButton.filledTonal(
             onPressed: () {
-              Navigator.pushNamed(
-                context,
-                '/room/details',
-                arguments: {}
-              );
+              Navigator.pushNamed(context, '/room/details', arguments: {});
             },
             icon: const Icon(Icons.navigate_next),
             style: ButtonStyle(
