@@ -3,7 +3,8 @@ import 'package:rentwise/constants/colours.dart';
 
 class DetailLayout extends StatelessWidget {
   final Widget body;
-  const DetailLayout({super.key, required this.body});
+  final List<Widget>? actions;
+  const DetailLayout({super.key, required this.body, this.actions});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,7 @@ class DetailLayout extends StatelessWidget {
             );
           },
         ),
+        actions: actions,
       ),
       body: SafeArea(
         child: Container(

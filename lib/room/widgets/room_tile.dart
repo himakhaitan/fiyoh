@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/info_item.dart';
 import 'package:rentwise/constants/colours.dart';
 import 'package:rentwise/models/room.dart';
+import 'package:rentwise/room/bloc/room_bloc.dart';
+import 'package:rentwise/room/screens/room_detail_screen.dart';
 
 class RoomTile extends StatelessWidget {
   final Room room;
@@ -47,7 +50,7 @@ class RoomTile extends StatelessWidget {
             child: Column(
               children: [
                 InfoItem(
-                  text: "Green Homes Platina",
+                  text: propertyName,
                   icon: Icons.apartment_outlined,
                 ),
                 InfoItem(
@@ -62,7 +65,17 @@ class RoomTile extends StatelessWidget {
           ),
           IconButton.filledTonal(
             onPressed: () {
-              Navigator.pushNamed(context, '/room/details', arguments: {});
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider(
+                    create: (context) => RoomBloc(),
+                    child: RoomDetailScreen(
+                      room: room,
+                      propertyName: propertyName,
+                    ),
+                  ),
+                ),
+              );
             },
             icon: const Icon(Icons.navigate_next),
             style: ButtonStyle(

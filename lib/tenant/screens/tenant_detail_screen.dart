@@ -12,6 +12,23 @@ class TenantDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DetailLayout(
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.transfer_within_a_station_outlined,
+            color: MyConstants.primaryColor,
+          ),
+        ),
+        IconButton(
+          icon: const Icon(
+            Icons.delete_outline,
+            color: MyConstants.redColor,
+            size: 30,
+          ),
+          onPressed: () {},
+        ),
+      ],
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

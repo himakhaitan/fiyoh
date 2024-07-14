@@ -227,6 +227,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
                 await _firestore.collection('rooms').add({
               'room_number': formatRoomNumber(roomNumber),
               'floor': floor,
+              'property_id': propertyId,
               'occupancy': 2,
               'tenants': [],
               'created_at': FieldValue.serverTimestamp(),
