@@ -22,7 +22,7 @@ class TransactionTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // const Icon(
-          //   Icons.arrow_right_alt_outlined,
+          //   Icons.monetization_on_outlined,
           //   color: MyConstants.primaryColor,
           // ),
           Column(
@@ -35,7 +35,7 @@ class TransactionTile extends StatelessWidget {
               SizedBox(height: 5),
               InfoItem(
                 text: "Rent",
-                icon: Icons.calendar_today_outlined,
+                icon: Icons.monetization_on_outlined,
                 color: MyConstants.orangeMetallic,
               ),
             ],
