@@ -10,64 +10,91 @@ class RoomDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DetailLayout(
-      body: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: MyConstants.purpleMetallic,
-                    borderRadius: BorderRadius.circular(5),
-                    // border: Border.all(
-                    //   color: MyConstants.greyColor,
-                    //   width: 1.5,
-                    // ),
-                  ),
-                  child: const Icon(
-                    Icons.apartment_outlined,
-                    size: 40,
-                    color: MyConstants.primaryColor,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: MyConstants.purpleMetallic,
+                  borderRadius: BorderRadius.circular(5),
+                  // border: Border.all(
+                  //   color: MyConstants.greyColor,
+                  //   width: 1.5,
+                  // ),
+                ),
+                child: const Icon(
+                  Icons.apartment_outlined,
+                  size: 40,
+                  color: MyConstants.primaryColor,
+                ),
+              ),
+              const SizedBox(width: 20),
+              const Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    HeaderText(
+                      text: "101",
+                      color: MyConstants.accentColor,
+                      fontSize: 35,
+                    ),
+                    DescriptiveText(
+                      text: "Green Homes Platina",
+                      color: MyConstants.greyColor,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Divider(
+            color: Colors.grey[400]!,
+            thickness: 1,
+            height: 40,
+          ),
+          const HeaderText(
+            text: "Details",
+            color: MyConstants.accentColor,
+            fontSize: 18,
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(
+                    color: Colors.grey[400]!,
+                    width: 1.5,
                   ),
                 ),
-                const SizedBox(width: 20),
-                const Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      HeaderText(
-                        text: "101",
-                        color: MyConstants.accentColor,
-                        fontSize: 35,
-                      ),
-                      DescriptiveText(
-                        text: "Green Homes Platina",
-                        color: MyConstants.greyColor,
-                      ),
-                    ],
-                  ),
+                child: const Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    DescriptiveText(
+                      text: "Floor",
+                      color: MyConstants.accentColor,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    SizedBox(width: 10),
+                    HeaderText(
+                      text: "2",
+                      color: MyConstants.accentColor,
+                      fontSize: 25,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            Divider(
-              color: Colors.grey[400]!,
-              thickness: 2,
-              height: 40,
-            ),
-            const HeaderText(
-              text: "Details",
-              color: MyConstants.accentColor,
-              fontSize: 18,
-            ),
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                Container(
+              ),
+              const SizedBox(width: 5),
+              Expanded(
+                child: Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                   decoration: BoxDecoration(
@@ -82,73 +109,42 @@ class RoomDetailScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       DescriptiveText(
-                        text: "Floor",
+                        text: "Occupancy",
                         color: MyConstants.accentColor,
                         fontWeight: FontWeight.w500,
                       ),
                       SizedBox(width: 10),
                       HeaderText(
-                        text: "2",
+                        text: "3",
                         color: MyConstants.accentColor,
                         fontSize: 25,
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(width: 5),
-                Expanded(
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(
-                        color: Colors.grey[400]!,
-                        width: 1.5,
-                      ),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        DescriptiveText(
-                          text: "Occupancy",
-                          color: MyConstants.accentColor,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        SizedBox(width: 10),
-                        HeaderText(
-                          text: "3",
-                          color: MyConstants.accentColor,
-                          fontSize: 25,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Divider(
-              color: Colors.grey[400]!,
-              thickness: 2,
-              height: 40,
-            ),
-            const HeaderText(
-              text: "Tenants",
-              color: MyConstants.accentColor,
-              fontSize: 18,
-            ),
-            const SizedBox(height: 10),
-            ListView(
-              shrinkWrap: true,
-              children: const [
-                TenantItem(name: "Himanshu Khaitan"),
-                TenantItem(name: "Ritesh Raj Sharma"),
-                TenantItem(name: "Kalyan Chowbey"),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+          Divider(
+            color: Colors.grey[400]!,
+            thickness: 1,
+            height: 40,
+          ),
+          const HeaderText(
+            text: "Tenants",
+            color: MyConstants.accentColor,
+            fontSize: 18,
+          ),
+          const SizedBox(height: 10),
+          ListView(
+            shrinkWrap: true,
+            children: const [
+              TenantItem(name: "Himanshu Khaitan"),
+              TenantItem(name: "Ritesh Raj Sharma"),
+              TenantItem(name: "Kalyan Chowbey"),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -165,11 +161,11 @@ class TenantItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: Colors.grey[200]!,
-            width: 1.5,
+            color: MyConstants.lightGreyColor,
+            width: 1,
           ),
         ),
       ),
@@ -182,7 +178,7 @@ class TenantItem extends StatelessWidget {
               shape: BoxShape.circle,
               color: MyConstants.primaryColor,
             ),
-            child: Icon(
+            child: const Icon(
               Icons.person_4_rounded,
               color: MyConstants.whiteColor,
             ),

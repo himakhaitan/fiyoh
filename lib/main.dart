@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rentwise/room/screens/room_detail_screen.dart';
+import 'package:rentwise/tenant/screens/tenant_detail_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -110,6 +111,10 @@ class MyApp extends StatelessWidget {
       case '/room/details':
         return MaterialPageRoute(
           builder: (context) => const RoomDetailScreen(),
+        );
+      case '/tenant/details':
+        return MaterialPageRoute(
+          builder: (context) => const TenantDetailScreen(),
         );
       default:
         return MaterialPageRoute(

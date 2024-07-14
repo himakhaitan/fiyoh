@@ -28,7 +28,7 @@ class RoomsScreen extends StatelessWidget {
                 starter: "Select Status",
               ),
               Align(
-                alignment: Alignment.centerRight,
+                alignment: Alignment.center,
                 child: TextLinkButton(
                   bgColor: Colors.grey[200]!,
                   color: MyConstants.primaryColor,

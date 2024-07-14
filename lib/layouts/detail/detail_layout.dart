@@ -27,7 +27,13 @@ class DetailLayout extends StatelessWidget {
           },
         ),
       ),
-      body: SafeArea(child: body),
+      body: SafeArea(
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
+          child: body,
+        ),
+      ),
     );
   }
 }

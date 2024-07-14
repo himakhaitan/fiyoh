@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/info_item.dart';
 import 'package:rentwise/constants/colours.dart';
 
-class RoomTile extends StatelessWidget {
-  const RoomTile({super.key});
+class TenantTile extends StatelessWidget {
+  const TenantTile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,45 +23,39 @@ class RoomTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(15),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.all(8),
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: MyConstants.primaryColor.withOpacity(0.8),
+              color: MyConstants.primaryColor,
             ),
-            child: const Center(
-              child: DescriptiveText(
-                text: "101",
-                fontSize: 18,
-                color: MyConstants.whiteColor,
-                fontWeight: FontWeight.w600,
-              ),
+            child: const Icon(
+              Icons.person_4_rounded,
+              color: MyConstants.whiteColor,
             ),
           ),
           const SizedBox(width: 20),
           const Expanded(
             child: Column(
               children: [
-                 InfoItem(
-                  text: "Green Homes Platina",
-                  icon: Icons.apartment_outlined,
-                  
+                InfoItem(
+                  text: "Himanshu Khaitan",
+                  icon: Icons.person_2_outlined,
                 ),
                 InfoItem(
-                  text: "Empty",
-                  icon: Icons.king_bed_outlined,
-                  color: MyConstants.yellowMetallic,
+                  text: "Room 101",
+                  icon: Icons.meeting_room_outlined,
                 ),
-               
+                InfoItem(
+                  text: "Paid",
+                  icon: Icons.currency_rupee_outlined,
+                  color: MyConstants.successMetallic,
+                ),
               ],
             ),
           ),
           IconButton.filledTonal(
             onPressed: () {
-              Navigator.pushNamed(
-                context,
-                '/room/details',
-                arguments: {}
-              );
+              Navigator.pushNamed(context, '/tenant/details', arguments: {});
             },
             icon: const Icon(Icons.navigate_next),
             style: ButtonStyle(
