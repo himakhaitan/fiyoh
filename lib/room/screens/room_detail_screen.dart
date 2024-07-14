@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/header_text.dart';
+import 'package:rentwise/common_widgets/section_header.dart';
 import 'package:rentwise/constants/colours.dart';
 import 'package:rentwise/layouts/detail/detail_layout.dart';
+import 'package:rentwise/tenant/screens/tenant_detail_screen.dart';
 
 class RoomDetailScreen extends StatelessWidget {
   const RoomDetailScreen({super.key});
@@ -56,72 +58,21 @@ class RoomDetailScreen extends StatelessWidget {
             thickness: 1,
             height: 40,
           ),
-          const HeaderText(
-            text: "Details",
-            color: MyConstants.accentColor,
-            fontSize: 18,
-          ),
+          SectionHeader(text: "Details"),
           const SizedBox(height: 10),
+
           Row(
             children: [
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(
-                    color: Colors.grey[400]!,
-                    width: 1.5,
-                  ),
-                ),
-                child: const Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    DescriptiveText(
-                      text: "Floor",
-                      color: MyConstants.accentColor,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    SizedBox(width: 10),
-                    HeaderText(
-                      text: "2",
-                      color: MyConstants.accentColor,
-                      fontSize: 25,
-                    ),
-                  ],
-                ),
+              InfoTag(
+                item: "Floor",
+                value: "1",
               ),
               const SizedBox(width: 5),
               Expanded(
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(
-                      color: Colors.grey[400]!,
-                      width: 1.5,
-                    ),
-                  ),
-                  child: const Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      DescriptiveText(
-                        text: "Occupancy",
-                        color: MyConstants.accentColor,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      SizedBox(width: 10),
-                      HeaderText(
-                        text: "3",
-                        color: MyConstants.accentColor,
-                        fontSize: 25,
-                      ),
-                    ],
-                  ),
-                ),
+                child: InfoTag(
+                item: "Occupancy",
+                value: "3",
+              ),
               ),
             ],
           ),
@@ -130,11 +81,7 @@ class RoomDetailScreen extends StatelessWidget {
             thickness: 1,
             height: 40,
           ),
-          const HeaderText(
-            text: "Tenants",
-            color: MyConstants.accentColor,
-            fontSize: 18,
-          ),
+          SectionHeader(text: "Tenants"),
           const SizedBox(height: 10),
           ListView(
             shrinkWrap: true,

@@ -62,18 +62,17 @@ class TenantDetailScreen extends StatelessWidget {
           SectionHeader(text: "Details"),
           const SizedBox(height: 10),
           InfoTag(
-                item: "Room Number",
-                value: "101",
-              ),
-              InfoTag(
-                item: "Phone Number",
-                value: "6203059082",
-              ),
-              InfoTag(
-                item: "Joining Date",
-                value: "21-04-2024",
-              ),
-         
+            item: "Room Number",
+            value: "101",
+          ),
+          InfoTag(
+            item: "Phone Number",
+            value: "6203059082",
+          ),
+          InfoTag(
+            item: "Joining Date",
+            value: "21-04-2024",
+          ),
           Divider(
             color: Colors.grey[400]!,
             thickness: 1,
@@ -108,17 +107,14 @@ class InfoTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      margin: const EdgeInsets.only(bottom: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 247, 247, 247),
-        borderRadius: BorderRadius.all(Radius.circular(5)),
-        // border: Border(
-        //   bottom: BorderSide(
-        //     color: Colors.grey[100]!,
-        //     width: 1.5,
-        //   ),
-        // ),
+        borderRadius: BorderRadius.circular(5),
+        border: Border.all(
+          color: Colors.grey[400]!,
+          width: 1.5,
+        ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -126,15 +122,15 @@ class InfoTag extends StatelessWidget {
         children: [
           DescriptiveText(
             text: item,
-            color: MyConstants.accentColor,
+            color: MyConstants.greyColor,
             fontWeight: FontWeight.w600,
           ),
           const SizedBox(width: 10),
           DescriptiveText(
             text: value,
-            color: MyConstants.greyColor,
+            color: MyConstants.accentColor,
             fontSize: 16,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
           ),
         ],
       ),
