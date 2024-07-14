@@ -20,8 +20,7 @@ class AddProperty extends PropertyEvent {
   String city;
   String state;
   String propertyType;
-  List<String> startRooms;
-  List<String> endRooms;
+  List<List<String>> floors;
   List<String> rules;
   List<bool> selectedFacilities;
   List<bool> selectedPaymentOptions;
@@ -34,8 +33,7 @@ class AddProperty extends PropertyEvent {
     required this.city,
     required this.state,
     required this.propertyType,
-    required this.startRooms,
-    required this.endRooms,
+    required this.floors,
     required this.rules,
     required this.selectedFacilities,
     required this.selectedPaymentOptions,
@@ -50,8 +48,7 @@ class AddProperty extends PropertyEvent {
         city,
         state,
         propertyType,
-        startRooms,
-        endRooms,
+        floors,
         rules,
         selectedFacilities,
         selectedPaymentOptions,

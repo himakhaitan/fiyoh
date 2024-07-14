@@ -60,6 +60,11 @@ class PropertyTile extends StatelessWidget {
           InfoItem(
             text: property.propertyType,
             icon: Icons.home,
+            color: (property.propertyType == 'Female')
+                ? MyConstants.pinkMetallic
+                : (property.propertyType == 'Male')
+                    ? MyConstants.blueMetallic
+                    : MyConstants.yellowMetallic,
           ),
           const SizedBox(
             height: 20,
@@ -104,4 +109,3 @@ class PropertyTile extends StatelessWidget {
     );
   }
 }
-

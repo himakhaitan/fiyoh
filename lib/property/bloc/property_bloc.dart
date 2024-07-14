@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -50,8 +48,6 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
 
             for (String roomId in roomIds) {
               DocumentSnapshot roomDoc = await _firestore
-                  .collection('properties')
-                  .doc(propertyId)
                   .collection('rooms')
                   .doc(roomId)
                   .get();
@@ -213,10 +209,10 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
       String propertyId = propertyRef.id;
       Map<String, List<String>> roomsByFloor = {};
 
-      for (int i = 0; i < event.startRooms.length; i++) {
-        int startRoomNumber = int.parse(event.startRooms[i]);
-        int endRoomNumber = int.parse(event.endRooms[i]);
-        int floor = startRoomNumber ~/ 100;
+      for (int i = 0; i < event.floors.length; i++) {
+        int startRoomNumber = int.parse(event.floors[i][1]);
+        int endRoomNumber = int.parse(event.floors[i][2]);
+        int floor = int.parse(event.floors[i][0]);
 
         if (!roomsByFloor.containsKey(floor.toString())) {
           roomsByFloor[floor.toString()] = [];
@@ -228,7 +224,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
           // Create the room
           try {
             DocumentReference roomRef =
-                await propertyRef.collection('rooms').add({
+                await _firestore.collection('rooms').add({
               'room_number': formatRoomNumber(roomNumber),
               'floor': floor,
               'occupancy': 2,
@@ -277,8 +273,6 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
         }
 
         await _firestore
-            .collection('properties')
-            .doc(event.propertyId)
             .collection('rooms')
             .where(FieldPath.documentId, whereIn: chunk)
             .get()

@@ -65,9 +65,7 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
             _isLoading = false;
           });
         } else if (state is PropertyAPICompleted) {
-          if (_error.isNotEmpty) {
-            Navigator.pop(context);
-          }
+          Navigator.pop(context);
         }
       },
       child: FormLayout(

@@ -7,7 +7,7 @@ import 'package:rentwise/common_widgets/long_button.dart';
 import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/constants/colours.dart';
 import 'package:rentwise/property/bloc/property_bloc.dart';
-import 'package:rentwise/property/widgets/multi_input.dart';
+import 'package:rentwise/property/widgets/floor_input.dart';
 import 'package:rentwise/property/widgets/property_rules.dart';
 import 'package:flutter/material.dart';
 import 'package:rentwise/layouts/form/form_layout.dart';
@@ -29,8 +29,7 @@ class _AddNewPropertyScreenState extends State<AddNewPropertyScreen> {
   String _selectedCity = "Select City";
   String _selectedState = "Select State";
   String _selectedPropertyType = "Select Property Type";
-  List<String> startRooms = [];
-  List<String> endRooms = [];
+  List<List<String>> floors = [];
   List<String> rules = [];
   List<bool> selectedFacilities = List<bool>.filled(facilities.length, false);
   List<bool> selectedPaymentOptions =
@@ -88,8 +87,7 @@ class _AddNewPropertyScreenState extends State<AddNewPropertyScreen> {
           selectedCity: _selectedCity,
           selectedState: _selectedState,
           selectedPropertyType: _selectedPropertyType,
-          startRooms: startRooms,
-          endRooms: endRooms,
+          floors: floors,
           selectedFacilities: selectedFacilities,
           selectedPaymentOptions: selectedPaymentOptions,
           selectedAmenities: selectedAmenities,
@@ -114,8 +112,7 @@ class _AddNewPropertyScreenState extends State<AddNewPropertyScreen> {
                                 city: _selectedCity,
                                 state: _selectedState,
                                 propertyType: _selectedPropertyType,
-                                startRooms: startRooms,
-                                endRooms: endRooms,
+                                floors: floors,
                                 rules: rules,
                                 selectedFacilities: selectedFacilities,
                                 selectedPaymentOptions: selectedPaymentOptions,
@@ -144,8 +141,7 @@ class AddNewPropertyOptions extends StatefulWidget {
   final String selectedCity;
   final String selectedState;
   final String selectedPropertyType;
-  List<String> startRooms;
-  List<String> endRooms;
+  List<List<String>> floors;
   List<String> rules;
   List<bool> selectedFacilities;
   List<bool> selectedPaymentOptions;
@@ -162,8 +158,7 @@ class AddNewPropertyOptions extends StatefulWidget {
     required this.selectedCity,
     required this.selectedState,
     required this.selectedPropertyType,
-    required this.startRooms,
-    required this.endRooms,
+    required this.floors,
     required this.rules,
     required this.selectedFacilities,
     required this.selectedPaymentOptions,
@@ -261,11 +256,10 @@ class _AddNewPropertyOptionsState extends State<AddNewPropertyOptions> {
           onChanged: widget.onPropertyTypeChange,
         ),
         // Room Details including beds
-        MultiInput<String>(
+        FloorInput(
           label: "Add Floors",
           description: "Add rooms to your property",
-          startRooms: widget.startRooms,
-          endRooms: widget.endRooms,
+          floors: widget.floors
         ),
         // Available Facilities
         CheckboxListFormField(
@@ -301,7 +295,7 @@ class _AddNewPropertyOptionsState extends State<AddNewPropertyOptions> {
           selectedOptions: widget.selectedAmenities,
           label: "Room Amenities",
         ),
-        PropertyRules<String>(
+        PropertyRules(
           label: "Property Rules",
           description: "Let us know your property rules",
           rules: widget.rules,
