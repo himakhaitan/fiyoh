@@ -90,7 +90,15 @@ class _RoomsScreenState extends State<RoomsScreen> {
                               .values
                               .expand((element) => element)
                               .toList();
-                          rooms = allRooms;
+                          rooms = (value == "All")
+                            ? allRooms
+                            : allRooms
+                                .where((element) => (value == "Empty")
+                                    ? element.occupancy >
+                                        element.tenants!.length
+                                    : element.occupancy <=
+                                        element.tenants!.length)
+                                .toList();
                         }
                       } else {
                         allRooms = [];
