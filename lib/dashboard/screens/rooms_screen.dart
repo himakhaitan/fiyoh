@@ -144,6 +144,10 @@ class _RoomsScreenState extends State<RoomsScreen> {
           if (_error.isNotEmpty) ErrorMessage(message: _error),
           _isLoading
               ? const ProgressLoader()
+              : (propertyItems.isEmpty)
+                  ? const Center(
+                      child: Text("No properties found."),
+                    )
               : (rooms.isEmpty)
                   ? const Center(
                       child: Text("No rooms found."),
