@@ -1,6 +1,7 @@
 import 'package:rentwise/app_entry/auth/screens/login_screen.dart';
 import 'package:rentwise/app_entry/new_pages/screens/welcome_screen.dart';
 import 'package:rentwise/app_entry/auth/screens/signup_screen.dart';
+import 'package:rentwise/auth_wrapper.dart';
 import 'package:rentwise/property/bloc/property_bloc.dart';
 import 'package:rentwise/dashboard/screens/dashboard.dart';
 import 'package:rentwise/app_entry/auth/screens/forgot_password_screen.dart';
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: WelcomeScreen(),
+      home: const AuthWrapper(),
       onGenerateRoute: (settings) => generateRoute(settings),
     );
   }

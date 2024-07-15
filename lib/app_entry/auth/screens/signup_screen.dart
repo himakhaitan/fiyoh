@@ -62,7 +62,7 @@ class _SignupScreenState extends State<SignupScreen> {
           setState(() {
             _isLoading = false;
           });
-          Navigator.pushNamed(context, '/home');
+          Navigator.pushReplacementNamed(context, '/home');
         } else if (state is AuthFailure) {
           /// If the signup event fails, show an error message.
           setState(() {

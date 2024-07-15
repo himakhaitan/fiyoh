@@ -33,7 +33,7 @@ class InfoItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
           child: DescriptiveText(
             text: text,
-            fontSize: 14,
+            fontSize: 12,
             color: MyConstants.primaryColor.withOpacity(0.8),
             fontWeight: FontWeight.w500,
           ),
