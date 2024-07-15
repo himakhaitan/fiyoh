@@ -44,14 +44,19 @@ class _RoomsScreenState extends State<RoomsScreen> {
                 : "Select Property";
             _selectedStatus = "All";
 
-            allRooms = state.properties
-                .where((element) => element.propertyName == _selectedProperty)
-                .first
-                .rooms
-                .values
-                .expand((element) => element)
-                .toList();
-            rooms = allRooms;
+            if (propertyItems.isNotEmpty) {
+              allRooms = state.properties
+                  .where((element) => element.propertyName == _selectedProperty)
+                  .first
+                  .rooms
+                  .values
+                  .expand((element) => element)
+                  .toList();
+              rooms = allRooms;
+            } else {
+              allRooms = [];
+              rooms = [];
+            }
             _isLoading = false;
           });
         } else if (state is PropertyFailed) {

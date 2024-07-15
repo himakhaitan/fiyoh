@@ -42,11 +42,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final User? user = userCredential.user;
 
       if (user != null) {
+        List<String> names = user.displayName!.split(" ");
+        String firstName = names[0];
+        String lastName = names.sublist(1).join(" ");
         await _onboardingService.signupUserDocument(
           user.uid,
           user.email ?? "",
-          user.displayName ?? "",
-          "", 
+          firstName,
+          lastName,
           user.phoneNumber ?? "",
           user.photoURL ?? "",
         );
@@ -77,6 +80,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       User? user = userCredential.user;
 
       if (user != null) {
+        bool isNewUser = await _onboardingService.isNewUser(user.uid);
+        if (isNewUser) {
+          // Seperate display name into first name and last name
+          List<String> names = user.displayName!.split(" ");
+          String firstName = names[0];
+          String lastName = names.sublist(1).join(" ");
+          await _onboardingService.signupUserDocument(
+            user.uid,
+            user.email ?? "",
+            firstName,
+            lastName,
+            user.phoneNumber ?? "",
+            user.photoURL ?? "",
+          );
+        }
         emit(AuthSuccess(user: user));
       } else {
         emit(AuthFailure(error: "Google sign in failed"));

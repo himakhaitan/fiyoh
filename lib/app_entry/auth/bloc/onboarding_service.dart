@@ -39,4 +39,15 @@ class OnboardingService {
       rethrow;
     }
   }
+
+  Future<bool> isNewUser(String uid) async {
+    try {
+      DocumentSnapshot docSnapshot =
+          await _firestore.collection('users').doc(uid).get();
+      return !docSnapshot.exists;
+    } catch (e) {
+      // Handle error as per your app's requirements
+      rethrow;
+    }
+  }
 }
