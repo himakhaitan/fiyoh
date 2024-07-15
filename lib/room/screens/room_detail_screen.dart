@@ -29,7 +29,7 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<RoomBloc>().add(GetTenants(room : widget.room));
+    context.read<RoomBloc>().add(GetTenants(room: widget.room));
   }
 
   @override
@@ -40,6 +40,7 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
           setState(() {
             _isLoading = true;
           });
+          print(_isLoading);
         } else if (state is RoomFailed) {
           setState(() {
             _isLoading = false;
@@ -121,18 +122,17 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
             const SizedBox(height: 10),
             _isLoading
                 ? const ProgressLoader()
-                : _error.isNotEmpty
-                    ? ErrorMessage(message: _error)
-                    : tenants.isEmpty
-                        ? const DescriptiveText(text: "No tenants found", color: MyConstants.greyColor)
-                        : ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: tenants.length,
-                            itemBuilder: (context, index) {
-                              return TenantItem(name: tenants[index]);
-                            },
-                          ),
+                : tenants.isEmpty
+                    ? const DescriptiveText(
+                        text: "No tenants found", color: MyConstants.greyColor)
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: tenants.length,
+                        itemBuilder: (context, index) {
+                          return TenantItem(name: tenants[index]);
+                        },
+                      ),
           ],
         ),
       ),

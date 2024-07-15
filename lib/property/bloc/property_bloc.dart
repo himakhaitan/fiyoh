@@ -110,8 +110,6 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
       );
 
       await _firestore
-          .collection('properties')
-          .doc(event.propertyId)
           .collection('rooms')
           .doc(event.tenantRoom)
           .update(
