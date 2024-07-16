@@ -3,6 +3,7 @@ import 'package:rentwise/common_widgets/info_item.dart';
 import 'package:rentwise/constants/colours.dart';
 
 class TenantTile extends StatelessWidget {
+
   const TenantTile({super.key});
 
   @override

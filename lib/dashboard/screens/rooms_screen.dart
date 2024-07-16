@@ -19,7 +19,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
   String _error = "";
   bool _isLoading = false;
   String _selectedProperty = "";
-  String _selectedStatus = "";
+  String _selectedStatus = "Select Status";
   List<Room> rooms = [];
   List<Room> allRooms = [];
 
@@ -84,6 +84,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
                   onChanged: (value) {
                     setState(() {
                       _selectedProperty = value;
+                      _selectedStatus = "All";
                       if (_selectedProperty != "Select Property") {
                         final currentState = context.read<PropertyBloc>().state;
                         if (currentState is PropertyLoaded) {
@@ -95,15 +96,8 @@ class _RoomsScreenState extends State<RoomsScreen> {
                               .values
                               .expand((element) => element)
                               .toList();
-                          rooms = (value == "All")
-                            ? allRooms
-                            : allRooms
-                                .where((element) => (value == "Empty")
-                                    ? element.occupancy >
-                                        element.tenants!.length
-                                    : element.occupancy <=
-                                        element.tenants!.length)
-                                .toList();
+                          rooms = allRooms;
+                              
                         }
                       } else {
                         allRooms = [];
@@ -116,8 +110,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
                 DropdownInput(
                   labelText: "Status",
                   items: const ["All", "Empty", "Filled"],
-                  initialValue:
-                      (propertyItems.isNotEmpty) ? "All" : "Select Status",
+                  initialValue: _selectedStatus,
                   onChanged: (value) {
                     setState(() {
                       _selectedStatus = value;
@@ -148,21 +141,21 @@ class _RoomsScreenState extends State<RoomsScreen> {
                   ? const Center(
                       child: Text("No properties found."),
                     )
-              : (rooms.isEmpty)
-                  ? const Center(
-                      child: Text("No rooms found."),
-                    )
-                  : Expanded(
-                      child: ListView.builder(
-                        itemCount: rooms.length,
-                        itemBuilder: (context, index) {
-                          return RoomTile(
-                            room: rooms[index],
-                            propertyName: _selectedProperty,
-                          );
-                        },
-                      ),
-                    ),
+                  : (rooms.isEmpty)
+                      ? const Center(
+                          child: Text("No rooms found."),
+                        )
+                      : Expanded(
+                          child: ListView.builder(
+                            itemCount: rooms.length,
+                            itemBuilder: (context, index) {
+                              return RoomTile(
+                                room: rooms[index],
+                                propertyName: _selectedProperty,
+                              );
+                            },
+                          ),
+                        ),
         ],
       ),
     );

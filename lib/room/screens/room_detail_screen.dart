@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rentwise/common_widgets/descriptive_text.dart';
-import 'package:rentwise/common_widgets/error_message.dart';
 import 'package:rentwise/common_widgets/header_text.dart';
 import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/common_widgets/section_header.dart';
