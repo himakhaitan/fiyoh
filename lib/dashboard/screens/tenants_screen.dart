@@ -17,7 +17,7 @@ class TenantsScreen extends StatefulWidget {
 
 class _TenantsScreenState extends State<TenantsScreen> {
   List<String> propertyItems = [];
-  List<String> tenants = [];
+  List<String> tenants = ["Himanshu"];
   String _error = "";
   bool _isLoading = false;
   String _selectedProperty = "";
@@ -28,17 +28,27 @@ class _TenantsScreenState extends State<TenantsScreen> {
   void initState() {
     super.initState();
 
-    context.read<PropertyBloc>().add(GetProperties());
+    final propertyState = context.read<PropertyBloc>().state;
+
+    if (propertyState is! PropertyLoaded) {
+      context.read<PropertyBloc>().add(GetProperties());
+    }
   }
 
-  void _handleSearch () {
+  void _handleSearch() {
+    if (_selectedPeriod == "Select Period" ||
+        _selectedProperty == "Select Property" ||
+        _selectedStatus == "Select Status") {
+      setState(() {
+        _error = "Please select all fields";
+      });
+      return;
+    }
     setState(() {
       _error = "";
       _isLoading = true;
       tenants = [];
     });
-    
-    
   }
 
   @override
@@ -131,16 +141,16 @@ class _TenantsScreenState extends State<TenantsScreen> {
               ? const ProgressLoader()
               : (propertyItems.isEmpty)
                   ? const Center(child: Text("No property found"))
-          : (tenants.isEmpty)
-              ? const Center(child: Text("No tenants found"))
-              :
-          Expanded(
-              child: ListView.builder(
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return const TenantTile();
-            },
-          )),
+                  : (tenants.isEmpty)
+                      ? const Center(child: Text("No tenants found"))
+                      : Expanded(
+                          child: ListView.builder(
+                            itemCount: 10,
+                            itemBuilder: (context, index) {
+                              return const TenantTile();
+                            },
+                          ),
+                        ),
         ],
       ),
     );

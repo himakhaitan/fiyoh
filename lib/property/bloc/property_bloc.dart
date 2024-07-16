@@ -234,7 +234,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
             roomsByFloor[floor.toString()]!.add(roomRef.id);
           } catch (e) {
             // Error Creating Room
-            print('Error creating room: $e');
+            print(e.toString());
           }
         }
       }

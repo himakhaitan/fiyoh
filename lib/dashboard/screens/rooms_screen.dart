@@ -27,7 +27,38 @@ class _RoomsScreenState extends State<RoomsScreen> {
   void initState() {
     super.initState();
 
-    context.read<PropertyBloc>().add(GetProperties());
+    final propertyState = context.read<PropertyBloc>().state;
+
+    if (propertyState is! PropertyLoaded) {
+      context.read<PropertyBloc>().add(GetProperties());
+    } else {
+      _updateProperties(propertyState);
+    }
+  }
+
+  void _updateProperties(PropertyLoaded state) {
+    setState(() {
+      propertyItems = state.properties.map((e) => e.propertyName).toList();
+      _error = "";
+      _selectedProperty =
+          (propertyItems.isNotEmpty) ? propertyItems.first : "Select Property";
+      _selectedStatus = "All";
+
+      if (propertyItems.isNotEmpty) {
+        allRooms = state.properties
+            .where((element) => element.propertyName == _selectedProperty)
+            .first
+            .rooms
+            .values
+            .expand((element) => element)
+            .toList();
+        rooms = allRooms;
+      } else {
+        allRooms = [];
+        rooms = [];
+      }
+      _isLoading = false;
+    });
   }
 
   @override
@@ -35,30 +66,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
     return BlocListener<PropertyBloc, PropertyState>(
       listener: (context, state) {
         if (state is PropertyLoaded) {
-          setState(() {
-            propertyItems =
-                state.properties.map((e) => e.propertyName).toList();
-            _error = "";
-            _selectedProperty = (propertyItems.isNotEmpty)
-                ? propertyItems.first
-                : "Select Property";
-            _selectedStatus = "All";
-
-            if (propertyItems.isNotEmpty) {
-              allRooms = state.properties
-                  .where((element) => element.propertyName == _selectedProperty)
-                  .first
-                  .rooms
-                  .values
-                  .expand((element) => element)
-                  .toList();
-              rooms = allRooms;
-            } else {
-              allRooms = [];
-              rooms = [];
-            }
-            _isLoading = false;
-          });
+          _updateProperties(state);
         } else if (state is PropertyFailed) {
           setState(() {
             _error = state.error;
@@ -97,7 +105,6 @@ class _RoomsScreenState extends State<RoomsScreen> {
                               .expand((element) => element)
                               .toList();
                           rooms = allRooms;
-                              
                         }
                       } else {
                         allRooms = [];

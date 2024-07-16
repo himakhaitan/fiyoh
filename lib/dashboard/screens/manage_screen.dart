@@ -18,7 +18,11 @@ class _ManageScreenState extends State<ManageScreen> {
   void initState() {
     super.initState();
 
-    context.read<PropertyBloc>().add(GetProperties());
+    final propertyState = context.read<PropertyBloc>().state;
+
+    if (propertyState is! PropertyLoaded) {
+      context.read<PropertyBloc>().add(GetProperties());
+    }
   }
 
   @override

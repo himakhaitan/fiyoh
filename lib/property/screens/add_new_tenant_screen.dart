@@ -22,8 +22,12 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
   @override
   void initState() {
     super.initState();
-    // Ensure this is called after the widget is fully built
-    context.read<PropertyBloc>().add(GetProperties());
+
+    final propertyState = context.read<PropertyBloc>().state;
+
+    if (propertyState is! PropertyLoaded) {
+      context.read<PropertyBloc>().add(GetProperties());
+    }
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -47,10 +51,8 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
 
   Future<bool> _checkRoomAvailability(String propertyId, String roomId) async {
     try {
-      DocumentSnapshot roomRef = await _firestore
-          .collection('rooms')
-          .doc(roomId)
-          .get();
+      DocumentSnapshot roomRef =
+          await _firestore.collection('rooms').doc(roomId).get();
       if (roomRef.exists) {
         if (roomRef['occupancy'] > roomRef['tenants'].length) {
           return true;
