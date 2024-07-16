@@ -3,6 +3,7 @@ import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/section_header.dart';
 import 'package:rentwise/common_widgets/text_link_button.dart';
 import 'package:rentwise/constants/colours.dart';
+import 'package:rentwise/stats/widgets/transaction_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -111,6 +112,13 @@ class _HomeScreenState extends State<HomeScreen> {
               text: "Recent Transactions",
             ),
             const SizedBox(height: 10),
+            ListView.builder(
+              itemBuilder: (context, index) {
+                return TransactionItem();
+              },
+              itemCount: 8,
+              shrinkWrap: true,
+            ),
           ],
         ),
       ),
