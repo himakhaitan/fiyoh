@@ -114,7 +114,9 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 10),
             ListView.builder(
               itemBuilder: (context, index) {
-                return TransactionItem();
+                return TransactionItem(
+                  isCredit : false
+                );
               },
               itemCount: 8,
               shrinkWrap: true,

@@ -66,6 +66,8 @@
         "type": "String",
         "enum": ["Coliving", "Female", "Male"]
       },
+      "total_rooms": "Int",
+      "total_tenants": "Int",
       "city": "String",
       "state": "String",
       "street_address": "String",

@@ -201,11 +201,14 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
         'rules': event.rules,
         'created_at': FieldValue.serverTimestamp(),
         'updated_at': FieldValue.serverTimestamp(),
-        'rooms': {}
+        'rooms': {},
+        'number_of_rooms': 0,
+        'total_tenants': 0,
       });
 
       String propertyId = propertyRef.id;
       Map<String, List<String>> roomsByFloor = {};
+      int totalRooms = 0;
 
       for (int i = 0; i < event.floors.length; i++) {
         int startRoomNumber = int.parse(event.floors[i][1]);
@@ -232,6 +235,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
               'updated_at': FieldValue.serverTimestamp(),
             });
             roomsByFloor[floor.toString()]!.add(roomRef.id);
+            totalRooms++;
           } catch (e) {
             // Error Creating Room
             print(e.toString());
@@ -241,6 +245,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
 
       await propertyRef.update({
         'rooms': roomsByFloor,
+        'number_of_rooms': totalRooms,
       });
 
       DocumentReference userRef = _firestore.collection('users').doc(user.uid);

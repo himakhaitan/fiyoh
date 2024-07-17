@@ -3,7 +3,11 @@ import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/constants/colours.dart';
 
 class TransactionItem extends StatelessWidget {
-  const TransactionItem({super.key});
+  final bool isCredit;
+  const TransactionItem({
+    super.key,
+    required this.isCredit,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +19,11 @@ class TransactionItem extends StatelessWidget {
             width: 50,
             height: 50,
             decoration: BoxDecoration(
-              color: MyConstants.successMetallic,
+              color: isCredit? MyConstants.successMetallic : MyConstants.errorMetallic,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: const Icon(
-              Icons.arrow_outward_outlined,
+            child: Icon(
+              isCredit ? Icons.south_east_outlined : Icons.arrow_outward_outlined,
               color: MyConstants.primaryColor,
             ),
           ),
@@ -27,7 +31,7 @@ class TransactionItem extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              DescriptiveText(
+              const DescriptiveText(
                 text: 'Rent Payment',
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
@@ -40,15 +44,14 @@ class TransactionItem extends StatelessWidget {
                     color: Colors.grey[600],
                     size: 16,
                   ),
-                   DescriptiveText(
-                // INR
-                text: '5000',
-                fontSize: 14,
-                color: Colors.grey[600]!,
-              ),
+                  DescriptiveText(
+                    // INR
+                    text: '5000',
+                    fontSize: 14,
+                    color: Colors.grey[600]!,
+                  ),
                 ],
               ),
-             
             ],
           ),
           const Spacer(),
