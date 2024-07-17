@@ -253,7 +253,6 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
         'properties': FieldValue.arrayUnion([propertyId]),
         'updated_at': FieldValue.serverTimestamp(),
       });
-
       emit(PropertyAPICompleted());
     } catch (e) {
       print(e.toString());

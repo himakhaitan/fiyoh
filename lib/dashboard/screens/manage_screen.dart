@@ -14,6 +14,7 @@ class ManageScreen extends StatefulWidget {
 }
 
 class _ManageScreenState extends State<ManageScreen> {
+
   @override
   void initState() {
     super.initState();
@@ -27,39 +28,44 @@ class _ManageScreenState extends State<ManageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-        child: Column(
-          children: [
-            const SectionHeader(text: "Your Properties"),
-            const SizedBox(height: 20),
-            BlocBuilder<PropertyBloc, PropertyState>(
-              builder: (context, state) {
-                if (state is PropertyLoaded) {
-                  List<Property> properties = state.properties;
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: properties.length,
-                    itemBuilder: (context, index) {
-                      Property property = properties[index];
-                      return PropertyTile(
-                        property: property,
-                      );
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+      child: Column(
+        children: [
+          const SectionHeader(text: "Your Properties"),
+          const SizedBox(height: 20),
+          BlocBuilder<PropertyBloc, PropertyState>(
+            builder: (context, state) {
+              if (state is PropertyLoaded) {
+                List<Property> properties = state.properties;
+                return Expanded(
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      context.read<PropertyBloc>().add(GetProperties());
                     },
-                  );
-                } else if (state is PropertyFailed) {
-                  return Center(
-                    child: Text('Failed to load properties: ${state.error}'),
-                  );
-                } else {
-                  return const ProgressLoader();
-                }
-              },
-            ),
-          ],
-        ),
+                    child: ListView.builder(
+                      key: UniqueKey(),
+                      shrinkWrap: true,
+                      itemCount: properties.length,
+                      itemBuilder: (context, index) {
+                        Property property = properties[index];
+                        return PropertyTile(
+                          property: property,
+                        );
+                      },
+                    ),
+                  ),
+                );
+              } else if (state is PropertyFailed) {
+                return Center(
+                  child: Text('Failed to load properties: ${state.error}'),
+                );
+              } else {
+                return const ProgressLoader();
+              }
+            },
+          ),
+        ],
       ),
     );
   }

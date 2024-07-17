@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rentwise/constants/colours.dart';
 import 'package:rentwise/dashboard/screens/home_screen.dart';
 import 'package:rentwise/dashboard/screens/manage_screen.dart';
@@ -7,6 +8,7 @@ import 'package:rentwise/dashboard/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:rentwise/dashboard/widgets/custom_bottom_bar.dart';
 import 'package:rentwise/dashboard/widgets/custom_app_bar.dart';
+import 'package:rentwise/property/bloc/property_bloc.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -48,11 +50,14 @@ class _DashboardState extends State<Dashboard> {
       body: PageView(
         controller: _pageController,
         onPageChanged: onPageChanged,
-        children: const [
-           HomeScreen(),
-           RoomsScreen(),
-           TenantsScreen(),
-           ManageScreen(),
+        children: [
+          HomeScreen(),
+          RoomsScreen(),
+          TenantsScreen(),
+          BlocProvider(
+            create: (context) => PropertyBloc(),
+            child: ManageScreen(),
+          ),
         ],
       ),
       bottomNavigationBar: CustomBottomBar(

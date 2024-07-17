@@ -39,7 +39,6 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
           setState(() {
             _isLoading = true;
           });
-          print(_isLoading);
         } else if (state is RoomFailed) {
           setState(() {
             _isLoading = false;

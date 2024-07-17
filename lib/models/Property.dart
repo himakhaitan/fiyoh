@@ -52,7 +52,7 @@ class Property {
       rules.add(value);
     });
 
-
+    
     return Property(
       propertyId: doc.id,
       city: doc['city'],
