@@ -1,59 +1,54 @@
+// Imports
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rentwise/constants/enums.dart';
 
+// User class
 class User {
-  final String userId;
+  final String id;
   final String firstName;
   final String lastName;
   final String email;
+  final String countryCode;
   final String phoneNumber;
-  final String userType;
-  final List<String>? properties;
-  final List<String>? bookings;
-  final String? activeBooking;
-
+  final String? profileUrl;
+  final UserType? userType;
+  final List<String> properties;
+ 
+  // Constructor
   User({
-    required this.userId,
+    required this.id,
     required this.firstName,
     required this.lastName,
     required this.email,
+    required this.countryCode,
+    this.profileUrl,
     required this.phoneNumber,
     required this.userType,
-    this.properties,
-    this.bookings,
-    this.activeBooking,
+    required this.properties,
   });
 
+  // Instanciate the User class from a DocumentSnapshot
   factory User.fromDocumentSnapshot(DocumentSnapshot doc) {
-    List<String>? properties = [];
-    List<String>? bookings = [];
-    String? activeBooking;
+    List<String> properties = [];
 
+    // Check if the properties field is not null
     if (doc['properties'] != null) {
       doc['properties'].forEach((value) {
         properties.add(value);
       });
     }
 
-    if (doc['bookings'] != null) {
-      doc['bookings'].forEach((value) {
-        bookings.add(value);
-      });
-    }
-
-    if (doc['active_booking'] != null) {
-      activeBooking = doc['active_booking'];
-    }
-
+    // Return the User instance
     return User(
-      userId: doc.id,
+      id: doc.id,
       firstName: doc['first_name'],
       lastName: doc['last_name'],
       email: doc['email'],
+      countryCode: doc['country_code'],
       phoneNumber: doc['phone_number'],
-      userType: doc['user_type'],
+      userType: UserTypeExtension.fromString(doc['user_type']),
       properties: properties,
-      bookings: bookings,
-      activeBooking: activeBooking,
+      profileUrl: doc['photo_url'],
     );
   }
 }

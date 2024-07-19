@@ -1,32 +1,32 @@
-enum USER_TYPE {
-  OWNER,
-  TENANT,
+// Type: User Enum
+enum UserType {
+  owner,
+  manager,
 }
 
-extension UserTypeExtension on USER_TYPE {
+// Type: User Enum Extension
+extension UserTypeExtension on UserType {
+  // Get the value of the enum
   String get value {
-    return toString().split('.').last;
+    switch (this) {
+      case UserType.owner:
+        return 'OWNER';
+      case UserType.manager:
+        return 'MANAGER';
+      default:
+        return '';
+    }
   }
 
-  static USER_TYPE fromString(String user) {
-    return USER_TYPE.values.firstWhere((e) => e.value == user);
-  }
-}
-
-enum BOOKING_STATUS {
-  PENDING,
-  CONFIRMED,
-  CANCELLED,
-  CHECKED_IN,
-  CHECKED_OUT,
-}
-
-extension BookingStatusExtension on BOOKING_STATUS {
-  String get value {
-    return toString().split('.').last;
-  }
-
-  static BOOKING_STATUS fromString(String status) {
-    return BOOKING_STATUS.values.firstWhere((e) => e.value == status);
+  // Get the enum from the value
+  static UserType? fromString(String value) {
+    switch (value) {
+      case 'OWNER':
+        return UserType.owner;
+      case 'MANAGER':
+        return UserType.manager;
+      default:
+        return null;
+    }
   }
 }
