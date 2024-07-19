@@ -1,3 +1,4 @@
+import 'package:rentwise/app_entry/auth/screens/check_user_type_screen.dart';
 import 'package:rentwise/app_entry/auth/screens/login_screen.dart';
 import 'package:rentwise/app_entry/new_pages/screens/welcome_screen.dart';
 import 'package:rentwise/app_entry/auth/screens/signup_screen.dart';
@@ -111,6 +112,13 @@ class MyApp extends StatelessWidget {
       case '/tenant/details':
         return MaterialPageRoute(
           builder: (context) => const TenantDetailScreen(),
+        );
+      case '/onboarding/user_type':
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => AuthBloc(),
+            child: const CheckUserTypeScreen(),
+          ),
         );
       default:
         return MaterialPageRoute(

@@ -37,6 +37,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     // Handle GoogleSignInEvent
     on<GoogleSignInEvent>((event, emit) => _handleGoogleSignIn(event, emit));
+
+    // Handle CheckUserTypeEvent
+    on<CheckUserTypeEvent>((event, emit) => _handleCheckUserType(event, emit));
   }
 
   // Handle SignUpEvent
@@ -281,6 +284,50 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else {
         // User is null
         emit(AuthFailure(error: "Google sign in failed"));
+      }
+    } catch (e) {
+      // An error occurred
+      emit(AuthFailure(error: e.toString()));
+    }
+  }
+
+  // Handle CheckUserTypeEvent
+  Future<void> _handleCheckUserType(
+      CheckUserTypeEvent event, Emitter<AuthState> emit) async {
+    // Emit AuthLoading state
+    emit(AuthLoading());
+    try {
+      // Fetch user data from Firestore
+      user_model.User? userData = await fetchUserData(_auth.currentUser!.uid);
+
+      // Check if user data is not null
+      if (userData == null) {
+        // Emit AuthFailure state
+        emit(AuthFailure(error: "User data not found"));
+        return;
+      }
+
+      // Check if user type is not null
+      if (userData.userType != null) {
+        // Emit AuthSuccess state
+        emit(AuthSuccess(user: userData));
+      } else {
+        // Update user type in Firestore
+        await _firestore
+            .collection('users')
+            .doc(_auth.currentUser!.uid)
+            .update({'user_type':
+            event.userType == UserType.owner.value
+                ? UserType.owner.value
+                : UserType.manager.value});
+
+        // Update user type in user object
+        userData.userType = event.userType == UserType.owner.value
+            ? UserType.owner
+            : UserType.manager;
+        
+        // Emit AuthSuccess state
+        emit(AuthSuccess(user: userData));
       }
     } catch (e) {
       // An error occurred

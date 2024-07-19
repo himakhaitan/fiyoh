@@ -58,3 +58,12 @@ class GoogleSignUpEvent extends AuthEvent {
   @override
   List<Object> get props => [];
 }
+
+class CheckUserTypeEvent extends AuthEvent {
+  final String userType;
+
+  CheckUserTypeEvent({required this.userType});
+
+  @override
+  List<Object> get props => [userType];
+}

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:rentwise/constants/colours.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-
-  const CustomAppBar({super.key});
+  bool showLeading = true;
+  CustomAppBar({super.key, this.showLeading = true});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: MyConstants.primaryColor,
-      leading: IconButton(
+      leading: showLeading ? IconButton(
         icon: const Icon(
           Icons.arrow_back_ios_new,
           color: MyConstants.whiteColor,
@@ -18,7 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: () {
           Navigator.pop(context);
         },
-      ),
+      ): null,
     );
   }
 

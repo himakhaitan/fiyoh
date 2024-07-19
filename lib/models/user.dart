@@ -11,8 +11,8 @@ class User {
   final String countryCode;
   final String phoneNumber;
   final String? profileUrl;
-  final UserType? userType;
-  final List<String> properties;
+  UserType? userType;
+  List<String> properties;
  
   // Constructor
   User({

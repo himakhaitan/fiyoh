@@ -23,7 +23,7 @@ class FormLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: CustomAppBar(),
       backgroundColor: MyConstants.whiteColor,
       body: SafeArea(
         child: Column(

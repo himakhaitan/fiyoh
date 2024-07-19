@@ -5,23 +5,26 @@ import 'package:rentwise/constants/colours.dart';
 import 'package:flutter/material.dart';
 
 class AuthLayout extends StatelessWidget {
+  bool showLeading = true;
   final String title;
   final String? subtitle;
   final String? description;
   final Widget container;
   final Widget button;
-  const AuthLayout(
-      {super.key,
-      required this.title,
-      this.subtitle,
-      this.description,
-      required this.container,
-      required this.button});
+  AuthLayout({
+    super.key,
+    required this.title,
+    this.subtitle,
+    this.description,
+    required this.container,
+    required this.button,
+    this.showLeading = true,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: CustomAppBar(showLeading: showLeading,),
       backgroundColor: MyConstants.whiteColor,
       body: SafeArea(
         child: Column(
@@ -35,8 +38,7 @@ class AuthLayout extends StatelessWidget {
                 children: [
                   HeaderText(text: title, color: MyConstants.whiteColor),
                   if (subtitle != null && subtitle!.isNotEmpty)
-                    HeaderText(
-                        text: subtitle!, color: MyConstants.whiteColor),
+                    HeaderText(text: subtitle!, color: MyConstants.whiteColor),
                   const SizedBox(height: 12),
                   if (description != null && description!.isNotEmpty)
                     DescriptiveText(

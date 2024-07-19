@@ -60,7 +60,11 @@ class _LoginScreenState extends State<LoginScreen> {
           setState(() {
             _isLoading = false;
           });
-          Navigator.pushReplacementNamed(context, '/home');
+          if (state.user.userType == null) {
+            Navigator.pushReplacementNamed(context, '/onboarding/user_type');
+          } else {
+            Navigator.pushReplacementNamed(context, '/home');
+          }
         } else if (state is AuthFailure) {
           /// If the login event fails, show an error message.
           setState(() {
