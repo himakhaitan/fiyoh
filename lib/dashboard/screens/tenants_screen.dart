@@ -137,13 +137,13 @@ class _TenantsScreenState extends State<TenantsScreen> {
             ),
           ),
           if (_error.isNotEmpty) ErrorMessage(message: _error),
-          _isLoading
-              ? const ProgressLoader()
-              : (propertyItems.isEmpty)
-                  ? const Center(child: Text("No property found"))
-                  : (tenants.isEmpty)
-                      ? const Center(child: Text("No tenants found"))
-                      : Expanded(
+          // _isLoading
+          //     ? const ProgressLoader()
+          //     : (propertyItems.isEmpty)
+          //         ? const Center(child: Text("No property found"))
+          //         : (tenants.isEmpty)
+          //             ? const Center(child: Text("No tenants found")): 
+          Expanded(
                           child: ListView.builder(
                             itemCount: 10,
                             itemBuilder: (context, index) {

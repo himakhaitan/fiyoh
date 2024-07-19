@@ -171,7 +171,10 @@ class TenantItem extends StatelessWidget {
               color: MyConstants.whiteColor,
             ),
           ),
-          DescriptiveText(text: name, color: MyConstants.accentColor),
+          DescriptiveText(
+            text: name,
+            color: MyConstants.accentColor,
+          ),
           IconButton.filledTonal(
             onPressed: () {},
             icon: const Icon(Icons.navigate_next),

@@ -76,17 +76,17 @@ class TenantDetailScreen extends StatelessWidget {
             thickness: 1,
             height: 30,
           ),
-          SectionHeader(text: "Details"),
+          const SectionHeader(text: "Details"),
           const SizedBox(height: 10),
-          InfoTag(
+          const InfoTag(
             item: "Room Number",
             value: "101",
           ),
-          InfoTag(
+          const InfoTag(
             item: "Phone Number",
             value: "6203059082",
           ),
-          InfoTag(
+          const InfoTag(
             item: "Joining Date",
             value: "21-04-2024",
           ),
@@ -95,7 +95,21 @@ class TenantDetailScreen extends StatelessWidget {
             thickness: 1,
             height: 30,
           ),
-          SectionHeader(text: "Transaction History"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SectionHeader(text: "Transaction History"),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.add_circle_outline,
+                  color: MyConstants.primaryColor,
+                  size: 30,
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(

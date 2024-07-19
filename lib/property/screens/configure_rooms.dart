@@ -157,7 +157,7 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
                       children: [
                         Expanded(
                           child: DescriptiveText(
-                            text: "Room ${addedRooms[index]['roomNumber']}",
+                            text: "Room ${addedRooms[addedRooms.length -index -1]['roomNumber']}",
                             color: MyConstants.primaryColor,
                           ),
                         ),
@@ -167,7 +167,7 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
                         IconButton(
                           onPressed: () {
                             setState(() {
-                              addedRooms.removeAt(index);
+                              addedRooms.removeAt(addedRooms.length -index -1);
                             });
                           },
                           icon: const Icon(Icons.close_outlined),
