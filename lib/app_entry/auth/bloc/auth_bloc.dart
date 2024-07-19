@@ -297,7 +297,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         'email': user.email,
         'country_code': user.countryCode,
         'phone_number': user.phoneNumber,
-        'user_type': UserType.owner.value,
+        'user_type': null,
         'photo_url': user.profileUrl,
         'properties': [],
         'created_at': FieldValue.serverTimestamp(),

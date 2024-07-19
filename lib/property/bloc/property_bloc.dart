@@ -87,7 +87,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
         'tenant_id': event.tenantEmail,
         'check_in': FieldValue.serverTimestamp(),
         'check_out': null,
-        'status': BOOKING_STATUS.CHECKED_IN.value,
+        // 'status': BOOKING_STATUS.CHECKED_IN.value,
         'created_at': FieldValue.serverTimestamp(),
         'updated_at': FieldValue.serverTimestamp(),
         'transactions': [],
@@ -100,7 +100,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
           'last_name': event.tenantLastName,
           'email': event.tenantEmail,
           'phone_number': event.tenantPhone,
-          'user_type': USER_TYPE.TENANT.value,
+          // 'user_type': USER_TYPE.TENANT.value,
           'bookings': FieldValue.arrayUnion([
             bookingRef.id,
           ]),

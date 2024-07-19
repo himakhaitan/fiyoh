@@ -19,7 +19,10 @@ extension UserTypeExtension on UserType {
   }
 
   // Get the enum from the value
-  static UserType? fromString(String value) {
+  static UserType? fromString(String? value) {
+    if (value == null) {
+      return null;
+    }
     switch (value) {
       case 'OWNER':
         return UserType.owner;

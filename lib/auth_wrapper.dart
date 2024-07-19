@@ -6,12 +6,6 @@ import 'package:rentwise/app_entry/new_pages/screens/welcome_screen.dart';
 import 'package:rentwise/dashboard/screens/dashboard.dart';
 import 'package:rentwise/property/bloc/property_bloc.dart';
 
-/// A wrapper class for the Firebase Authentication service.
-///
-/// The [AuthWrapper] class provides methods to handle the authentication
-/// process using Firebase Authentication. It includes methods to sign up,
-/// log in, log out, and reset the password of a user.
-
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({super.key});
 

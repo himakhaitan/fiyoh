@@ -45,7 +45,7 @@ class User {
       lastName: doc['last_name'],
       email: doc['email'],
       countryCode: doc['country_code'],
-      phoneNumber: doc['phone_number'],
+      phoneNumber: doc['phone_number'] ?? '',
       userType: UserTypeExtension.fromString(doc['user_type']),
       properties: properties,
       profileUrl: doc['photo_url'],

@@ -65,7 +65,6 @@ class _LoginScreenState extends State<LoginScreen> {
           /// If the login event fails, show an error message.
           setState(() {
             _isLoading = false;
-            print(state.error);
             _error = state.error;
           });
         } else if (state is AuthLoading) {
