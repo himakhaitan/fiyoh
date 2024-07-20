@@ -40,6 +40,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     // Handle CheckUserTypeEvent
     on<CheckUserTypeEvent>((event, emit) => _handleCheckUserType(event, emit));
+
+    // Handle RefreshState
+    on<RefreshState>((event, emit) => _handleRefreshState(event, emit));
   }
 
   // Handle SignUpEvent
@@ -67,6 +70,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           userType: null,
           properties: [],
           profileUrl: "",
+          joinedAt: DateTime.now(),
         );
 
         // Create user document in Firestore
@@ -200,6 +204,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           userType: null,
           properties: [],
           profileUrl: user.photoURL ?? "",
+          joinedAt: DateTime.now(),
         );
 
         // Create user document in Firestore
@@ -260,6 +265,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             userType: null,
             properties: [],
             profileUrl: user.photoURL ?? "",
+            joinedAt: DateTime.now(),
           );
 
           // Create user document in Firestore
@@ -335,6 +341,33 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
+  // Handle RefreshState
+  Future<void> _handleRefreshState(
+      RefreshState event, Emitter<AuthState> emit
+      ) async {
+        User? user = _auth.currentUser;
+
+        // Check if user is not null
+        if (user != null) {
+          // Fetch user data from Firestore
+          user_model.User? userData = await fetchUserData(user.uid);
+
+          // Check if user data is not null
+          if (userData == null) {
+            // Emit AuthFailure state
+            emit(AuthFailure(error: "User data not found"));
+            return;
+          }
+
+          // Emit AuthSuccess state
+          emit(AuthSuccess(user: userData));
+        } else {
+          // Emit AuthFailure state
+          emit(AuthFailure(error: "User not found"));
+        
+        }
+  }
+  
   // Function to post user data to Firestore
   Future<void> signupUserDocument(user_model.User user) async {
     try {

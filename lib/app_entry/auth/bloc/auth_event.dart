@@ -67,3 +67,10 @@ class CheckUserTypeEvent extends AuthEvent {
   @override
   List<Object> get props => [userType];
 }
+
+class RefreshState extends AuthEvent {
+  RefreshState();
+
+  @override
+  List<Object> get props => [];
+}

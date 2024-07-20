@@ -39,7 +39,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   CustomListTitle(
                     title: "Profile",
                     icon: Icons.person,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, '/profile');
+                    },
                   ),
                   CustomListTitle(
                     title: "Sign Out",

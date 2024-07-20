@@ -8,9 +8,10 @@ class TextLinkButton extends StatelessWidget {
   final Color color;
   final Color bgColor;
   final Widget? icon;
+  final double? fontSize;
 
   const TextLinkButton(
-      {super.key, required this.onPressed, required this.text, this.color = Colors.blue, this.bgColor = Colors.transparent, this.icon});
+      {super.key, required this.onPressed, required this.text, this.color = Colors.blue, this.bgColor = Colors.transparent, this.icon, this.fontSize = 16});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class TextLinkButton extends StatelessWidget {
         text,
         style: GoogleFonts.poppins(
           color: color,
-          fontSize: 16,
+          fontSize: fontSize,
           fontWeight: FontWeight.w500,
         ),
         textAlign: TextAlign.right,

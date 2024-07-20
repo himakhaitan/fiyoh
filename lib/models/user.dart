@@ -11,6 +11,7 @@ class User {
   final String countryCode;
   final String phoneNumber;
   final String? profileUrl;
+  final DateTime joinedAt;
   UserType? userType;
   List<String> properties;
  
@@ -22,6 +23,7 @@ class User {
     required this.email,
     required this.countryCode,
     this.profileUrl,
+    required this.joinedAt,
     required this.phoneNumber,
     required this.userType,
     required this.properties,
@@ -49,6 +51,7 @@ class User {
       userType: UserTypeExtension.fromString(doc['user_type']),
       properties: properties,
       profileUrl: doc['photo_url'],
+      joinedAt: doc['created_at'].toDate(),
     );
   }
 }
