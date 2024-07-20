@@ -12,16 +12,6 @@ import 'package:rentwise/constants/enums.dart';
 import 'package:rentwise/layouts/detail/detail_layout.dart';
 import 'package:rentwise/models/user.dart';
 
-// User ID
-// Copy User ID feature
-// Email
-// First Name
-// Last Name
-// Phone Number
-// Country Code
-// Profile Picture
-// User Type
-
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -79,7 +69,7 @@ class ProfileSection extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: MyConstants.primaryColor,
+                color: MyConstants.greyColor,
                 width: 2,
               ),
             ),

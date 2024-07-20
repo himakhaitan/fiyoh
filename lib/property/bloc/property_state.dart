@@ -31,9 +31,3 @@ final class PropertyLoaded extends PropertyState {
   @override
   List<Object> get props => [properties];
 }
-
-final class PropertyAPICompleted extends PropertyState {
-
-  @override 
-  List<Object> get props => [];
-}

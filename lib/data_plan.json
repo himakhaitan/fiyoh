@@ -23,6 +23,21 @@
       "updated_at": "Date"
     }
   },
+  "ROOMS": {
+    "DESCRIPTION": "Data Structure of Rooms",
+    "STRUCTURE" : {
+      "id": "String",
+      "occupancy": "Int",
+      "floor": "Int",
+      "room_number": "String",
+      "tenants": [{
+        "user_id": "String",
+        "booking_id": "String"
+      }],
+      "created_at": "Date",
+      "updated_at": "Date"
+    }
+  },
   "TENANTS": {
     "DESCRIPTION": "Data Structure of Tenants",
     "STRUCTURE": {
