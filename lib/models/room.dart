@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Room {
-  final String roomId;
+  final String id;
   final int occupancy;
   final int floor;
   final String roomNumber;
   final List<Map<String, String>>? tenants;
 
   Room({
-    required this.roomId,
+    required this.id,
     required this.occupancy,
     required this.floor,
     required this.roomNumber,
@@ -26,7 +26,7 @@ class Room {
     });
 
     return Room(
-      roomId: doc.id,
+      id: doc.id,
       occupancy: doc['occupancy'],
       floor: doc['floor'],
       roomNumber: doc['room_number'],

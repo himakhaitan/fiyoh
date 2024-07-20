@@ -1,15 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rentwise/constants/enums.dart';
 import 'package:rentwise/models/room.dart';
 
 class Property {
-  final String propertyId;
+  final String id;
   final String propertyName;
-  final String propertyType;
+  final PropertyType propertyType;
   final String city;
   final String state;
   final String streetAddress;
   final String pincode;
-  final String ownerID;
+  final String ownerId;
+  final int totalTenants;
+  final int totalRooms;
+  final DateTime createdAt;
+  final String? managerId;
   final Map<String, bool> amenities;
   final Map<String, bool> facilities;
   final Map<String, bool> paymentOptions;
@@ -17,7 +22,7 @@ class Property {
   final Map<String, List<Room>> rooms;
   
   Property({
-    required this.propertyId,
+    required this.id,
     required this.city,
     required this.propertyName,
     required this.propertyType,
@@ -29,7 +34,11 @@ class Property {
     required this.paymentOptions,
     required this.rules,
     required this.rooms,
-    required this.ownerID,
+    required this.ownerId,
+    this.managerId,
+    this.totalTenants = 0,
+    this.totalRooms = 0,
+    required this.createdAt,
   });
 
   // forDocumentSnapshot 
@@ -54,10 +63,10 @@ class Property {
 
     
     return Property(
-      propertyId: doc.id,
+      id: doc.id,
       city: doc['city'],
       propertyName: doc['property_name'],
-      propertyType: doc['property_type'],
+      propertyType: PropertyTypeExtension.fromString(doc['property_type'])!,
       streetAddress: doc['street_address'],
       state: doc['state'],
       pincode: doc['pincode'],
@@ -66,7 +75,11 @@ class Property {
       paymentOptions: paymentOptions,
       rules: rules,
       rooms: rooms,
-      ownerID: doc['owner_id'],
+      ownerId: doc['owner_id'],
+      managerId: doc['manager_id'],
+      totalTenants: doc['tenant_count'] as int,
+      totalRooms: doc['room_count'] as int,
+      createdAt: doc['created_at'].toDate(),
     );
   }
 }

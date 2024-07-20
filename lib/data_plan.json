@@ -1,15 +1,11 @@
 {
   "BOOKINGS": {
     "DESCRIPTION": "Data Structure of Bookings",
-    "STRUCTURE": {
-      
-    }
+    "STRUCTURE": {}
   },
   "TRANSACTIONS": {
     "DESCRIPTION": "Data Structure of Transactions",
-    "STRUCTURE": {
-      
-    }
+    "STRUCTURE": {}
   },
   "USERS": {
     "DESCRIPTION": "Data Structure of Users",
@@ -24,13 +20,69 @@
       "photo_url": "String",
       "properties": ["String"],
       "created_at": "Date",
-      "updated_at": "Date"      
+      "updated_at": "Date"
+    }
+  },
+  "TENANTS": {
+    "DESCRIPTION": "Data Structure of Tenants",
+    "STRUCTURE": {
+      "id": "String",
+      "first_name": "String",
+      "last_name": "String",
+      "email": "String",
+      "country_code": "String",
+      "phone_number": "String",
+      "active_booking": "String"
     }
   },
   "PROPERTIES": {
     "DESCRIPTION": "Data Structure of Properties",
     "STRUCTURE": {
-      
+      "id": "String",
+      "city": "String",
+      "property_name": "String",
+      "property_type": "String",
+      "street_address": "String",
+      "state": "String",
+      "pincode": "String",
+      "amenities": {
+        "is_matteress": "Boolean",
+        "is_wardrobe": "Boolean",
+        "is_fridge": "Boolean",
+        "is_table": "Boolean",
+        "is_chair": "Boolean",
+        "is_ac": "Boolean",
+        "is_geyser": "Boolean",
+        "is_tv": "Boolean",
+        "is_washing_machine": "Boolean"
+      },
+      "facilities": {
+        "is_wifi": "Boolean",
+        "is_laundry": "Boolean",
+        "is_parking": "Boolean",
+        "is_common_area": "Boolean",
+        "is_gym": "Boolean",
+        "is_cleaning": "Boolean",
+        "is_cctv": "Boolean",
+        "is_security": "Boolean",
+        "is_power_backup": "Boolean",
+        "is_food": "Boolean"
+      },
+      "payment_options": {
+        "is_cash": "Boolean",
+        "is_upi": "Boolean",
+        "is_bank_transfer": "Boolean",
+        "is_debit_card": "Boolean",
+        "is_credit_card": "Boolean"
+      },
+      "rules": ["String"],
+      "rooms": ["Map<String, [String]>"],
+      "owner_id": "String",
+      "manager_id": "String",
+      "tenant_count": "Int",
+      "room_count": "Int",
+      "created_at": "Date",
+      "updated_at": "Date"
     }
   }
 }
