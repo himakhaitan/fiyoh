@@ -75,6 +75,8 @@ class _RoomsScreenState extends State<RoomsScreen> {
           setState(() {
             _isLoading = true;
           });
+        } else {
+          print(":");
         }
       },
       child: Column(

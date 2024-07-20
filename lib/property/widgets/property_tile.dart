@@ -1,6 +1,7 @@
 import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/info_item.dart';
 import 'package:rentwise/constants/colours.dart';
+import 'package:rentwise/constants/enums.dart';
 import 'package:rentwise/property/bloc/property_bloc.dart';
 import 'package:rentwise/models/property.dart';
 import 'package:rentwise/property/screens/configure_rooms.dart';
@@ -58,11 +59,11 @@ class PropertyTile extends StatelessWidget {
             height: 10,
           ),
           InfoItem(
-            text: property.propertyType,
+            text: property.propertyType.value,
             icon: Icons.home,
-            color: (property.propertyType == 'Female')
+            color: (property.propertyType == PropertyType.female)
                 ? MyConstants.pinkMetallic
-                : (property.propertyType == 'Male')
+                : (property.propertyType == PropertyType.male)
                     ? MyConstants.blueMetallic
                     : MyConstants.yellowMetallic,
           ),

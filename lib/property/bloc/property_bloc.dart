@@ -29,9 +29,6 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
 
     // Register AdjustProperty event handler
     on<AdjustProperty>((event, emit) => _handleAdjustProperty(event, emit));
-
-    // // Register AddTenant event handler
-    // on<AddTenant>((event, emit) => _handleAddTenant(event, emit));
   }
 
   // Function to fetch properties from Firestore
@@ -197,6 +194,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
         'street_address': event.streetAddress,
         'pincode': event.pincode,
         'owner_id': user.uid,
+        'manager_id': null,
         'facilities': {
           'is_wifi': event.selectedFacilities[0],
           'is_laundry': event.selectedFacilities[1],
@@ -337,11 +335,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
               error:
                   'These rooms have more tenants than occupancy : ${roomNumbers.join(', ')}'));
         } else {
-          // Update properties and emit PropertyLoaded state
-
-          List<Property> properties =
-              await _fetchProperties(_auth.currentUser!.uid);
-          emit(PropertyLoaded(properties: properties));
+          emit(PropertyAPICompleted());
         }
       }
     } catch (e) {

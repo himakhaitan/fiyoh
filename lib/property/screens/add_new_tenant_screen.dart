@@ -230,10 +230,10 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
                           .rooms[_selectedFloor]!
                           .firstWhere(
                               (room) => room.roomNumber == _selectedRoom)
-                          .roomId;
+                          .id;
 
                       _roomAvailable = await _checkRoomAvailability(
-                          selectedProperty.propertyId, selectedRoomID);
+                          selectedProperty.id, selectedRoomID);
 
                       if (_roomAvailable!) {
                         setState(() {
@@ -296,18 +296,18 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
                                 .rooms[_selectedFloor]!
                                 .firstWhere(
                                     (room) => room.roomNumber == _selectedRoom)
-                                .roomId;
+                                .id;
 
-                            context.read<PropertyBloc>().add(
-                                  AddTenant(
-                                    tenantEmail: _emailController.text,
-                                    tenantPhone: _phoneController.text,
-                                    tenantRoom: selectedRoomID,
-                                    propertyId: selectedProperty.propertyId,
-                                    tenantFirstName: _firstNameController.text,
-                                    tenantLastName: _lastNameController.text,
-                                  ),
-                                );
+                            // context.read<PropertyBloc>().add(
+                            //       AddTenant(
+                            //         tenantEmail: _emailController.text,
+                            //         tenantPhone: _phoneController.text,
+                            //         tenantRoom: selectedRoomID,
+                            //         propertyId: selectedProperty.propertyId,
+                            //         tenantFirstName: _firstNameController.text,
+                            //         tenantLastName: _lastNameController.text,
+                            //       ),
+                            //     );
                           }
                         }
                       }
@@ -345,7 +345,7 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
           .firstWhere((property) => property.propertyName == propertyName);
       return selectedProperty.rooms[floor]!
           .map((room) => {
-                'roomId': room.roomId,
+                'roomId': room.id,
                 'roomNumber': room.roomNumber,
               })
           .toList()

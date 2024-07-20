@@ -38,7 +38,7 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
   List<String> _getRoomsOnFloor(String floor) {
     return widget.property.rooms[floor]!
         .map((room) => {
-              'roomId': room.roomId,
+              'roomId': room.id,
               'roomNumber': room.roomNumber,
             })
         .toList()
@@ -65,7 +65,7 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
             _isLoading = false;
           });
         } else if (state is PropertyAPICompleted) {
-          Navigator.pop(context);
+          Navigator.pushReplacementNamed(context, '/home');
         }
       },
       child: FormLayout(
@@ -108,7 +108,7 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
                   String selectedRoomID = widget.property.rooms[_selectedFloor]!
                       .firstWhere(
                           (element) => element.roomNumber == _selectedRoom)
-                      .roomId;
+                      .id;
 
                   if (!addedRooms
                       .any((element) => element['roomId'] == selectedRoomID)) {
@@ -200,7 +200,7 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
                         // Call the bloc to update the rooms
                         context.read<PropertyBloc>().add(
                               AdjustProperty(
-                                propertyId: widget.property.propertyId,
+                                propertyId: widget.property.id,
                                 rooms: addedRooms
                                     .map((room) => room['roomId']!)
                                     .toList(),

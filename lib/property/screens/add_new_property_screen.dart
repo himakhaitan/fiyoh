@@ -6,6 +6,7 @@ import 'package:rentwise/common_widgets/form_input.dart';
 import 'package:rentwise/common_widgets/long_button.dart';
 import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/constants/colours.dart';
+import 'package:rentwise/constants/enums.dart';
 import 'package:rentwise/property/bloc/property_bloc.dart';
 import 'package:rentwise/property/widgets/floor_input.dart';
 import 'package:rentwise/property/widgets/property_rules.dart';
@@ -63,11 +64,11 @@ class _AddNewPropertyScreenState extends State<AddNewPropertyScreen> {
           setState(() {
             _isLoading = true;
           });
-        } else if (state is PropertyAPICompleted) {
+        } else if (state is PropertyLoaded) {
           setState(() {
             _isLoading = false;
           });
-          Navigator.pop(context);
+          Navigator.pushReplacementNamed(context, '/home');
         } else if (state is PropertyFailed) {
           setState(() {
             _isLoading = false;
@@ -111,7 +112,8 @@ class _AddNewPropertyScreenState extends State<AddNewPropertyScreen> {
                                 pincode: _pincodeController.text,
                                 city: _selectedCity,
                                 state: _selectedState,
-                                propertyType: _selectedPropertyType,
+                                propertyType: PropertyTypeExtension.fromString(
+                                    _selectedPropertyType)!,
                                 floors: floors,
                                 rules: rules,
                                 selectedFacilities: selectedFacilities,
@@ -126,7 +128,8 @@ class _AddNewPropertyScreenState extends State<AddNewPropertyScreen> {
                   ),
                   if (_isError) const SizedBox(height: 10),
                   if (_isError)
-                    const ErrorMessage(message: "An error occurred. Please try again"),
+                    const ErrorMessage(
+                        message: "An error occurred. Please try again"),
                 ],
               ),
       ),
@@ -257,10 +260,9 @@ class _AddNewPropertyOptionsState extends State<AddNewPropertyOptions> {
         ),
         // Room Details including beds
         FloorInput(
-          label: "Add Floors",
-          description: "Add rooms to your property",
-          floors: widget.floors
-        ),
+            label: "Add Floors",
+            description: "Add rooms to your property",
+            floors: widget.floors),
         // Available Facilities
         CheckboxListFormField(
           options: facilities,

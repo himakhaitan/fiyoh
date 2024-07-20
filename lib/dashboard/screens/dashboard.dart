@@ -52,7 +52,10 @@ class _DashboardState extends State<Dashboard> {
         onPageChanged: onPageChanged,
         children: [
           HomeScreen(),
-          RoomsScreen(),
+          BlocProvider(
+            create: (context) => PropertyBloc(),
+            child: RoomsScreen(),
+          ),
           TenantsScreen(),
           BlocProvider(
             create: (context) => PropertyBloc(),
