@@ -293,10 +293,6 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
             if (widget.property.rules.isNotEmpty)
               for (String rule in widget.property.rules)
                 RuleItem(rule: rule),
-              // DescriptiveText(
-              //   text: formatRules(widget.property.rules),
-              //   color: MyConstants.greyColor,
-              // ),
             if (widget.property.rules.isNotEmpty)
               Divider(
                 color: Colors.grey[400]!,
@@ -324,16 +320,6 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
       ),
     );
   }
-}
-
-String formatRules(List<String> rules) {
-  StringBuffer formatted = StringBuffer();
-
-  for (int i = 0; i < rules.length; i++) {
-    formatted.writeln("${i + 1}.\t\t${rules[i]}");
-  }
-
-  return formatted.toString();
 }
 
 class RuleItem extends StatelessWidget {

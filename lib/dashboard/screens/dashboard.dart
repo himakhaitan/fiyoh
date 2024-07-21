@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rentwise/app_entry/auth/bloc/auth_bloc.dart';
 import 'package:rentwise/constants/colours.dart';
 import 'package:rentwise/dashboard/screens/home_screen.dart';
 import 'package:rentwise/dashboard/screens/manage_screen.dart';
@@ -51,7 +52,10 @@ class _DashboardState extends State<Dashboard> {
         controller: _pageController,
         onPageChanged: onPageChanged,
         children: [
-          const HomeScreen(),
+          BlocProvider(
+            create: (context) => AuthBloc(),
+            child: const HomeScreen(),
+          ),
           BlocProvider(
             create: (context) => PropertyBloc(),
             child: const RoomsScreen(),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rentwise/app_entry/auth/bloc/auth_bloc.dart';
 import 'package:rentwise/common_widgets/descriptive_text.dart';
 import 'package:rentwise/common_widgets/section_header.dart';
 import 'package:rentwise/common_widgets/text_link_button.dart';
@@ -20,14 +22,23 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
         child: Column(
           children: [
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: DescriptiveText(
-                text: "Hello, Ramesh!",
-                color: MyConstants.primaryColor,
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-              ),
+            BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) {
+                if (state is AuthSuccess) {
+                  return Align(
+                    alignment: Alignment.centerLeft,
+                    child: DescriptiveText(
+                      text: "Hello, ${state.user.firstName}!",
+                      color: MyConstants.primaryColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  );
+                } else {
+                  context.read<AuthBloc>().add(RefreshState());
+                }
+                return const SizedBox();
+              },
             ),
             const SizedBox(height: 20),
             Container(
@@ -115,9 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 10),
             ListView.builder(
               itemBuilder: (context, index) {
-                return TransactionItem(
-                  isCredit : false
-                );
+                return TransactionItem(isCredit: false);
               },
               itemCount: 8,
               shrinkWrap: true,

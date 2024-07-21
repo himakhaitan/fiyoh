@@ -1,3 +1,4 @@
+import 'package:rentwise/common_widgets/bottom_modal.dart';
 import 'package:rentwise/common_widgets/header_text.dart';
 import 'package:rentwise/constants/colours.dart';
 import 'package:flutter/material.dart';
@@ -50,15 +51,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           );
         },
       ),
-      // centerTitle: true,
-      // title: Text(
-      //   'Welcome! Himanshu',
-      //   style: GoogleFonts.roboto(
-      //     color: MyConstants.accentColor,
-      //     fontSize: 20,
-      //     fontWeight: FontWeight.bold,
-      //   ),
-      // ),
       actions: [
         IconButton(
           icon: const Icon(
@@ -67,28 +59,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             size: 30,
           ),
           onPressed: () {
-            showBottomModal(context);
-          },
-        ),
-      ],
-    );
-  }
-
-  Future<dynamic> showBottomModal(BuildContext context) {
-    return showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          decoration: const BoxDecoration(
-            color: MyConstants.primaryColor,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          ),
-          width: double.infinity,
-          child: Column(
-            children: <Widget>[
+            showBottomModal(context, [
               Container(
                 margin: const EdgeInsets.only(bottom: 10),
                 decoration: const BoxDecoration(
@@ -154,10 +125,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   },
                 ),
               )
-            ],
-          ),
-        );
-      },
+            ]);
+          },
+        ),
+      ],
     );
   }
 

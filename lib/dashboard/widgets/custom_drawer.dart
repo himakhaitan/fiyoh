@@ -32,11 +32,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 padding: EdgeInsets.zero,
                 children: [
                   CustomListTitle(
-                    title: "Home",
-                    icon: Icons.home,
-                    onTap: () {},
-                  ),
-                  CustomListTitle(
                     title: "Profile",
                     icon: Icons.person,
                     onTap: () {
