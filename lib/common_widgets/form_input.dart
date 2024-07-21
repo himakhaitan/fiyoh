@@ -10,6 +10,7 @@ class FormInput extends StatelessWidget {
   final TextEditingController controller;
   final FormFieldValidator<String>? validator;
   final TextInputType? keyboardType;
+  final int? maxLines;
   
   const FormInput({
     super.key,
@@ -17,6 +18,7 @@ class FormInput extends StatelessWidget {
     required this.hintText,
     required this.obscureText,
     required this.controller,
+    this.maxLines,
     this.icon,
     this.keyboardType = TextInputType.text,
     required this.validator
@@ -29,6 +31,7 @@ class FormInput extends StatelessWidget {
       child: TextFormField(
         // Keyboard type should be text
         keyboardType: keyboardType,
+        maxLines: maxLines,
         controller: controller,
         decoration: InputDecoration(
           icon: icon != null

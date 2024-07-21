@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rentwise/support/support_screen.dart';
 import 'package:rentwise/tenant/screens/tenant_detail_screen.dart';
 import 'firebase_options.dart';
 
@@ -126,6 +127,13 @@ class MyApp extends StatelessWidget {
           builder: (context) => BlocProvider(
             create: (context) => AuthBloc(),
             child: const ProfileScreen(),
+          ),
+        );
+      case '/support':
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => AuthBloc(),
+            child: const SupportScreen(),
           ),
         );
       default:

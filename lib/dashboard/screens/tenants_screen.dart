@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rentwise/common_widgets/dropdown.dart';
 import 'package:rentwise/common_widgets/error_message.dart';
-import 'package:rentwise/common_widgets/progress_loader.dart';
 import 'package:rentwise/common_widgets/text_link_button.dart';
 import 'package:rentwise/constants/colours.dart';
 import 'package:rentwise/property/bloc/property_bloc.dart';

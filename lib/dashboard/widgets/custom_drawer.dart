@@ -33,9 +33,16 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 children: [
                   CustomListTitle(
                     title: "Profile",
-                    icon: Icons.person,
+                    icon: Icons.person_outlined,
                     onTap: () {
                       Navigator.pushNamed(context, '/profile');
+                    },
+                  ),
+                  CustomListTitle(
+                    title: "Support",
+                    icon: Icons.support_agent_outlined,
+                    onTap: () {
+                      Navigator.pushNamed(context, '/support');
                     },
                   ),
                   CustomListTitle(
