@@ -172,7 +172,7 @@ class ProfileSection extends StatelessWidget {
             },
             text: "Copy ID",
             color: MyConstants.primaryColor,
-            bgColor: MyConstants.lightGreyColor,
+            bgColor: Colors.grey[100]!,
             fontSize: 14,
             icon: const Icon(
               Icons.copy,

@@ -51,15 +51,18 @@ class _DashboardState extends State<Dashboard> {
         controller: _pageController,
         onPageChanged: onPageChanged,
         children: [
-          HomeScreen(),
+          const HomeScreen(),
           BlocProvider(
             create: (context) => PropertyBloc(),
-            child: RoomsScreen(),
+            child: const RoomsScreen(),
           ),
-          TenantsScreen(),
           BlocProvider(
             create: (context) => PropertyBloc(),
-            child: ManageScreen(),
+            child: const TenantsScreen(),
+          ),
+          BlocProvider(
+            create: (context) => PropertyBloc(),
+            child: const ManageScreen(),
           ),
         ],
       ),

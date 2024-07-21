@@ -12,10 +12,12 @@ class MyConstants {
   static const Color redColor = Color.fromRGBO(255, 108, 108, 1);
   static const Color successMetallic = Color.fromRGBO(190, 255, 192, 1);
   static const Color yellowMetallic = Color.fromRGBO(255, 253, 190, 1);
+  static const Color greenMetallic = Color.fromRGBO(224, 255, 224, 1);
+  static const Color tealMetallic = Color.fromRGBO(190, 255, 254, 1);
   static const Color purpleMetallic = Color.fromRGBO(229, 217, 253, 1);
   static const Color orangeMetallic = Color.fromRGBO(255, 228, 198, 1);
   static const Color pinkMetallic = Color.fromRGBO(255, 198, 249, 1);
-  static const Color blueMetallic = Color.fromRGBO(198, 200, 255, 1);
+  static const Color blueMetallic = Color.fromRGBO(215, 216, 255, 1);
   static const Color errorMetallic = Color.fromRGBO(250, 192, 192, 1);
   static const Color lightGreyColor = Color.fromRGBO(228, 228, 228, 1);
 }
