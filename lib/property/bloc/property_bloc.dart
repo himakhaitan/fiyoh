@@ -29,6 +29,9 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
 
     // Register AdjustProperty event handler
     on<AdjustProperty>((event, emit) => _handleAdjustProperty(event, emit));
+
+    // Register AddTenant event handler
+    on<AddTenant>((event, emit) => _handleAddTenant(event, emit));
   }
 
   // Function to fetch properties from Firestore
@@ -89,66 +92,71 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
     return properties;
   }
 
-  // Future<void> _handleAddTenant(
-  //     AddTenant event, Emitter<PropertyState> emit) async {
-  //   emit(PropertyLoading());
-  //   try {
-  //     final user = _auth.currentUser;
+  Future<void> _handleAddTenant(
+      AddTenant event, Emitter<PropertyState> emit) async {
+    emit(PropertyLoading());
+    try {
+      final user = _auth.currentUser;
 
-  //     if (user == null) {
-  //       emit(PropertyFailed(error: 'Unauthenticated User'));
-  //       return;
-  //     }
+      if (user == null) {
+        emit(PropertyFailed(error: 'Unauthenticated User'));
+        return;
+      }
 
-  //     // Create a Booking
-  //     DocumentReference bookingRef =
-  //         await _firestore.collection('bookings').add({
-  //       'property_id': event.propertyId,
-  //       'room_id': event.tenantRoom,
-  //       'tenant_id': event.tenantEmail,
-  //       'check_in': FieldValue.serverTimestamp(),
-  //       'check_out': null,
-  //       // 'status': BOOKING_STATUS.CHECKED_IN.value,
-  //       'created_at': FieldValue.serverTimestamp(),
-  //       'updated_at': FieldValue.serverTimestamp(),
-  //       'transactions': [],
-  //     });
+      // Create a Booking
+      DocumentReference bookingRef =
+          await _firestore.collection('bookings').add({
+        'property_id': event.propertyId,
+        'room_id': event.tenantRoom,
+        'tenant_id': event.tenantEmail,
+        'check_in': FieldValue.serverTimestamp(),
+        'check_out': null,
+        'status': 'ACTIVE',
+        'created_at': FieldValue.serverTimestamp(),
+        'updated_at': FieldValue.serverTimestamp(),
+      });
 
-  //     // Create a new user with email id as the tenant email
-  //     await _firestore.collection('users').doc(event.tenantEmail).set(
-  //       {
-  //         'first_name': event.tenantFirstName,
-  //         'last_name': event.tenantLastName,
-  //         'email': event.tenantEmail,
-  //         'phone_number': event.tenantPhone,
-  //         // 'user_type': USER_TYPE.TENANT.value,
-  //         'bookings': FieldValue.arrayUnion([
-  //           bookingRef.id,
-  //         ]),
-  //         'created_at': FieldValue.serverTimestamp(),
-  //         'updated_at': FieldValue.serverTimestamp(),
-  //       },
-  //     );
+      // Create a new user with email id as the tenant email
+      await _firestore.collection('users').doc(event.tenantEmail).set(
+        {
+          'first_name': event.tenantFirstName,
+          'last_name': event.tenantLastName,
+          'email': event.tenantEmail,
+          'phone_number': event.tenantPhone,
+          // 'user_type': USER_TYPE.TENANT.value,
+          'bookings': FieldValue.arrayUnion([
+            bookingRef.id,
+          ]),
+          'created_at': FieldValue.serverTimestamp(),
+          'updated_at': FieldValue.serverTimestamp(),
+        },
+      );
 
-  //     await _firestore
-  //         .collection('rooms')
-  //         .doc(event.tenantRoom)
-  //         .update(
-  //       {
-  //         'tenants': FieldValue.arrayUnion([
-  //           {
-  //             'user_id': event.tenantEmail,
-  //             'booking_id': bookingRef.id,
-  //           }
-  //         ]),
-  //         'updated_at': FieldValue.serverTimestamp(),
-  //       },
-  //     );
-  //     emit(PropertyAPICompleted());
-  //   } catch (e) {
-  //     emit(PropertyFailed(error: e.toString()));
-  //   }
-  // }
+      await _firestore
+          .collection('rooms')
+          .doc(event.tenantRoom)
+          .update(
+        {
+          'tenants': FieldValue.arrayUnion([
+            {
+              'user_id': event.tenantEmail,
+              'booking_id': bookingRef.id,
+            }
+          ]),
+          'updated_at': FieldValue.serverTimestamp(),
+        },
+      );
+      await _firestore.collection('users').doc(user.uid).update(
+        {
+          'tenant_count': FieldValue.increment(1),
+          'updated_at': FieldValue.serverTimestamp(),
+        }
+      );
+      emit(PropertyAPICompleted());
+    } catch (e) {
+      emit(PropertyFailed(error: e.toString()));
+    }
+  }
 
   // Handle GetProperties event
   Future<void> _handleGetProperties(

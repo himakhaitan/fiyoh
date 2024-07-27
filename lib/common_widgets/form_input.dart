@@ -31,7 +31,7 @@ class FormInput extends StatelessWidget {
       child: TextFormField(
         // Keyboard type should be text
         keyboardType: keyboardType,
-        maxLines: maxLines,
+        maxLines: obscureText ? 1 : maxLines,
         controller: controller,
         decoration: InputDecoration(
           icon: icon != null

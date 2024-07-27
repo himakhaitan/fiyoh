@@ -297,17 +297,16 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
                                 .firstWhere(
                                     (room) => room.roomNumber == _selectedRoom)
                                 .id;
-
-                            // context.read<PropertyBloc>().add(
-                            //       AddTenant(
-                            //         tenantEmail: _emailController.text,
-                            //         tenantPhone: _phoneController.text,
-                            //         tenantRoom: selectedRoomID,
-                            //         propertyId: selectedProperty.propertyId,
-                            //         tenantFirstName: _firstNameController.text,
-                            //         tenantLastName: _lastNameController.text,
-                            //       ),
-                            //     );
+                            context.read<PropertyBloc>().add(
+                                  AddTenant(
+                                    tenantEmail: _emailController.text,
+                                    tenantPhone: _phoneController.text,
+                                    tenantRoom: selectedRoomID,
+                                    propertyId: selectedProperty.id,
+                                    tenantFirstName: _firstNameController.text,
+                                    tenantLastName: _lastNameController.text,
+                                  ),
+                                );
                           }
                         }
                       }
