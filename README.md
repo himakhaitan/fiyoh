@@ -1,6 +1,6 @@
-# rentwise
+# Fiyoh
 
-A new Flutter project.
+A management app for your properties.
 
 ## Getting Started
 

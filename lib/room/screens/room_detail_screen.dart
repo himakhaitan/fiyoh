@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rentwise/common_widgets/descriptive_text.dart';
-import 'package:rentwise/common_widgets/header_text.dart';
-import 'package:rentwise/common_widgets/progress_loader.dart';
-import 'package:rentwise/common_widgets/section_header.dart';
-import 'package:rentwise/constants/colours.dart';
-import 'package:rentwise/layouts/detail/detail_layout.dart';
-import 'package:rentwise/models/room.dart';
-import 'package:rentwise/room/bloc/room_bloc.dart';
-import 'package:rentwise/tenant/screens/tenant_detail_screen.dart';
+import 'package:fiyoh/common_widgets/descriptive_text.dart';
+import 'package:fiyoh/common_widgets/header_text.dart';
+import 'package:fiyoh/common_widgets/progress_loader.dart';
+import 'package:fiyoh/common_widgets/section_header.dart';
+import 'package:fiyoh/constants/colours.dart';
+import 'package:fiyoh/layouts/detail/detail_layout.dart';
+import 'package:fiyoh/models/room.dart';
+import 'package:fiyoh/room/bloc/room_bloc.dart';
+import 'package:fiyoh/tenant/screens/tenant_detail_screen.dart';
 
 class RoomDetailScreen extends StatefulWidget {
   final Room room;

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rentwise/common_widgets/dropdown.dart';
-import 'package:rentwise/common_widgets/error_message.dart';
-import 'package:rentwise/common_widgets/text_link_button.dart';
-import 'package:rentwise/constants/colours.dart';
-import 'package:rentwise/property/bloc/property_bloc.dart';
-import 'package:rentwise/tenant/widgets/tenant_tile.dart';
+import 'package:fiyoh/common_widgets/dropdown.dart';
+import 'package:fiyoh/common_widgets/error_message.dart';
+import 'package:fiyoh/common_widgets/text_link_button.dart';
+import 'package:fiyoh/constants/colours.dart';
+import 'package:fiyoh/property/bloc/property_bloc.dart';
+import 'package:fiyoh/tenant/widgets/tenant_tile.dart';
 
 class TenantsScreen extends StatefulWidget {
   const TenantsScreen({super.key});

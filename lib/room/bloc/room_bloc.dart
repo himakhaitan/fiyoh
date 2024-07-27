@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
-import 'package:rentwise/models/room.dart';
+import 'package:fiyoh/models/room.dart';
 part 'room_event.dart';
 part 'room_state.dart';
 

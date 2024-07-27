@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rentwise/app_entry/auth/bloc/auth_bloc.dart';
-import 'package:rentwise/common_widgets/descriptive_text.dart';
-import 'package:rentwise/constants/colours.dart';
-import 'package:rentwise/dashboard/widgets/custom_drawer_header.dart';
-import 'package:rentwise/dashboard/widgets/custom_list_title.dart';
+import 'package:fiyoh/app_entry/auth/bloc/auth_bloc.dart';
+import 'package:fiyoh/common_widgets/descriptive_text.dart';
+import 'package:fiyoh/constants/colours.dart';
+import 'package:fiyoh/dashboard/widgets/custom_drawer_header.dart';
+import 'package:fiyoh/dashboard/widgets/custom_list_title.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatefulWidget {

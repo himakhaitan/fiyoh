@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rentwise/constants/colours.dart';
+import 'package:fiyoh/constants/colours.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomBottomBar extends StatelessWidget {

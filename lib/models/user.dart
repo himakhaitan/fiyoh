@@ -1,6 +1,6 @@
 // Imports
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:rentwise/constants/enums.dart';
+import 'package:fiyoh/constants/enums.dart';
 
 // User class
 class User {

@@ -1,15 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rentwise/app_entry/auth/bloc/auth_bloc.dart';
-import 'package:rentwise/constants/colours.dart';
-import 'package:rentwise/dashboard/screens/home_screen.dart';
-import 'package:rentwise/dashboard/screens/manage_screen.dart';
-import 'package:rentwise/dashboard/screens/rooms_screen.dart';
-import 'package:rentwise/dashboard/screens/tenants_screen.dart';
-import 'package:rentwise/dashboard/widgets/custom_drawer.dart';
+import 'package:fiyoh/app_entry/auth/bloc/auth_bloc.dart';
+import 'package:fiyoh/constants/colours.dart';
+import 'package:fiyoh/dashboard/screens/home_screen.dart';
+import 'package:fiyoh/dashboard/screens/manage_screen.dart';
+import 'package:fiyoh/dashboard/screens/rooms_screen.dart';
+import 'package:fiyoh/dashboard/screens/tenants_screen.dart';
+import 'package:fiyoh/dashboard/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:rentwise/dashboard/widgets/custom_bottom_bar.dart';
-import 'package:rentwise/dashboard/widgets/custom_app_bar.dart';
-import 'package:rentwise/property/bloc/property_bloc.dart';
+import 'package:fiyoh/dashboard/widgets/custom_bottom_bar.dart';
+import 'package:fiyoh/dashboard/widgets/custom_app_bar.dart';
+import 'package:fiyoh/property/bloc/property_bloc.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});

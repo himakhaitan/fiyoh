@@ -1,17 +1,17 @@
 // Packages: Imports
-import 'package:rentwise/common_widgets/descriptive_text.dart';
-import 'package:rentwise/common_widgets/error_message.dart';
-import 'package:rentwise/common_widgets/form_input.dart';
-import 'package:rentwise/common_widgets/google_button.dart';
-import 'package:rentwise/common_widgets/phone_number_input.dart';
-import 'package:rentwise/common_widgets/progress_loader.dart';
-import 'package:rentwise/app_entry/auth/bloc/auth_bloc.dart';
+import 'package:fiyoh/common_widgets/descriptive_text.dart';
+import 'package:fiyoh/common_widgets/error_message.dart';
+import 'package:fiyoh/common_widgets/form_input.dart';
+import 'package:fiyoh/common_widgets/google_button.dart';
+import 'package:fiyoh/common_widgets/phone_number_input.dart';
+import 'package:fiyoh/common_widgets/progress_loader.dart';
+import 'package:fiyoh/app_entry/auth/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:rentwise/common_widgets/text_divider.dart';
-import 'package:rentwise/common_widgets/text_link_button.dart';
-import 'package:rentwise/layouts/auth/auth_layout.dart';
-import 'package:rentwise/common_widgets/long_button.dart';
-import 'package:rentwise/constants/colours.dart';
+import 'package:fiyoh/common_widgets/text_divider.dart';
+import 'package:fiyoh/common_widgets/text_link_button.dart';
+import 'package:fiyoh/layouts/auth/auth_layout.dart';
+import 'package:fiyoh/common_widgets/long_button.dart';
+import 'package:fiyoh/constants/colours.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// A screen for handling the signup functionality.

@@ -1,7 +1,7 @@
-import 'package:rentwise/constants/colours.dart';
+import 'package:fiyoh/constants/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rentwise/common_widgets/form_input.dart';
+import 'package:fiyoh/common_widgets/form_input.dart';
 
 class PhoneNumberInput extends StatelessWidget {
   final String labelText;

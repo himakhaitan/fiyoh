@@ -1,18 +1,18 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rentwise/common_widgets/checkbox_list.dart';
-import 'package:rentwise/common_widgets/dropdown.dart';
-import 'package:rentwise/common_widgets/error_message.dart';
-import 'package:rentwise/common_widgets/form_input.dart';
-import 'package:rentwise/common_widgets/long_button.dart';
-import 'package:rentwise/common_widgets/progress_loader.dart';
-import 'package:rentwise/constants/colours.dart';
-import 'package:rentwise/constants/enums.dart';
-import 'package:rentwise/property/bloc/property_bloc.dart';
-import 'package:rentwise/property/widgets/floor_input.dart';
-import 'package:rentwise/property/widgets/property_rules.dart';
+import 'package:fiyoh/common_widgets/checkbox_list.dart';
+import 'package:fiyoh/common_widgets/dropdown.dart';
+import 'package:fiyoh/common_widgets/error_message.dart';
+import 'package:fiyoh/common_widgets/form_input.dart';
+import 'package:fiyoh/common_widgets/long_button.dart';
+import 'package:fiyoh/common_widgets/progress_loader.dart';
+import 'package:fiyoh/constants/colours.dart';
+import 'package:fiyoh/constants/enums.dart';
+import 'package:fiyoh/property/bloc/property_bloc.dart';
+import 'package:fiyoh/property/widgets/floor_input.dart';
+import 'package:fiyoh/property/widgets/property_rules.dart';
 import 'package:flutter/material.dart';
-import 'package:rentwise/layouts/form/form_layout.dart';
-import 'package:rentwise/constants/property.dart';
+import 'package:fiyoh/layouts/form/form_layout.dart';
+import 'package:fiyoh/constants/property.dart';
 
 class AddNewPropertyScreen extends StatefulWidget {
   const AddNewPropertyScreen({super.key});

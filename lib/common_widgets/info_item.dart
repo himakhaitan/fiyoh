@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rentwise/common_widgets/descriptive_text.dart';
-import 'package:rentwise/constants/colours.dart';
+import 'package:fiyoh/common_widgets/descriptive_text.dart';
+import 'package:fiyoh/constants/colours.dart';
 
 
 class InfoItem extends StatelessWidget {

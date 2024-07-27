@@ -3,10 +3,10 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
-import 'package:rentwise/constants/enums.dart';
-import 'package:rentwise/models/property.dart';
-import 'package:rentwise/models/room.dart';
-import 'package:rentwise/utils/format_room_number.dart';
+import 'package:fiyoh/constants/enums.dart';
+import 'package:fiyoh/models/property.dart';
+import 'package:fiyoh/models/room.dart';
+import 'package:fiyoh/utils/format_room_number.dart';
 
 // Part Statements
 part 'property_event.dart';
@@ -29,6 +29,9 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
 
     // Register AdjustProperty event handler
     on<AdjustProperty>((event, emit) => _handleAdjustProperty(event, emit));
+
+    // Register DeleteProperty event handler
+    on<DeleteProperty>((event, emit) => _handleDeleteProperty(event, emit));
 
     // Register AddTenant event handler
     on<AddTenant>((event, emit) => _handleAddTenant(event, emit));
@@ -92,6 +95,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
     return properties;
   }
 
+  // Handle Add Tenant event
   Future<void> _handleAddTenant(
       AddTenant event, Emitter<PropertyState> emit) async {
     emit(PropertyLoading());
@@ -132,10 +136,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
         },
       );
 
-      await _firestore
-          .collection('rooms')
-          .doc(event.tenantRoom)
-          .update(
+      await _firestore.collection('rooms').doc(event.tenantRoom).update(
         {
           'tenants': FieldValue.arrayUnion([
             {
@@ -146,12 +147,10 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
           'updated_at': FieldValue.serverTimestamp(),
         },
       );
-      await _firestore.collection('users').doc(user.uid).update(
-        {
-          'tenant_count': FieldValue.increment(1),
-          'updated_at': FieldValue.serverTimestamp(),
-        }
-      );
+      await _firestore.collection('users').doc(user.uid).update({
+        'tenant_count': FieldValue.increment(1),
+        'updated_at': FieldValue.serverTimestamp(),
+      });
       emit(PropertyAPICompleted());
     } catch (e) {
       emit(PropertyFailed(error: e.toString()));
@@ -302,6 +301,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
     }
   }
 
+  // Handle Configure Property event
   Future<void> _handleAdjustProperty(
       AdjustProperty event, Emitter<PropertyState> emit) async {
     emit(PropertyLoading());
@@ -348,6 +348,25 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
       }
     } catch (e) {
       emit(PropertyFailed(error: e.toString()));
+    }
+  }
+
+  // Handle Delete Property event
+  Future<void> _handleDeleteProperty(
+    DeleteProperty event,
+    Emitter<PropertyState> emit,
+  ) async {
+    emit(PropertyLoading());
+    try {
+      _firestore.collection('users').doc(_auth.currentUser!.uid).update(
+        {
+          'properties': FieldValue.arrayRemove([event.propertyId]),
+          'updated_at': FieldValue.serverTimestamp(),
+        },
+      );
+      emit(PropertyAPICompleted());
+    } catch (err) {
+      emit(PropertyFailed(error: err.toString()));
     }
   }
 }

@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:45593094888:android:f89278d99c08691460f75d",
+        "mobilesdk_app_id": "1:45593094888:android:96e949d6eee0e08960f75d",
         "android_client_info": {
-          "package_name": "com.rentwise.app"
+          "package_name": "com.fiyoh.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "45593094888-u8unfoqiu0jcatboi8i8ifj2qumuvhc4.apps.googleusercontent.com",
+          "client_id": "45593094888-kih1j3hstq51sv4ln3gt3r699o9i8ivn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.rentwise.app",
+            "package_name": "com.fiyoh.app",
             "certificate_hash": "ceb32821d35edf03df57c0e5e01523f204badca9"
           }
         },
@@ -42,7 +42,7 @@
               "client_id": "45593094888-24r7ebicvc4065cq94vt55v8pm02q9dv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.rentwise.app"
+                "bundle_id": "com.fiyoh.app"
               }
             }
           ]

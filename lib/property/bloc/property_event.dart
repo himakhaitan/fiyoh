@@ -89,3 +89,12 @@ class AddTenant extends PropertyEvent {
   @override
   List<Object> get props => [propertyId, tenantEmail, tenantPhone, tenantRoom];
 }
+
+class DeleteProperty extends PropertyEvent {
+  final String propertyId;
+
+  DeleteProperty({required this.propertyId});
+
+  @override
+  List<Object> get props => [propertyId];
+}

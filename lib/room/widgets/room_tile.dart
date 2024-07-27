@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rentwise/common_widgets/descriptive_text.dart';
-import 'package:rentwise/common_widgets/info_item.dart';
-import 'package:rentwise/constants/colours.dart';
-import 'package:rentwise/models/room.dart';
-import 'package:rentwise/room/bloc/room_bloc.dart';
-import 'package:rentwise/room/screens/room_detail_screen.dart';
+import 'package:fiyoh/common_widgets/descriptive_text.dart';
+import 'package:fiyoh/common_widgets/info_item.dart';
+import 'package:fiyoh/constants/colours.dart';
+import 'package:fiyoh/models/room.dart';
+import 'package:fiyoh/room/bloc/room_bloc.dart';
+import 'package:fiyoh/room/screens/room_detail_screen.dart';
 
 class RoomTile extends StatelessWidget {
   final Room room;

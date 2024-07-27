@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:rentwise/constants/enums.dart';
-import 'package:rentwise/models/room.dart';
+import 'package:fiyoh/constants/enums.dart';
+import 'package:fiyoh/models/room.dart';
 
 class Property {
   final String id;

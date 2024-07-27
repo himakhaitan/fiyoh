@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rentwise/app_entry/auth/bloc/auth_bloc.dart';
-import 'package:rentwise/common_widgets/descriptive_text.dart';
-import 'package:rentwise/common_widgets/error_message.dart';
-import 'package:rentwise/common_widgets/long_button.dart';
-import 'package:rentwise/common_widgets/progress_loader.dart';
-import 'package:rentwise/constants/colours.dart';
-import 'package:rentwise/constants/enums.dart';
-import 'package:rentwise/layouts/auth/auth_layout.dart';
+import 'package:fiyoh/app_entry/auth/bloc/auth_bloc.dart';
+import 'package:fiyoh/common_widgets/descriptive_text.dart';
+import 'package:fiyoh/common_widgets/error_message.dart';
+import 'package:fiyoh/common_widgets/long_button.dart';
+import 'package:fiyoh/common_widgets/progress_loader.dart';
+import 'package:fiyoh/constants/colours.dart';
+import 'package:fiyoh/constants/enums.dart';
+import 'package:fiyoh/layouts/auth/auth_layout.dart';
 
 class CheckUserTypeScreen extends StatefulWidget {
   const CheckUserTypeScreen({super.key});

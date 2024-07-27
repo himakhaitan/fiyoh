@@ -4,8 +4,8 @@ import 'package:meta/meta.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:rentwise/constants/enums.dart';
-import 'package:rentwise/models/user.dart' as user_model;
+import 'package:fiyoh/constants/enums.dart';
+import 'package:fiyoh/models/user.dart' as user_model;
 
 // Part Statements
 part 'auth_event.dart';

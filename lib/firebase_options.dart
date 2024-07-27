@@ -42,7 +42,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCGy_vYVxqs2-SfXqSplq2A0gHqgpgxX3A',
-    appId: '1:45593094888:android:f89278d99c08691460f75d',
+    appId: '1:45593094888:android:96e949d6eee0e08960f75d',
     messagingSenderId: '45593094888',
     projectId: 'pg-connect-8ce02',
     storageBucket: 'pg-connect-8ce02.appspot.com',
@@ -50,42 +50,44 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAqKgSJ7ykhbDWeAgKLUQ9f405yDJEy6H4',
-    appId: '1:45593094888:ios:d76017d14a8a86ba60f75d',
+    appId: '1:45593094888:ios:317b0bb161497e1860f75d',
     messagingSenderId: '45593094888',
     projectId: 'pg-connect-8ce02',
     storageBucket: 'pg-connect-8ce02.appspot.com',
-    iosClientId: '45593094888-24r7ebicvc4065cq94vt55v8pm02q9dv.apps.googleusercontent.com',
-    iosBundleId: 'com.rentwise.app',
+    androidClientId: '45593094888-u8unfoqiu0jcatboi8i8ifj2qumuvhc4.apps.googleusercontent.com',
+    iosClientId: '45593094888-3dn1meeg1uio4crsn4n1bsd460qd8ese.apps.googleusercontent.com',
+    iosBundleId: 'com.fiyoh.app',
   );
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyClVp4iRcNK7MRH6JfJQPtCGpK7Qi5KlNk',
-    appId: '1:45593094888:web:cf818b0da5869b0760f75d',
+    appId: '1:45593094888:web:b53987fece15016360f75d',
     messagingSenderId: '45593094888',
     projectId: 'pg-connect-8ce02',
     authDomain: 'pg-connect-8ce02.firebaseapp.com',
     storageBucket: 'pg-connect-8ce02.appspot.com',
-    measurementId: 'G-T5QD008J3L',
+    measurementId: 'G-BRWDT0EDXG',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyAqKgSJ7ykhbDWeAgKLUQ9f405yDJEy6H4',
-    appId: '1:45593094888:ios:fe5c6e7df5d595a060f75d',
+    appId: '1:45593094888:ios:701e43b1b6fa804d60f75d',
     messagingSenderId: '45593094888',
     projectId: 'pg-connect-8ce02',
     storageBucket: 'pg-connect-8ce02.appspot.com',
+    androidClientId: '45593094888-u8unfoqiu0jcatboi8i8ifj2qumuvhc4.apps.googleusercontent.com',
     iosClientId: '45593094888-8fk6oer3274cn3ae0ihpmdqv34v7gb85.apps.googleusercontent.com',
     iosBundleId: 'com.example.rentwise',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
     apiKey: 'AIzaSyClVp4iRcNK7MRH6JfJQPtCGpK7Qi5KlNk',
-    appId: '1:45593094888:web:55507451b34a094060f75d',
+    appId: '1:45593094888:web:9727b937d01c06b260f75d',
     messagingSenderId: '45593094888',
     projectId: 'pg-connect-8ce02',
     authDomain: 'pg-connect-8ce02.firebaseapp.com',
     storageBucket: 'pg-connect-8ce02.appspot.com',
-    measurementId: 'G-MTR6CBNEDZ',
+    measurementId: 'G-J1LQ6J2HP8',
   );
 
 }

@@ -1,13 +1,14 @@
-import 'package:rentwise/common_widgets/descriptive_text.dart';
-import 'package:rentwise/common_widgets/info_item.dart';
-import 'package:rentwise/constants/colours.dart';
-import 'package:rentwise/constants/enums.dart';
-import 'package:rentwise/property/bloc/property_bloc.dart';
-import 'package:rentwise/models/property.dart';
-import 'package:rentwise/property/screens/configure_rooms.dart';
+import 'package:fiyoh/app_entry/auth/bloc/auth_bloc.dart';
+import 'package:fiyoh/common_widgets/descriptive_text.dart';
+import 'package:fiyoh/common_widgets/info_item.dart';
+import 'package:fiyoh/constants/colours.dart';
+import 'package:fiyoh/constants/enums.dart';
+import 'package:fiyoh/property/bloc/property_bloc.dart';
+import 'package:fiyoh/models/property.dart';
+import 'package:fiyoh/property/screens/configure_rooms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rentwise/property/screens/property_detail_screen.dart';
+import 'package:fiyoh/property/screens/property_detail_screen.dart';
 
 class PropertyTile extends StatelessWidget {
   final Property property;
@@ -31,8 +32,18 @@ class PropertyTile extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => BlocProvider(
                 create: (context) => PropertyBloc(),
-                child: PropertyDetailScreen(
-                  property: property,
+                child: MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => PropertyBloc(),
+                    ),
+                    BlocProvider(
+                      create: (context) => AuthBloc(),
+                    ),
+                  ],
+                  child: PropertyDetailScreen(
+                    property: property,
+                  ),
                 ),
               ),
             ),
@@ -106,7 +117,8 @@ class PropertyTile extends StatelessWidget {
                       size: 20,
                     ),
                     style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.all(Colors.grey[200]),
+                      backgroundColor:
+                          WidgetStateProperty.all(Colors.grey[200]),
                     ),
                     onPressed: () {
                       // Navigate to the configure rooms screen

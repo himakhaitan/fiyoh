@@ -1,7 +1,7 @@
 // Packages: Imports
-import 'package:rentwise/common_widgets/descriptive_text.dart';
-import 'package:rentwise/common_widgets/section_header.dart';
-import 'package:rentwise/constants/colours.dart';
+import 'package:fiyoh/common_widgets/descriptive_text.dart';
+import 'package:fiyoh/common_widgets/section_header.dart';
+import 'package:fiyoh/constants/colours.dart';
 import 'package:flutter/material.dart';
 
 /// A form field for selecting multiple options using checkboxes.

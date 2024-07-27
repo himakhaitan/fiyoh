@@ -1,21 +1,21 @@
-import 'package:rentwise/app_entry/auth/screens/check_user_type_screen.dart';
-import 'package:rentwise/app_entry/auth/screens/login_screen.dart';
-import 'package:rentwise/app_entry/new_pages/screens/welcome_screen.dart';
-import 'package:rentwise/app_entry/auth/screens/signup_screen.dart';
-import 'package:rentwise/auth_wrapper.dart';
-import 'package:rentwise/dashboard/screens/profile_screen.dart';
-import 'package:rentwise/property/bloc/property_bloc.dart';
-import 'package:rentwise/dashboard/screens/dashboard.dart';
-import 'package:rentwise/app_entry/auth/screens/forgot_password_screen.dart';
-import 'package:rentwise/property/screens/add_new_property_screen.dart';
-import 'package:rentwise/property/screens/add_new_tenant_screen.dart';
-import 'package:rentwise/app_entry/auth/bloc/auth_bloc.dart';
+import 'package:fiyoh/app_entry/auth/screens/check_user_type_screen.dart';
+import 'package:fiyoh/app_entry/auth/screens/login_screen.dart';
+import 'package:fiyoh/app_entry/new_pages/screens/welcome_screen.dart';
+import 'package:fiyoh/app_entry/auth/screens/signup_screen.dart';
+import 'package:fiyoh/auth_wrapper.dart';
+import 'package:fiyoh/dashboard/screens/profile_screen.dart';
+import 'package:fiyoh/property/bloc/property_bloc.dart';
+import 'package:fiyoh/dashboard/screens/dashboard.dart';
+import 'package:fiyoh/app_entry/auth/screens/forgot_password_screen.dart';
+import 'package:fiyoh/property/screens/add_new_property_screen.dart';
+import 'package:fiyoh/property/screens/add_new_tenant_screen.dart';
+import 'package:fiyoh/app_entry/auth/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rentwise/support/support_screen.dart';
-import 'package:rentwise/tenant/screens/tenant_detail_screen.dart';
+import 'package:fiyoh/support/support_screen.dart';
+import 'package:fiyoh/tenant/screens/tenant_detail_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Rentwise',
+      title: 'Fiyoh',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

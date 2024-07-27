@@ -1,5 +1,5 @@
-import 'package:rentwise/common_widgets/header_text.dart';
-import 'package:rentwise/constants/colours.dart';
+import 'package:fiyoh/common_widgets/header_text.dart';
+import 'package:fiyoh/constants/colours.dart';
 import 'package:flutter/material.dart';
 
 class SectionHeader extends StatelessWidget {

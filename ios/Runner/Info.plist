@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Rentwise</string>
+	<string>Fiyoh</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>rentwise</string>
+	<string>fiyoh</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -48,7 +48,7 @@
     <string>Editor</string>
     <key>CFBundleURLSchemes</key>
     <array>
-      <string>com.googleusercontent.apps.45593094888-24r7ebicvc4065cq94vt55v8pm02q9dv</string> 
+      <string>com.googleusercontent.apps.45593094888-3dn1meeg1uio4crsn4n1bsd460qd8ese</string> 
     </array>
   </dict>
 </array>

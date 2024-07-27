@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rentwise/constants/colours.dart';
+import 'package:fiyoh/constants/colours.dart';
 
 Future<dynamic> showBottomModal(BuildContext context, List<Widget> content) {
   return showModalBottomSheet(

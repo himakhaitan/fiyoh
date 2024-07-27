@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rentwise/app_entry/auth/bloc/auth_bloc.dart';
-import 'package:rentwise/app_entry/new_pages/screens/welcome_screen.dart';
-import 'package:rentwise/dashboard/screens/dashboard.dart';
-import 'package:rentwise/property/bloc/property_bloc.dart';
+import 'package:fiyoh/app_entry/auth/bloc/auth_bloc.dart';
+import 'package:fiyoh/app_entry/new_pages/screens/welcome_screen.dart';
+import 'package:fiyoh/dashboard/screens/dashboard.dart';
+import 'package:fiyoh/property/bloc/property_bloc.dart';
 
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({super.key});

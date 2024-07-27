@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:rentwise/common_widgets/descriptive_text.dart';
-import 'package:rentwise/common_widgets/header_text.dart';
-import 'package:rentwise/common_widgets/section_header.dart';
-import 'package:rentwise/constants/colours.dart';
-import 'package:rentwise/layouts/detail/detail_layout.dart';
-import 'package:rentwise/tenant/widgets/transaction_tile.dart';
+import 'package:fiyoh/common_widgets/descriptive_text.dart';
+import 'package:fiyoh/common_widgets/header_text.dart';
+import 'package:fiyoh/common_widgets/section_header.dart';
+import 'package:fiyoh/constants/colours.dart';
+import 'package:fiyoh/layouts/detail/detail_layout.dart';
+import 'package:fiyoh/tenant/widgets/transaction_tile.dart';
 
 class TenantDetailScreen extends StatelessWidget {
   const TenantDetailScreen({super.key});

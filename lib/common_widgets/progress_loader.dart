@@ -1,7 +1,7 @@
 // Widget to render Circular Progress Bar
 
 import 'package:flutter/material.dart';
-import 'package:rentwise/constants/colours.dart';
+import 'package:fiyoh/constants/colours.dart';
 
 class ProgressLoader extends StatelessWidget {
   const ProgressLoader({super.key});

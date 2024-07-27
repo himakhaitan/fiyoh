@@ -1,7 +1,7 @@
 // Packages: Imports
-import 'package:rentwise/common_widgets/duotone_text.dart';
-import 'package:rentwise/common_widgets/long_button.dart';
-import 'package:rentwise/constants/colours.dart';
+import 'package:fiyoh/common_widgets/duotone_text.dart';
+import 'package:fiyoh/common_widgets/long_button.dart';
+import 'package:fiyoh/constants/colours.dart';
 import 'package:flutter/material.dart';
 
 /// A screen for welcoming users to the app.

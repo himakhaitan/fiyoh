@@ -1,7 +1,7 @@
-import 'package:rentwise/layouts/widgets/custom_app_bar.dart';
-import 'package:rentwise/common_widgets/descriptive_text.dart';
-import 'package:rentwise/common_widgets/header_text.dart';
-import 'package:rentwise/constants/colours.dart';
+import 'package:fiyoh/layouts/widgets/custom_app_bar.dart';
+import 'package:fiyoh/common_widgets/descriptive_text.dart';
+import 'package:fiyoh/common_widgets/header_text.dart';
+import 'package:fiyoh/constants/colours.dart';
 import 'package:flutter/material.dart';
 
 class AuthLayout extends StatelessWidget {
