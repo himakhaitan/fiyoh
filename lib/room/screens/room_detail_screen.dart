@@ -114,9 +114,25 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
             Divider(
               color: Colors.grey[400]!,
               thickness: 1,
-              height: 40,
+              height: 30,
             ),
-            const SectionHeader(text: "Tenants"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SectionHeader(text: "Tenants"),
+                if (tenants.length < widget.room.occupancy)
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/tenant/add');
+                    },
+                    icon: const Icon(
+                      Icons.add_circle_outline_outlined,
+                      size: 25,
+                    ),
+                    color: MyConstants.primaryColor,
+                  ),
+              ],
+            ),
             const SizedBox(height: 10),
             _isLoading
                 ? const ProgressLoader()
