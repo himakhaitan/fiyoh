@@ -9,16 +9,16 @@ class DetailLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyConstants.whiteColor,
+      backgroundColor: MyConstants.bg400,
       appBar: AppBar(
-        backgroundColor: MyConstants.whiteColor,
+        backgroundColor: MyConstants.bg400,
         automaticallyImplyLeading: false,
         leading: Builder(
           builder: (context) {
             return IconButton(
               icon: const Icon(
                 Icons.arrow_back_ios_outlined,
-                color: MyConstants.accentColor,
+                color: MyConstants.primary100,
                 size: 30,
               ),
               onPressed: () {

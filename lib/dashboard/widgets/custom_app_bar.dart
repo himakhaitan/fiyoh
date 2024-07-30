@@ -72,6 +72,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 );
               },
             ),
+            centerTitle: true,
+            title: Image.asset(
+              'assets/images/logo.png',
+              height: 40,
+            ),
             actions: [
               IconButton(
                 icon: const Icon(
@@ -86,6 +91,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       Container(
                         margin: const EdgeInsets.only(bottom: 10),
                         decoration: const BoxDecoration(
+                          color: MyConstants.primary100,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20),
                             topRight: Radius.circular(20),
@@ -93,7 +99,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                           ),
                           border: Border(
                             bottom: BorderSide(
-                              color: MyConstants.tertiaryColor,
+                              color: MyConstants.brand400,
                               width: 2,
                             ),
                           ),
@@ -170,7 +176,7 @@ class OptionListItem extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
-                color: MyConstants.tertiaryColor.withOpacity(0.2),
+                color: MyConstants.brand400.withOpacity(0.2),
               ),
             ),
           ),
@@ -184,7 +190,7 @@ class OptionListItem extends StatelessWidget {
             ),
             leading: Icon(
               item.icon,
-              color: MyConstants.tertiaryColor,
+              color: MyConstants.brand400,
             ),
             onTap: () {
               Navigator.pushNamed(context, item.onTap);

@@ -24,22 +24,22 @@ class FormLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
-      backgroundColor: MyConstants.whiteColor,
+      backgroundColor: MyConstants.bg400,
       body: SafeArea(
         child: Column(
           children: [
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(20),
-              color: MyConstants.accentColor,
+              color: MyConstants.primary100,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  HeaderText(text: title, color: MyConstants.whiteColor),
+                  HeaderText(text: title, color: MyConstants.text400),
                   const SizedBox(height: 12),
                   DescriptiveText(
                     text: description,
-                    color: MyConstants.whiteColor,
+                    color: MyConstants.text400,
                   ),
                 ],
               ),

@@ -66,13 +66,11 @@ class _LoginScreenState extends State<LoginScreen> {
             Navigator.pushReplacementNamed(context, '/home');
           }
         } else if (state is AuthFailure) {
-          /// If the login event fails, show an error message.
           setState(() {
             _isLoading = false;
             _error = state.error;
           });
         } else if (state is AuthLoading) {
-          /// If the login event is loading, show a progress loader.
           setState(() {
             _isLoading = true;
           });
@@ -143,23 +141,13 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-/// A widget that contains the input fields for the login form.
 class SignInOptions extends StatelessWidget {
-  /// The form key for the login form.
   final GlobalKey<FormState> formKey;
 
-  /// The controller for the email input field.
   final TextEditingController emailController;
 
-  /// The controller for the password input field.
   final TextEditingController passwordController;
 
-  /// Creates a [SignInOptions] widget.
-  ///
-  /// The [formKey], [emailController], and [passwordController] are required.
-  /// The [formKey], [emailController], and [passwordController] must not be null.
-  /// The [formKey] must be a [GlobalKey] of type [FormState].
-  /// The [emailController] and [passwordController] must be of type [TextEditingController].
   const SignInOptions({
     super.key,
     required this.formKey,

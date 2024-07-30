@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
               width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.grey[100],
+                color: MyConstants.colorGray100,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           DescriptiveText(
                             text: "This Month",
-                            color: MyConstants.greyColor,
+                            color: MyConstants.text200,
                             // color: MyConstants.primaryColor,
                             fontWeight: FontWeight.w600,
                             fontSize: 14,
@@ -84,8 +84,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       TextLinkButton(
                         onPressed: () {},
                         text: "View Details",
-                        color: MyConstants.whiteColor,
-                        bgColor: Colors.grey[800]!,
+                        color: MyConstants.text400,
+                        bgColor: MyConstants.primary100,
                       ),
                     ],
                   ),
@@ -155,7 +155,7 @@ class HomeDetailShort extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           // color: Colors.grey[100],
-          color: Colors.grey[200],
+          color: MyConstants.colorGray100,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
@@ -163,7 +163,7 @@ class HomeDetailShort extends StatelessWidget {
           children: [
             DescriptiveText(
               text: value,
-              color: MyConstants.primaryColor,
+              color: MyConstants.text100,
               // color: MyConstants.primaryColor,
               fontWeight: FontWeight.w600,
               fontSize: 25,
@@ -171,7 +171,7 @@ class HomeDetailShort extends StatelessWidget {
             const SizedBox(height: 10),
             DescriptiveText(
               text: label,
-              color: MyConstants.greyColor,
+              color: MyConstants.text200,
               // color: MyConstants.primaryColor,
               fontWeight: FontWeight.w500,
               fontSize: 16,
@@ -200,14 +200,14 @@ class HomeInfoItem extends StatelessWidget {
       children: [
         DescriptiveText(
           text: label,
-          color: MyConstants.primaryColor,
+          color: MyConstants.text100,
           // color: MyConstants.primaryColor,
           fontWeight: FontWeight.w500,
           fontSize: 16,
         ),
         DescriptiveText(
           text: value,
-          color: MyConstants.primaryColor,
+          color: MyConstants.text100,
           // color: MyConstants.primaryColor,
           fontWeight: FontWeight.w600,
           fontSize: 18,

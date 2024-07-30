@@ -10,24 +10,28 @@ class CustomDrawerHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DrawerHeader(
+    return DrawerHeader(
       margin: EdgeInsets.zero,
       decoration: BoxDecoration(
-        color: MyConstants.primaryColor,
+        color: MyConstants.primary100,
       ),
       child: Column(
         children: [
           Align(
             alignment: Alignment.centerLeft,
-            child: HeaderText(
-              text: "Roomwise",
-              color: MyConstants.whiteColor,
+            child: Image.asset(
+              'assets/images/logo_dark.png',
+              height: 40,
             ),
           ),
           SizedBox(height: 5.0),
           Align(
             alignment: Alignment.centerLeft,
-            child: DescriptiveText(text: "A PG Management App!"),
+            child: DescriptiveText(
+              text: "A PG Management App!",
+              color: MyConstants.text400,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ],
       ),
