@@ -24,7 +24,7 @@ class TagItem extends StatelessWidget {
       child: DescriptiveText(
         text: text,
         fontSize: 14,
-        color: MyConstants.primaryColor,
+        color: MyConstants.text100,
         fontWeight: FontWeight.w500,
       ),
     );

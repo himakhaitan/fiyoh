@@ -14,7 +14,7 @@ class TenantTile extends StatelessWidget {
       decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: MyConstants.lightGreyColor,
+            color: MyConstants.colorGray200,
             width: 1,
           ),
         ),
@@ -27,11 +27,11 @@ class TenantTile extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: MyConstants.primaryColor,
+              color: MyConstants.primary100,
             ),
             child: const Icon(
               Icons.person_4_rounded,
-              color: MyConstants.whiteColor,
+              color: MyConstants.primary400,
             ),
           ),
           const SizedBox(width: 20),
@@ -49,7 +49,7 @@ class TenantTile extends StatelessWidget {
                 InfoItem(
                   text: "Paid",
                   icon: Icons.currency_rupee_outlined,
-                  color: MyConstants.successMetallic,
+                  color: MyConstants.successLightest,
                 ),
               ],
             ),

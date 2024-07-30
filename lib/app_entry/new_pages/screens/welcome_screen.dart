@@ -15,7 +15,7 @@ class WelcomeScreen extends StatelessWidget {
       body: Stack(
         children: [
           Image.asset(
-            'assets/images/welcome_image.png',
+            'assets/images/app.png',
             width: double.infinity,
             height: double.infinity,
             fit: BoxFit.cover,
@@ -34,22 +34,31 @@ class WelcomeScreen extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.4,
+            height: MediaQuery.of(context).size.height * 0.5,
             width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 40, right: 20),
-                  child: DuoToneText(
-                      firstPart: 'Effortlessly Manage Your ',
-                      highlightedPart: 'PG Properties',
-                      lastPart: ' Anytime, Anywhere',
-                      primaryColor: MyConstants.primaryColor,
-                      secondaryColor: MyConstants.secondaryColor),
-                ),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30, right: 40),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                      height: 70,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  DuoToneText(
+                    firstPart: 'Effortlessly Manage Your ',
+                    highlightedPart: 'PG Properties',
+                    lastPart: ' Anytime, Anywhere',
+                    primaryColor: MyConstants.accent100,
+                    secondaryColor: MyConstants.brand100,
+                  ),
+                ],
+              ),
             ),
           ),
           Positioned(
@@ -61,7 +70,8 @@ class WelcomeScreen extends StatelessWidget {
               child: Center(
                 child: LongButton(
                   text: "Get Started",
-                  /// Navigate to the login screen.
+                  buttonColor: MyConstants.bg400,
+                  textColor: MyConstants.text100,
                   onPressed: () {
                     Navigator.pushNamed(context, '/login');
                   },

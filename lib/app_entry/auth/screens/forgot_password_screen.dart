@@ -70,8 +70,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   );
             }
           },
-          buttonColor: MyConstants.accentColor,
-          textColor: MyConstants.whiteColor,
+          buttonColor: MyConstants.primary100,
+          textColor: MyConstants.text400,
         ),
       ),
     );

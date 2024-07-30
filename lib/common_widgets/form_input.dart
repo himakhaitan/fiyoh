@@ -37,7 +37,7 @@ class FormInput extends StatelessWidget {
           icon: icon != null
               ? Icon(
                   icon,
-                  color: MyConstants.primaryColor,
+                  color: MyConstants.primary100,
                 )
               : null,
           labelText: labelText,
@@ -45,7 +45,7 @@ class FormInput extends StatelessWidget {
           labelStyle: GoogleFonts.poppins(
             fontSize: 16,
             fontWeight: FontWeight.w500,
-            color: MyConstants.primaryColor,
+            color: MyConstants.text100,
           ),
           hintStyle: GoogleFonts.poppins(
             fontSize: 16,
@@ -53,18 +53,18 @@ class FormInput extends StatelessWidget {
             color: Colors.grey,
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: MyConstants.accentColor, width: 2.0), // Change border color focused
+            borderSide: const BorderSide(color: MyConstants.accent200, width: 2.0), // Change border color focused
             borderRadius: BorderRadius.circular(5.0),
           ),
           enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 1.5), 
+            borderSide: BorderSide(color: MyConstants.accent200, width: 1.5), 
           ),
         ),
         obscureText: obscureText,
         style: GoogleFonts.poppins(
           fontSize: 16,
           fontWeight: FontWeight.w500,
-          color: MyConstants.primaryColor,
+          color: MyConstants.text100,
         ),
         validator: validator,
       ),

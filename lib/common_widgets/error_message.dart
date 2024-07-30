@@ -14,7 +14,7 @@ class ErrorMessage extends StatelessWidget {
         message,
         textAlign: TextAlign.center,
         style: GoogleFonts.poppins(
-          color: MyConstants.redColor,
+          color: MyConstants.dangerDarker,
           fontSize: 14,
           height: 1.2,
           fontWeight: FontWeight.w400,

@@ -10,8 +10,15 @@ class TextLinkButton extends StatelessWidget {
   final Widget? icon;
   final double? fontSize;
 
-  const TextLinkButton(
-      {super.key, required this.onPressed, required this.text, this.color = Colors.blue, this.bgColor = Colors.transparent, this.icon, this.fontSize = 16});
+  const TextLinkButton({
+    super.key,
+    required this.onPressed,
+    required this.text,
+    this.color = MyConstants.brand100,
+    this.bgColor = Colors.transparent,
+    this.icon,
+    this.fontSize = 16,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +27,7 @@ class TextLinkButton extends StatelessWidget {
       style: TextButton.styleFrom(
         backgroundColor: bgColor,
         foregroundColor: Colors.transparent,
-        overlayColor: MyConstants.accentColor,
+        overlayColor: MyConstants.bg100,
       ),
       onPressed: onPressed,
       label: Text(
@@ -31,7 +38,6 @@ class TextLinkButton extends StatelessWidget {
           fontWeight: FontWeight.w500,
         ),
         textAlign: TextAlign.right,
-        
       ),
     );
   }

@@ -13,7 +13,7 @@ class TransactionTile extends StatelessWidget {
       decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: MyConstants.lightGreyColor,
+            color: MyConstants.accent300,
             width: 1,
           ),
         ),

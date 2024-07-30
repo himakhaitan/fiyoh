@@ -28,7 +28,7 @@ class GoogleButton extends StatelessWidget {
           child: Text(
             text,
             style: GoogleFonts.poppins(
-              color: MyConstants.primaryColor,
+              color: MyConstants.primary100,
               fontSize: 16.0,
               fontWeight: FontWeight.w500,
             ),
@@ -36,15 +36,15 @@ class GoogleButton extends StatelessWidget {
         ),
         style: ButtonStyle(
           backgroundColor:
-              WidgetStateProperty.all(const Color.fromARGB(255, 243, 243, 243)),
+              WidgetStateProperty.all(MyConstants.colorGray100),
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5.0),
             ),
           ),
           overlayColor:
-              WidgetStateProperty.all(MyConstants.whiteColor.withOpacity(0.2)),
-          shadowColor: WidgetStatePropertyAll(const Color.fromARGB(255, 243, 243, 243).withOpacity(0.7)),
+              WidgetStateProperty.all(MyConstants.bg100.withOpacity(0.2)),
+          shadowColor: WidgetStatePropertyAll(MyConstants.colorGray100.withOpacity(0.5)),
         ),
       ),
     );

@@ -52,7 +52,7 @@ class _CheckUserTypeScreenState extends State<CheckUserTypeScreen> {
         container: Column(
           children: [
             RadioListTile(
-              fillColor: WidgetStateProperty.all(MyConstants.primaryColor),
+              fillColor: WidgetStateProperty.all(MyConstants.primary100),
               title: const DescriptiveText(text: "I am an Owner"),
               value: UserType.owner.value,
               groupValue: _selectedUserType,
@@ -63,7 +63,7 @@ class _CheckUserTypeScreenState extends State<CheckUserTypeScreen> {
               },
             ),
             RadioListTile(
-              fillColor: WidgetStateProperty.all(MyConstants.primaryColor),
+              fillColor: WidgetStateProperty.all(MyConstants.primary100),
               title: const DescriptiveText(text: "I am a Manger"),
               value: UserType.manager.value,
               groupValue: _selectedUserType,
@@ -80,8 +80,8 @@ class _CheckUserTypeScreenState extends State<CheckUserTypeScreen> {
             ? const ProgressLoader()
             : LongButton(
                 text: "Complete Onboarding",
-                buttonColor: MyConstants.primaryColor,
-                textColor: MyConstants.whiteColor,
+                buttonColor: MyConstants.primary100,
+                textColor: MyConstants.text400,
                 onPressed: () {
                   context
                       .read<AuthBloc>()

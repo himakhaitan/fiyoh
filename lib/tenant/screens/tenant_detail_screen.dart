@@ -17,13 +17,13 @@ class TenantDetailScreen extends StatelessWidget {
           onPressed: () {},
           icon: const Icon(
             Icons.transfer_within_a_station_outlined,
-            color: MyConstants.primaryColor,
+            color: MyConstants.primary100,
           ),
         ),
         IconButton(
           icon: const Icon(
             Icons.delete_outline,
-            color: MyConstants.redColor,
+            color: MyConstants.dangerDarker,
             size: 30,
           ),
           onPressed: () {},
@@ -38,7 +38,7 @@ class TenantDetailScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: MyConstants.purpleMetallic,
+                  color: MyConstants.brand400,
                   borderRadius: BorderRadius.circular(5),
                   // border: Border.all(
                   //   color: MyConstants.greyColor,
@@ -48,7 +48,7 @@ class TenantDetailScreen extends StatelessWidget {
                 child: const Icon(
                   Icons.person_outlined,
                   size: 40,
-                  color: MyConstants.primaryColor,
+                  color: MyConstants.primary100,
                 ),
               ),
               const SizedBox(width: 20),
@@ -58,12 +58,12 @@ class TenantDetailScreen extends StatelessWidget {
                   children: [
                     HeaderText(
                       text: "Himanshu",
-                      color: MyConstants.accentColor,
+                      color: MyConstants.text100,
                       fontSize: 25,
                     ),
                     DescriptiveText(
                       text: "Khaitan",
-                      color: MyConstants.greyColor,
+                      color: MyConstants.text200,
                       fontSize: 20,
                     ),
                   ],
@@ -104,7 +104,7 @@ class TenantDetailScreen extends StatelessWidget {
                 onPressed: () {},
                 icon: const Icon(
                   Icons.add_circle_outline,
-                  color: MyConstants.primaryColor,
+                  color: MyConstants.primary100,
                   size: 30,
                 ),
               ),
@@ -153,13 +153,13 @@ class InfoTag extends StatelessWidget {
         children: [
           DescriptiveText(
             text: item,
-            color: MyConstants.greyColor,
+            color: MyConstants.text200,
             fontWeight: FontWeight.w600,
           ),
           const SizedBox(width: 10),
           DescriptiveText(
             text: value,
-            color: MyConstants.accentColor,
+            color: MyConstants.text100,
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),

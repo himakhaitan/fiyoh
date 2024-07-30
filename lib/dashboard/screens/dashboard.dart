@@ -45,7 +45,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyConstants.whiteColor,
+      backgroundColor: MyConstants.bg400,
       appBar: CustomAppBar(),
       drawer: const CustomDrawer(),
       body: PageView(

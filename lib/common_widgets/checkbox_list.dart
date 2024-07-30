@@ -82,11 +82,11 @@ class _CheckboxListFormFieldState extends State<CheckboxListFormField> {
               widget.options.length,
               (index) {
                 return CheckboxListTile(
-                  checkColor: MyConstants.whiteColor,
-                  activeColor: MyConstants.primaryColor,
+                  checkColor: MyConstants.bg400,
+                  activeColor: MyConstants.primary100,
                   title: DescriptiveText(
                     text: widget.options[index],
-                    color: MyConstants.primaryColor,
+                    color: MyConstants.primary100,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),

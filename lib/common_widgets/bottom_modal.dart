@@ -7,7 +7,7 @@ Future<dynamic> showBottomModal(BuildContext context, List<Widget> content) {
       builder: (BuildContext context) {
         return Container(
           decoration: const BoxDecoration(
-            color: MyConstants.primaryColor,
+            color: MyConstants.primary100,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),

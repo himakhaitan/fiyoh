@@ -14,7 +14,7 @@ class SectionHeader extends StatelessWidget {
       child: HeaderText(
         text: text,
         fontSize: 18,
-        color: MyConstants.primaryColor,
+        color: MyConstants.text100,
       ),
     );
   }

@@ -24,25 +24,28 @@ class AuthLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(showLeading: showLeading,),
-      backgroundColor: MyConstants.whiteColor,
+      appBar: CustomAppBar(
+        showLeading: showLeading,
+      ),
+      backgroundColor: MyConstants.bg400,
       body: SafeArea(
         child: Column(
           children: [
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(20),
-              color: MyConstants.accentColor,
+              color: MyConstants.primary100,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  HeaderText(text: title, color: MyConstants.whiteColor),
+                  // SizedBox(height: 25,),
+                  HeaderText(text: title, color: MyConstants.text400),
                   if (subtitle != null && subtitle!.isNotEmpty)
-                    HeaderText(text: subtitle!, color: MyConstants.whiteColor),
+                    HeaderText(text: subtitle!, color: MyConstants.text400),
                   const SizedBox(height: 12),
                   if (description != null && description!.isNotEmpty)
                     DescriptiveText(
-                        text: description!, color: MyConstants.whiteColor),
+                        text: description!, color: MyConstants.text400),
                 ],
               ),
             ),

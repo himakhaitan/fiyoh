@@ -21,7 +21,7 @@ class InfoItem extends StatelessWidget {
       children: [
         Icon(
           icon,
-          color: MyConstants.primaryColor.withOpacity(0.6),
+          color: MyConstants.primary100,
           size: 20,
         ),
         const SizedBox(width: 10),
@@ -34,7 +34,7 @@ class InfoItem extends StatelessWidget {
           child: DescriptiveText(
             text: text,
             fontSize: 12,
-            color: MyConstants.primaryColor.withOpacity(0.8),
+            color: MyConstants.primary100,
             fontWeight: FontWeight.w500,
           ),
         ),

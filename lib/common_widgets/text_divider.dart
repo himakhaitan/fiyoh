@@ -14,7 +14,7 @@ class TextDivider extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.only(right: 10, left: 50),
             child: const Divider(
-              color: MyConstants.greyColor,
+              color: MyConstants.accent200,
               thickness: 1,
             ),
           ),
@@ -26,7 +26,7 @@ class TextDivider extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.only(left: 10, right: 50),
             child: const Divider(
-              color: MyConstants.greyColor,
+              color: MyConstants.accent200,
               thickness: 1,
             ),
           ),

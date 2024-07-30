@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     alignment: Alignment.centerLeft,
                     child: DescriptiveText(
                       text: "Hello, ${state.user.firstName}!",
-                      color: MyConstants.primaryColor,
+                      color: MyConstants.text100,
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
                     ),
@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   const DescriptiveText(
                     text: "Earnings",
-                    color: MyConstants.primaryColor,
+                    color: MyConstants.text100,
                     // color: MyConstants.primaryColor,
                     fontWeight: FontWeight.w500,
                     fontSize: 18,
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           DescriptiveText(
                             text: "₹ 12,10,000",
-                            color: MyConstants.primaryColor,
+                            color: MyConstants.text100,
                             fontWeight: FontWeight.w600,
                             fontSize: 25,
                           ),

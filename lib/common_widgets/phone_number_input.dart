@@ -35,11 +35,11 @@ class PhoneNumberInput extends StatelessWidget {
               style: GoogleFonts.poppins(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: MyConstants.primaryColor,
+                color: MyConstants.text100,
               ),
             ),
             decoration: BoxDecoration(
-              color: MyConstants.primaryColor.withOpacity(0.1), // Background color
+              color: MyConstants.bg300, // Background color
               borderRadius: BorderRadius.circular(5), // Rounded corners
             ),
           ),

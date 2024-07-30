@@ -17,7 +17,7 @@ class DuoToneText extends StatelessWidget {
     required this.lastPart,
     required this.primaryColor,
     required this.secondaryColor,
-    this.fontSize = 30,
+    this.fontSize = 25,
     this.fontWeight = FontWeight.w700,
     this.height = 1.2,
   });

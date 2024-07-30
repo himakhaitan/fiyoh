@@ -9,7 +9,7 @@ Widget adaptiveAction(
     {required BuildContext context,
     required VoidCallback onPressed,
     required String text,
-    Color textColor = MyConstants.primaryColor}) {
+    Color textColor = MyConstants.primary100}) {
   final ThemeData theme = Theme.of(context);
   switch (theme.platform) {
     case TargetPlatform.android:
@@ -54,7 +54,7 @@ void showAlertDialog({
         return AlertDialog.adaptive(
           title: DescriptiveText(
             text: title,
-            color: MyConstants.primaryColor,
+            color: MyConstants.primary100,
             fontWeight: FontWeight.w600,
             fontSize: 18,
           ),
@@ -72,7 +72,7 @@ void showAlertDialog({
               context: context,
               onPressed: okayAction,
               text: "Delete",
-              textColor: MyConstants.redColor,
+              textColor: MyConstants.danger,
             ),
           ],
         );

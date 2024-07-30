@@ -106,8 +106,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             );
                       }
                     },
-                    buttonColor: MyConstants.accentColor,
-                    textColor: MyConstants.whiteColor,
+                    buttonColor: MyConstants.primary100,
+                    textColor: MyConstants.text400,
                   ),
             const SizedBox(height: 15),
             const TextDivider(),
@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const DescriptiveText(
                   text: "Don't have an account?",
-                  color: MyConstants.primaryColor,
+                  color: MyConstants.text100,
                 ),
                 TextLinkButton(
                   /// Navigate to the sign up screen.
