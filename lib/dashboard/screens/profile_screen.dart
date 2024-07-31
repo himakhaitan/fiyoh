@@ -94,7 +94,7 @@ class ProfileSection extends StatelessWidget {
           text: "${user.firstName} ${user.lastName}",
           fontSize: 24,
           fontWeight: FontWeight.w600,
-          color: MyConstants.primaryColor,
+          color: MyConstants.text100,
         ),
         const SizedBox(height: 10),
         // Fed usertype in InfoItem

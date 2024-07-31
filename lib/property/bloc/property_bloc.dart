@@ -127,10 +127,11 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
           'last_name': event.tenantLastName,
           'email': event.tenantEmail,
           'phone_number': event.tenantPhone,
-          // 'user_type': USER_TYPE.TENANT.value,
+          'user_type': 'TENANT',
           'bookings': FieldValue.arrayUnion([
             bookingRef.id,
           ]),
+          'active_booking': bookingRef.id,
           'created_at': FieldValue.serverTimestamp(),
           'updated_at': FieldValue.serverTimestamp(),
         },

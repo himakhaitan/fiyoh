@@ -1,3 +1,4 @@
+import 'package:fiyoh/tenant/bloc/tenant_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fiyoh/app_entry/auth/bloc/auth_bloc.dart';
 import 'package:fiyoh/constants/colours.dart';
@@ -60,8 +61,15 @@ class _DashboardState extends State<Dashboard> {
             create: (context) => PropertyBloc(),
             child: const RoomsScreen(),
           ),
-          BlocProvider(
-            create: (context) => PropertyBloc(),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => PropertyBloc(),
+              ),
+              BlocProvider(
+                create: (context) => TenantBloc(),
+              ),
+            ],
             child: const TenantsScreen(),
           ),
           BlocProvider(

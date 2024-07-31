@@ -54,17 +54,16 @@ class PropertyTile extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            border: Border.all(color: MyConstants.greyColor, width: 1),
+            border: Border.all(color: MyConstants.colorGray600, width: 1),
           ),
           child: Column(
             children: [
-              // Property Name
               Container(
                 padding: const EdgeInsets.only(bottom: 10),
                 decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
-                      color: MyConstants.primaryColor,
+                      color: MyConstants.colorGray600,
                       width: 1.5,
                     ),
                   ),
@@ -74,7 +73,7 @@ class PropertyTile extends StatelessWidget {
                   child: DescriptiveText(
                     text: property.propertyName,
                     fontSize: 18,
-                    color: MyConstants.primaryColor,
+                    color: MyConstants.text100,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

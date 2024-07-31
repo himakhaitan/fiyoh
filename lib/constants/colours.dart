@@ -46,11 +46,29 @@ class MyConstants {
   // Danger Colors
   static const Color danger = Color(0xFFFA383E);
   static const Color dangerDark = Color(0xFFE13238);
-  static const Color dangerDarker = Color.fromARGB(255, 53, 13, 14);
+  static const Color dangerDarker = Color(0xFFD53035);
   static const Color dangerDarkest = Color(0xFFAF272B);
   static const Color dangerLight = Color(0xFFFB565B);
   static const Color dangerLighter = Color(0xFFFB7478);
   static const Color dangerLightest = Color(0xFFFD9C9F);
+
+  // Info Colors
+  static const Color info = Color(0xFF54C7EC);
+  static const Color infoDark = Color(0xFF4CB3D4);
+  static const Color infoDarker = Color(0xFF47A9C9);
+  static const Color infoDarkest = Color(0xFF3B8BA5);
+  static const Color infoLight = Color(0xFF6ECFEF);
+  static const Color infoLighter = Color(0xFF87D8F2);
+  static const Color infoLightest = Color(0xFFAAE3F6);
+
+  // Warning Colors
+  static const Color warning = Color(0xFFFFBA00);
+  static const Color warningDark = Color(0xFFE6A700);
+  static const Color warningDarker = Color(0xFFD99E00);
+  static const Color warningDarkest = Color(0xFFB38200);
+  static const Color warningLight = Color(0xFFFFC426);
+  static const Color warningLighter = Color(0xFFFFCF4D);
+  static const Color warningLightest = Color(0xFFFFDD80);
 
   // Success Colors
   static const Color success = Color(0xFF00A400);

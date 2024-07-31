@@ -21,7 +21,7 @@ class InfoItem extends StatelessWidget {
       children: [
         Icon(
           icon,
-          color: MyConstants.primary100,
+          color: MyConstants.primary200,
           size: 20,
         ),
         const SizedBox(width: 10),
