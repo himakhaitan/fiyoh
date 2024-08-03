@@ -1,3 +1,4 @@
+import 'package:fiyoh/models/tenant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fiyoh/common_widgets/descriptive_text.dart';
@@ -23,7 +24,7 @@ class RoomDetailScreen extends StatefulWidget {
 class _RoomDetailScreenState extends State<RoomDetailScreen> {
   bool _isLoading = false;
   String _error = "";
-  List<String> tenants = [];
+  List<Tenant> tenants = [];
 
   @override
   void initState() {
@@ -144,7 +145,7 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: tenants.length,
                         itemBuilder: (context, index) {
-                          return TenantItem(name: tenants[index]);
+                          return TenantItem(tenant: tenants[index]);
                         },
                       ),
           ],
@@ -155,10 +156,10 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
 }
 
 class TenantItem extends StatelessWidget {
-  final String name;
+  final Tenant tenant;
   const TenantItem({
     super.key,
-    required this.name,
+    required this.tenant,
   });
 
   @override
@@ -188,7 +189,7 @@ class TenantItem extends StatelessWidget {
             ),
           ),
           DescriptiveText(
-            text: name,
+            text: '${tenant.firstName} ${tenant.lastName}',
             color: MyConstants.accentColor,
           ),
           IconButton.filledTonal(

@@ -1,4 +1,5 @@
 import 'package:fiyoh/common_widgets/progress_loader.dart';
+import 'package:fiyoh/models/tenant.dart';
 import 'package:fiyoh/tenant/bloc/tenant_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +18,7 @@ class TenantsScreen extends StatefulWidget {
 class _TenantsScreenState extends State<TenantsScreen> {
   List<String> propertyItems = [];
   List<String> propertyIds = [];
-  List<String> tenantItems = [];
+  List<Tenant> tenantItems = [];
   String _error = "";
   bool _isLoading = false;
   String _selectedProperty = "";

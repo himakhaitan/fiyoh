@@ -24,7 +24,7 @@ class Tenant {
   });
 
   // Instanciate the Tenant class from a DocumentSnapshot
-  factory Tenant.fromDocumentSnapshot(DocumentSnapshot doc) {
+  factory Tenant.fromDocumentSnapshot(DocumentSnapshot doc, Booking activeBooking) {
 
     return Tenant(
       id: doc.id,
@@ -33,7 +33,7 @@ class Tenant {
       email: doc['email'],
       countryCode: doc['country_code'],
       phoneNumber: doc['phone_number'] ?? '',
-      activeBooking: doc['active_booking'],
+      activeBooking: activeBooking,
     );
   }
 }

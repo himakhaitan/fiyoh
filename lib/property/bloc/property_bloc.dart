@@ -142,7 +142,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
         {
           'tenants': FieldValue.arrayUnion([
             {
-              'user_id': event.tenantEmail,
+              'tenant_id': event.tenantEmail,
               'booking_id': bookingRef.id,
             }
           ]),

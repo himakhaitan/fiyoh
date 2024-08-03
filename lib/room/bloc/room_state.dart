@@ -23,7 +23,7 @@ final class RoomFailed extends RoomState {
 }
 
 final class RoomLoaded extends RoomState {
-  final List<String> tenants;
+  final List<Tenant> tenants;
 
   RoomLoaded({required this.tenants});
 

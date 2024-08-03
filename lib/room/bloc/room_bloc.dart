@@ -1,6 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiyoh/models/booking.dart';
 import 'package:meta/meta.dart';
+import 'package:fiyoh/models/tenant.dart';
+import 'package:fiyoh/models/transaction.dart' as tmodel;
 import 'package:fiyoh/models/room.dart';
 part 'room_event.dart';
 part 'room_state.dart';
@@ -12,22 +15,43 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     on<GetTenants>((event, emit) => _onGetTenants(event, emit));
   }
 
+  Future<Tenant> fetchTenant(String userId, String bookingId) async {
+    // Fetch transactions using transaction ids stored in the booking
+    QuerySnapshot transactionSnapshot = await _firestore
+        .collection('transactions')
+        .where('booking_id', isEqualTo: bookingId)
+        .get();
+
+    // Create Transaction objects from the snapshot
+    List<tmodel.Transaction> transactions = transactionSnapshot.docs
+        .map((doc) => tmodel.Transaction.fromDocumentSnapshot(doc))
+        .toList();
+
+    // Create Booking Object from the snapshot
+    Booking bookingObject = Booking.fromDocumentSnapshot(
+        transactionSnapshot.docs.first, transactions);
+
+    // Fetch the tenant details from the tenant collection
+    DocumentSnapshot tenantSnapshot =
+        await _firestore.collection('users').doc(userId).get();
+
+    // Create Tenant object from the snapshot
+    Tenant tenant = Tenant.fromDocumentSnapshot(tenantSnapshot, bookingObject);
+
+    return tenant;
+  }
+
   void _onGetTenants(GetTenants event, Emitter<RoomState> emit) async {
     emit(RoomLoading());
     try {
       // loop through tenants inside event.room
-      List<String> tenants = [];
-      for (var tenant in event.room.tenants!) {
-        final DocumentSnapshot tenantRef =
-            await _firestore.collection('users').doc(tenant['user_id']).get();
+      List<Tenant> tenants = [];
+      for (var tenant in event.room.tenants) {
+        // Get user_id and booking_id from the map
+        String userId = tenant['tenant_id']!;
+        String bookingId = tenant['booking_id']!;
 
-        if (!tenantRef.exists) {
-          emit(RoomFailed(error: 'Tenant not found'));
-          return;
-        }
-        final Map<String, dynamic> tenantData =
-            tenantRef.data() as Map<String, dynamic>;
-        tenants.add('${tenantData['first_name']} ${tenantData['last_name']}');
+        tenants.add(await fetchTenant(userId, bookingId));
       }
       emit(RoomLoaded(tenants: tenants));
     } catch (e) {

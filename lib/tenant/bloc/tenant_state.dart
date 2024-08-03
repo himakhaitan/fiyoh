@@ -23,7 +23,7 @@ final class TenantFailed extends TenantState {
 }
 
 final class TenantLoaded extends TenantState {
-  final List<String> tenants;
+  final List<Tenant> tenants;
 
   TenantLoaded({required this.tenants});
 

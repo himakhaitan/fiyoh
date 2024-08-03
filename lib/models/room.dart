@@ -5,14 +5,14 @@ class Room {
   final int occupancy;
   final int floor;
   final String roomNumber;
-  final List<Map<String, String>>? tenants;
+  final List<Map<String, String>> tenants;
 
   Room({
     required this.id,
     required this.occupancy,
     required this.floor,
     required this.roomNumber,
-    this.tenants,
+    this.tenants = const [],
   });
 
   factory Room.fromDocumentSnapshot(DocumentSnapshot doc) {
@@ -20,7 +20,7 @@ class Room {
     List<Map<String, String>> tenants = [];
     doc['tenants'].forEach((value) {
       Map<String, String> tenant = {};
-      tenant['user_id'] = value['user_id'];
+      tenant['tenant_id'] = value['tenant_id'];
       tenant['booking_id'] = value['booking_id'];
       tenants.add(tenant);
     });
