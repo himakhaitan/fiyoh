@@ -1,10 +1,12 @@
+import 'package:fiyoh/models/tenant.dart';
+import 'package:fiyoh/tenant/screens/tenant_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fiyoh/common_widgets/info_item.dart';
 import 'package:fiyoh/constants/colours.dart';
 
 class TenantTile extends StatelessWidget {
-
-  const TenantTile({super.key});
+  final Tenant tenant;
+  const TenantTile({super.key, required this.tenant});
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +37,11 @@ class TenantTile extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 20),
-          const Expanded(
+          Expanded(
             child: Column(
               children: [
                 InfoItem(
-                  text: "Himanshu Khaitan",
+                  text: '${tenant.firstName} ${tenant.lastName}',
                   icon: Icons.person_2_outlined,
                 ),
                 InfoItem(
@@ -56,7 +58,13 @@ class TenantTile extends StatelessWidget {
           ),
           IconButton.filledTonal(
             onPressed: () {
-              Navigator.pushNamed(context, '/tenant/details', arguments: {});
+              // Navigator.pushNamed(context, '/tenant/details', arguments: {});
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TenantDetailScreen(tenant: tenant),
+                ),
+              );
             },
             icon: const Icon(Icons.navigate_next),
             style: ButtonStyle(

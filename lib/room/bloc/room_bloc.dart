@@ -21,15 +21,21 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
         .collection('transactions')
         .where('booking_id', isEqualTo: bookingId)
         .get();
-
+    
     // Create Transaction objects from the snapshot
     List<tmodel.Transaction> transactions = transactionSnapshot.docs
         .map((doc) => tmodel.Transaction.fromDocumentSnapshot(doc))
         .toList();
 
+    // Fetch the booking details from the booking collection
+    DocumentSnapshot bookingSnapshot = await _firestore
+        .collection('bookings')
+        .doc(bookingId)
+        .get();
+
     // Create Booking Object from the snapshot
     Booking bookingObject = Booking.fromDocumentSnapshot(
-        transactionSnapshot.docs.first, transactions);
+        bookingSnapshot, transactions);
 
     // Fetch the tenant details from the tenant collection
     DocumentSnapshot tenantSnapshot =

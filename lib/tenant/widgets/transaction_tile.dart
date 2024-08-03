@@ -1,10 +1,13 @@
+import 'package:fiyoh/models/transaction.dart';
+import 'package:fiyoh/utils/format_date.dart';
 import 'package:flutter/material.dart';
 import 'package:fiyoh/common_widgets/descriptive_text.dart';
 import 'package:fiyoh/common_widgets/info_item.dart';
 import 'package:fiyoh/constants/colours.dart';
 
 class TransactionTile extends StatelessWidget {
-  const TransactionTile({super.key});
+  final Transaction transaction;
+  const TransactionTile({super.key, required this.transaction});
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +32,12 @@ class TransactionTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               InfoItem(
-                text: "01/01/2024",
+                text: formatDate(transaction.transactionTimestamp),
                 icon: Icons.calendar_today_outlined,
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               InfoItem(
-                text: "Rent",
+                text: transaction.transactionType,
                 icon: Icons.monetization_on_outlined,
                 color: MyConstants.orangeMetallic,
               ),
@@ -42,10 +45,10 @@ class TransactionTile extends StatelessWidget {
           ),
           Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.currency_rupee_outlined,
               ),
-              DescriptiveText(text: "20,000"),
+              DescriptiveText(text: transaction.amount.toString()),
             ],
           ),
         ],

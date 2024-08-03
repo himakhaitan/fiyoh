@@ -145,7 +145,7 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: tenants.length,
                         itemBuilder: (context, index) {
-                          return TenantItem(tenant: tenants[index]);
+                          return TenantItem(tenant: tenants[index], roomNumber: widget.room.roomNumber,);
                         },
                       ),
           ],
@@ -157,9 +157,11 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
 
 class TenantItem extends StatelessWidget {
   final Tenant tenant;
+  final String roomNumber;
   const TenantItem({
     super.key,
     required this.tenant,
+    required this.roomNumber,
   });
 
   @override
@@ -193,7 +195,14 @@ class TenantItem extends StatelessWidget {
             color: MyConstants.accentColor,
           ),
           IconButton.filledTonal(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TenantDetailScreen(tenant: tenant, roomNumber: roomNumber,),
+                ),
+              );
+            },
             icon: const Icon(Icons.navigate_next),
             style: ButtonStyle(
               backgroundColor: WidgetStateProperty.all(Colors.grey[100]),

@@ -111,10 +111,10 @@ class MyApp extends StatelessWidget {
             child: const AddNewTenantScreen(),
           ),
         );
-      case '/tenant/details':
-        return MaterialPageRoute(
-          builder: (context) => const TenantDetailScreen(),
-        );
+      // case '/tenant/details':
+      //   return MaterialPageRoute(
+      //     builder: (context) => const TenantDetailScreen(),
+      //   );
       case '/onboarding/user_type':
         return MaterialPageRoute(
           builder: (context) => BlocProvider(

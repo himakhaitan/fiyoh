@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Transaction {
   final String id;
   final String bookingId;
-  final String userId;
   final double amount;
   final String status;
   final DateTime transactionTimestamp;
@@ -14,7 +13,6 @@ class Transaction {
   Transaction({
     required this.id,
     required this.bookingId,
-    required this.userId,
     required this.amount,
     required this.status,
     required this.transactionTimestamp,
@@ -27,7 +25,6 @@ class Transaction {
     return Transaction(
       id: doc.id,
       bookingId: doc['booking_id'],
-      userId: doc['user_id'],
       amount: doc['amount'].toDouble(),
       status: doc['status'],
       transactionTimestamp:

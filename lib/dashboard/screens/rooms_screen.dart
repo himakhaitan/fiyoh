@@ -128,9 +128,9 @@ class _RoomsScreenState extends State<RoomsScreen> {
                             : allRooms
                                 .where((element) => (value == "Empty")
                                     ? element.occupancy >
-                                        element.tenants!.length
+                                        element.tenants.length
                                     : element.occupancy <=
-                                        element.tenants!.length)
+                                        element.tenants.length)
                                 .toList();
                       } else {
                         rooms = [];

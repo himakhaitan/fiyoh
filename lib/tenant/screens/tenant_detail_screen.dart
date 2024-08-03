@@ -1,3 +1,4 @@
+import 'package:fiyoh/models/tenant.dart';
 import 'package:flutter/material.dart';
 import 'package:fiyoh/common_widgets/descriptive_text.dart';
 import 'package:fiyoh/common_widgets/header_text.dart';
@@ -5,21 +6,30 @@ import 'package:fiyoh/common_widgets/section_header.dart';
 import 'package:fiyoh/constants/colours.dart';
 import 'package:fiyoh/layouts/detail/detail_layout.dart';
 import 'package:fiyoh/tenant/widgets/transaction_tile.dart';
+import 'package:fiyoh/utils/format_date.dart';
 
-class TenantDetailScreen extends StatelessWidget {
-  const TenantDetailScreen({super.key});
+class TenantDetailScreen extends StatefulWidget {
+  final Tenant tenant;
+  final String? roomNumber;
+  const TenantDetailScreen({super.key, required this.tenant, this.roomNumber});
+
+  @override
+  State<TenantDetailScreen> createState() => _TenantDetailScreenState();
+}
+
+class _TenantDetailScreenState extends State<TenantDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
     return DetailLayout(
       actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.transfer_within_a_station_outlined,
-            color: MyConstants.primary100,
-          ),
-        ),
+        // IconButton(
+        //   onPressed: () {},
+        //   icon: const Icon(
+        //     Icons.transfer_within_a_station_outlined,
+        //     color: MyConstants.primary100,
+        //   ),
+        // ),
         IconButton(
           icon: const Icon(
             Icons.delete_outline,
@@ -52,17 +62,17 @@ class TenantDetailScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 20),
-              const Expanded(
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     HeaderText(
-                      text: "Himanshu",
+                      text: widget.tenant.firstName,
                       color: MyConstants.text100,
                       fontSize: 25,
                     ),
                     DescriptiveText(
-                      text: "Khaitan",
+                      text: widget.tenant.lastName,
                       color: MyConstants.text200,
                       fontSize: 20,
                     ),
@@ -78,17 +88,19 @@ class TenantDetailScreen extends StatelessWidget {
           ),
           const SectionHeader(text: "Details"),
           const SizedBox(height: 10),
-          const InfoTag(
-            item: "Room Number",
-            value: "101",
-          ),
-          const InfoTag(
+          if (widget.roomNumber != null)
+            InfoTag(
+              item: "Room Number",
+              value: widget.roomNumber!,
+            ),
+          InfoTag(
             item: "Phone Number",
-            value: "6203059082",
+            value: widget.tenant.phoneNumber,
           ),
-          const InfoTag(
+          // Only show date of joining
+          InfoTag(
             item: "Joining Date",
-            value: "21-04-2024",
+            value: formatDate(widget.tenant.activeBooking.checkInDate!),
           ),
           Divider(
             color: Colors.grey[400]!,
@@ -111,12 +123,19 @@ class TenantDetailScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
+          if (widget.tenant.activeBooking.transactions.isEmpty)
+            const DescriptiveText(
+              text: "No transactions yet",
+              color: MyConstants.text200,
+            ),
           Expanded(
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: 10,
+              itemCount: widget.tenant.activeBooking.transactions.length,
               itemBuilder: (context, index) {
-                return TransactionTile();
+                return TransactionTile(
+                  transaction: widget.tenant.activeBooking.transactions[index],
+                );
               },
             ),
           )

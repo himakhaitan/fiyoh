@@ -196,7 +196,7 @@ class _TenantsScreenState extends State<TenantsScreen> {
                       child: ListView.builder(
                         itemCount: tenantItems.length,
                         itemBuilder: (context, index) {
-                          return const TenantTile();
+                          return TenantTile(tenant: tenantItems[index]);
                         },
                       ),
                     ),
