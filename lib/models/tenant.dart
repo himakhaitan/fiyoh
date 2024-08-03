@@ -1,5 +1,6 @@
 // Imports
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiyoh/models/booking.dart';
 
 // Tenant Class
 class Tenant {
@@ -9,7 +10,7 @@ class Tenant {
   final String email;
   final String countryCode;
   final String phoneNumber;
-  final String? activeBooking;
+  final Booking activeBooking;
 
   // Constructor
   Tenant({
@@ -19,7 +20,7 @@ class Tenant {
     required this.email,
     required this.countryCode,
     required this.phoneNumber,
-    this.activeBooking,
+    required this.activeBooking,
   });
 
   // Instanciate the Tenant class from a DocumentSnapshot

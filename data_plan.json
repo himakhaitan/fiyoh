@@ -16,7 +16,20 @@
   },
   "TRANSACTIONS": {
     "DESCRIPTION": "Data Structure of Transactions",
-    "STRUCTURE": {}
+    "STRUCTURE": {
+      "id" : "String",
+      "booking_id": "String",
+      "user_id": "String",
+      "amount": "Double",
+      "payment_mode": "String",
+      "status": "String",
+      "transaction_type": "String",
+      "transaction_timestamp": "Date",
+      "start_date": "Date",
+      "end_date": "Date",
+      "created_at": "Date",
+      "updated_at": "Date"
+    }
   },
   "USERS": {
     "DESCRIPTION": "Data Structure of Users",

@@ -1,41 +1,44 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Transaction {
-  final String transactionId;
-  final String transactionType;
-  final double amount;
+  final String id;
   final String bookingId;
   final String userId;
+  final double amount;
   final String status;
-  final DateTime paymentDate;
-  final String rentMonth;
-  final String rentYear;
+  final DateTime transactionTimestamp;
+  final String transactionType;
+  final DateTime? startDate;
+  final DateTime? endDate;
 
   Transaction({
-    required this.transactionId,
-    required this.transactionType,
-    required this.amount,
+    required this.id,
     required this.bookingId,
     required this.userId,
+    required this.amount,
     required this.status,
-    required this.paymentDate,
-    required this.rentMonth,
-    required this.rentYear,
+    required this.transactionTimestamp,
+    required this.transactionType,
+    required this.startDate,
+    required this.endDate,
   });
 
   factory Transaction.fromDocumentSnapshot(DocumentSnapshot doc) {
-    
     return Transaction(
-      transactionId: doc.id,
-      transactionType: doc['transactionType'],
-      amount: doc['amount'] as double,
-      bookingId: doc['bookingId'],
-      userId: doc['userId'],
+      id: doc.id,
+      bookingId: doc['booking_id'],
+      userId: doc['user_id'],
+      amount: doc['amount'].toDouble(),
       status: doc['status'],
-      paymentDate: doc['paymentDate'].toDate(),
-      rentMonth: doc['rentMonth'],
-      rentYear: doc['rentYear'],
+      transactionTimestamp:
+          (doc['transaction_timestamp'] as Timestamp).toDate(),
+      transactionType: doc['transaction_type'],
+      startDate: doc['start_date'] != null
+          ? (doc['start_date'] as Timestamp).toDate()
+          : null,
+      endDate: doc['end_date'] != null
+          ? (doc['end_date'] as Timestamp).toDate()
+          : null,
     );
   }
 }

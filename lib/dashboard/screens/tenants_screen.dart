@@ -48,6 +48,9 @@ class _TenantsScreenState extends State<TenantsScreen> {
       });
       return;
     }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   void _updateProperties(PropertyLoaded state) {
@@ -123,6 +126,11 @@ class _TenantsScreenState extends State<TenantsScreen> {
                               propertyId: propertyIds[index],
                             ),
                           );
+                    } else {
+                      setState(() {
+                        tenantItems = [];
+                        _error = "";
+                      });
                     }
                   },
                   starter: "Select Property",
