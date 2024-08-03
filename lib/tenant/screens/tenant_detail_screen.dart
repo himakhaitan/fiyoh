@@ -1,4 +1,5 @@
 import 'package:fiyoh/models/tenant.dart';
+import 'package:fiyoh/payments/screens/add_payment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fiyoh/common_widgets/descriptive_text.dart';
 import 'package:fiyoh/common_widgets/header_text.dart';
@@ -18,7 +19,6 @@ class TenantDetailScreen extends StatefulWidget {
 }
 
 class _TenantDetailScreenState extends State<TenantDetailScreen> {
-
   @override
   Widget build(BuildContext context) {
     return DetailLayout(
@@ -113,7 +113,12 @@ class _TenantDetailScreenState extends State<TenantDetailScreen> {
             children: [
               const SectionHeader(text: "Transaction History"),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AddPaymentScreen()));
+                },
                 icon: const Icon(
                   Icons.add_circle_outline,
                   color: MyConstants.primary100,
