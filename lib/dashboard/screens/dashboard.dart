@@ -53,8 +53,15 @@ class _DashboardState extends State<Dashboard> {
         controller: _pageController,
         onPageChanged: onPageChanged,
         children: [
-          BlocProvider(
-            create: (context) => AuthBloc(),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => AuthBloc(),
+              ),
+              BlocProvider(
+                create: (context) => PropertyBloc(),
+              ),
+            ],
             child: const HomeScreen(),
           ),
           BlocProvider(

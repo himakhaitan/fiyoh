@@ -1,3 +1,4 @@
+import 'package:fiyoh/property/widgets/no_property.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fiyoh/common_widgets/dropdown.dart';
@@ -146,9 +147,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
           _isLoading
               ? const ProgressLoader()
               : (propertyItems.isEmpty)
-                  ? const Center(
-                      child: Text("No properties found."),
-                    )
+                  ? const NoProperty()
                   : (rooms.isEmpty)
                       ? const Center(
                           child: Text("No rooms found."),

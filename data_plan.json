@@ -18,6 +18,7 @@
     "STRUCTURE": {
       "id": "String",
       "booking_id": "String",
+      "property_id": "String",
       "amount": "Double",
       "payment_mode": "String",
       "status": "String",

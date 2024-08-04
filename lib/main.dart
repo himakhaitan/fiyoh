@@ -10,12 +10,12 @@ import 'package:fiyoh/app_entry/auth/screens/forgot_password_screen.dart';
 import 'package:fiyoh/property/screens/add_new_property_screen.dart';
 import 'package:fiyoh/property/screens/add_new_tenant_screen.dart';
 import 'package:fiyoh/app_entry/auth/bloc/auth_bloc.dart';
+import 'package:fiyoh/tenant/bloc/tenant_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fiyoh/support/support_screen.dart';
-import 'package:fiyoh/tenant/screens/tenant_detail_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -92,6 +92,9 @@ class MyApp extends StatelessWidget {
               ),
               BlocProvider(
                 create: (context) => AuthBloc(),
+              ),
+              BlocProvider(
+                create: (context) => TenantBloc(),
               ),
             ],
             child: const Dashboard(),

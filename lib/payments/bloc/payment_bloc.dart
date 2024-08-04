@@ -52,6 +52,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
 
       await _firestore.collection('transactions').add({
         'booking_id': event.bookingId,
+        'property_id': event.propertyId,
         'amount': event.amount,
         'payment_method': event.paymentMethod,
         'status': 'PAID',
@@ -76,6 +77,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
       // Create a transaction
       await _firestore.collection('transactions').add({
         'booking_id': event.bookingId,
+        'property_id': event.propertyId,
         'amount': event.amount,
         'payment_method': event.paymentMethod,
         'status': 'PAID',

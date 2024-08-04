@@ -1,5 +1,6 @@
 import 'package:fiyoh/common_widgets/progress_loader.dart';
 import 'package:fiyoh/models/tenant.dart';
+import 'package:fiyoh/property/widgets/no_property.dart';
 import 'package:fiyoh/tenant/bloc/tenant_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -80,6 +81,9 @@ class _TenantsScreenState extends State<TenantsScreen> {
           listener: (context, state) {
             if (state is PropertyLoaded) {
               _updateProperties(state);
+              setState(() {
+                _isLoading = false;
+              });
             } else if (state is PropertyLoading) {
               setState(() {
                 _isLoading = true;
@@ -191,7 +195,7 @@ class _TenantsScreenState extends State<TenantsScreen> {
           _isLoading
               ? const ProgressLoader()
               : (propertyItems.isEmpty)
-                  ? const Center(child: Text("No property found"))
+                  ? const NoProperty()
                   : Expanded(
                       child: ListView.builder(
                         itemCount: tenantItems.length,

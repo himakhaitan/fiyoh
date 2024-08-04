@@ -19,7 +19,7 @@ class TransactionItem extends StatelessWidget {
             width: 50,
             height: 50,
             decoration: BoxDecoration(
-              color: isCredit? MyConstants.successMetallic : MyConstants.errorMetallic,
+              color: isCredit? MyConstants.brand400 : MyConstants.brand400,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(

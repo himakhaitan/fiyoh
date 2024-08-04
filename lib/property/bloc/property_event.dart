@@ -2,15 +2,10 @@ part of 'property_bloc.dart';
 
 @immutable
 sealed class PropertyEvent {
-  @override
-  List<Object> get props => [];
 }
 
 class GetProperties extends PropertyEvent {
   GetProperties();
-
-  @override
-  List<Object> get props => [];
 }
 
 class AddProperty extends PropertyEvent {
@@ -40,7 +35,6 @@ class AddProperty extends PropertyEvent {
     required this.selectedAmenities,
   });
 
-  @override
   List<Object> get props => [
         propertyName,
         streetAddress,

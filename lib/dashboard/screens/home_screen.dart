@@ -1,3 +1,5 @@
+import 'package:fiyoh/models/property.dart';
+import 'package:fiyoh/property/bloc/property_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fiyoh/app_entry/auth/bloc/auth_bloc.dart';
@@ -89,32 +91,65 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 const SizedBox(height: 30),
-                const HomeInfoItem(
-                  label: "Total Properties",
-                  value: "10",
+                BlocBuilder<PropertyBloc, PropertyState>(
+                  builder: (context, state) {
+                    if (state is PropertyLoaded) {
+                      return HomeInfoItem(
+                        label: "Total Properties",
+                        value: state.properties.length.toString(),
+                      );
+                    } else {
+                      context.read<PropertyBloc>().add(GetProperties());
+                    }
+                    return const SizedBox();
+                  },
                 ),
                 const SizedBox(height: 10),
-                const HomeInfoItem(
-                  label: "Total Earnings",
-                  value: "₹ 1,20,000",
-                ),
+                // const HomeInfoItem(
+                //   label: "Total Earnings",
+                //   value: "₹ 1,20,000",
+                // ),
               ],
             ),
           ),
           const SizedBox(height: 10),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              HomeDetailShort(
-                label: "Tenants",
-                value: "123",
+              BlocBuilder<PropertyBloc, PropertyState>(
+                builder: (context, state) {
+                  return HomeDetailShort(
+                    label: "Tenants",
+                    value: state is PropertyLoaded
+                        ? state.properties
+                            .fold(
+                              0,
+                              (previousValue, element) =>
+                                  previousValue + element.totalTenants,
+                            )
+                            .toString()
+                        : "0",
+                  );
+                },
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
-              HomeDetailShort(
-                label: "Rooms",
-                value: "100",
+              BlocBuilder<PropertyBloc, PropertyState>(
+                builder: (context, state) {
+                  return HomeDetailShort(
+                    label: "Rooms",
+                    value: state is PropertyLoaded
+                        ? state.properties
+                            .fold(
+                              0,
+                              (previousValue, element) =>
+                                  previousValue + element.totalRooms,
+                            )
+                            .toString()
+                        : "0",
+                  );
+                },
               ),
             ],
           ),
@@ -126,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: ListView.builder(
               itemBuilder: (context, index) {
-                return TransactionItem(isCredit: false);
+                return TransactionItem(isCredit: true);
               },
               itemCount: 8,
               shrinkWrap: true,

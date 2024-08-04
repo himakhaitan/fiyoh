@@ -15,7 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddPaymentScreen extends StatefulWidget {
   final String bookingID;
-  const AddPaymentScreen({super.key, required this.bookingID});
+  final String propertyID;
+  const AddPaymentScreen({super.key, required this.bookingID, required this.propertyID});
 
   @override
   State<AddPaymentScreen> createState() => _AddPaymentScreenState();
@@ -270,6 +271,7 @@ class _AddPaymentScreenState extends State<AddPaymentScreen> {
                           if (paymentType == 'RENT') {
                             context.read<PaymentBloc>().add(RentTransaction(
                                   bookingId: widget.bookingID,
+                                  propertyId: widget.propertyID,
                                   amount: totalAmount,
                                   paymentMethod: paymentMethod,
                                   startDate: _startDateController.text,
@@ -283,6 +285,7 @@ class _AddPaymentScreenState extends State<AddPaymentScreen> {
                           } else if (paymentType == 'DEPOSIT') {
                             context.read<PaymentBloc>().add(DepositTransaction(
                                   bookingId: widget.bookingID,
+                                  propertyId: widget.propertyID,
                                   amount: totalAmount,
                                   paymentMethod: paymentMethod,
                                   status: 'PAID',

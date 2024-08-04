@@ -117,14 +117,17 @@ class _TenantDetailScreenState extends State<TenantDetailScreen> {
               IconButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => BlocProvider(
-                                create: (context) => PaymentBloc(),
-                                child: AddPaymentScreen(
-                                  bookingID: widget.tenant.activeBooking.id,
-                                ),
-                              )));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                        create: (context) => PaymentBloc(),
+                        child: AddPaymentScreen(
+                          bookingID: widget.tenant.activeBooking.id,
+                          propertyID: widget.tenant.activeBooking.propertyId,
+                        ),
+                      ),
+                    ),
+                  );
                 },
                 icon: const Icon(
                   Icons.add_circle_outline,

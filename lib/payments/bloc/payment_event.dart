@@ -5,6 +5,7 @@ sealed class PaymentEvent {}
 
 class DepositTransaction extends PaymentEvent {
   final String bookingId;
+  final String propertyId;
   final double amount;
   final String paymentMethod;
   final String status;
@@ -13,6 +14,7 @@ class DepositTransaction extends PaymentEvent {
 
   DepositTransaction({
     required this.bookingId,
+    required this.propertyId,
     required this.amount,
     required this.paymentMethod,
     required this.status,
@@ -23,6 +25,7 @@ class DepositTransaction extends PaymentEvent {
 
 class RentTransaction extends PaymentEvent {
   final String bookingId;
+  final String propertyId;
   final double amount;
   final String paymentMethod;
   final String startDate;
@@ -36,6 +39,7 @@ class RentTransaction extends PaymentEvent {
   RentTransaction({
     required this.bookingId,
     required this.amount,
+    required this.propertyId,
     required this.paymentMethod,
     required this.startDate,
     required this.endDate,
