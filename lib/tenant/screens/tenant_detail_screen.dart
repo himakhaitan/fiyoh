@@ -117,7 +117,7 @@ class _TenantDetailScreenState extends State<TenantDetailScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AddPaymentScreen()));
+                          builder: (context) => AddPaymentScreen(bookingID: widget.tenant.activeBooking.id,)));
                 },
                 icon: const Icon(
                   Icons.add_circle_outline,

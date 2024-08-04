@@ -29,7 +29,6 @@ class FormInput extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(bottom: 15),
       child: TextFormField(
-        // Keyboard type should be text
         keyboardType: keyboardType,
         maxLines: obscureText ? 1 : maxLines,
         controller: controller,

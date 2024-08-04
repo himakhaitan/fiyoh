@@ -7,6 +7,7 @@ class Transaction {
   final String status;
   final DateTime transactionTimestamp;
   final String transactionType;
+  final String paymentMethod;
   final DateTime? startDate;
   final DateTime? endDate;
 
@@ -18,6 +19,7 @@ class Transaction {
     required this.transactionTimestamp,
     required this.transactionType,
     required this.startDate,
+    required this.paymentMethod,
     required this.endDate,
   });
 
@@ -27,6 +29,7 @@ class Transaction {
       bookingId: doc['booking_id'],
       amount: doc['amount'].toDouble(),
       status: doc['status'],
+      paymentMethod: doc['payment_method'],
       transactionTimestamp:
           (doc['transaction_timestamp'] as Timestamp).toDate(),
       transactionType: doc['transaction_type'],

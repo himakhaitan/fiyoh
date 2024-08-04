@@ -17,12 +17,17 @@
   "TRANSACTIONS": {
     "DESCRIPTION": "Data Structure of Transactions",
     "STRUCTURE": {
-      "id" : "String",
+      "id": "String",
       "booking_id": "String",
-      "user_id": "String",
       "amount": "Double",
       "payment_mode": "String",
       "status": "String",
+      "classification": [
+        {
+          "type": "String",
+          "amount": "Double"
+        }
+      ],
       "transaction_type": "String",
       "transaction_timestamp": "Date",
       "start_date": "Date",
@@ -49,15 +54,17 @@
   },
   "ROOMS": {
     "DESCRIPTION": "Data Structure of Rooms",
-    "STRUCTURE" : {
+    "STRUCTURE": {
       "id": "String",
       "occupancy": "Int",
       "floor": "Int",
       "room_number": "String",
-      "tenants": [{
-        "user_id": "String",
-        "booking_id": "String"
-      }],
+      "tenants": [
+        {
+          "user_id": "String",
+          "booking_id": "String"
+        }
+      ],
       "created_at": "Date",
       "updated_at": "Date"
     }

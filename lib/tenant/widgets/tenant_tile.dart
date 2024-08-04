@@ -58,7 +58,6 @@ class TenantTile extends StatelessWidget {
           ),
           IconButton.filledTonal(
             onPressed: () {
-              // Navigator.pushNamed(context, '/tenant/details', arguments: {});
               Navigator.push(
                 context,
                 MaterialPageRoute(

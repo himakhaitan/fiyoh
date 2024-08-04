@@ -33,7 +33,7 @@ class LongButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(borderRadius),
             ),
           ),
-          overlayColor: WidgetStateProperty.all(MyConstants.colorGray400),
+          overlayColor: WidgetStateProperty.all(MyConstants.colorGray800),
         ),
         label: Padding(
           padding: const EdgeInsets.symmetric(vertical: 14),
