@@ -115,7 +115,6 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
         'tenant_id': event.tenantEmail,
         'check_in': FieldValue.serverTimestamp(),
         'check_out': null,
-        'transactions': [],
         'status': 'ACTIVE',
         'created_at': FieldValue.serverTimestamp(),
         'updated_at': FieldValue.serverTimestamp(),

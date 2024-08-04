@@ -1,4 +1,5 @@
 import 'package:fiyoh/models/tenant.dart';
+import 'package:fiyoh/payments/bloc/payment_bloc.dart';
 import 'package:fiyoh/payments/screens/add_payment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fiyoh/common_widgets/descriptive_text.dart';
@@ -8,6 +9,7 @@ import 'package:fiyoh/constants/colours.dart';
 import 'package:fiyoh/layouts/detail/detail_layout.dart';
 import 'package:fiyoh/tenant/widgets/transaction_tile.dart';
 import 'package:fiyoh/utils/date_handler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TenantDetailScreen extends StatefulWidget {
   final Tenant tenant;
@@ -117,7 +119,12 @@ class _TenantDetailScreenState extends State<TenantDetailScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AddPaymentScreen(bookingID: widget.tenant.activeBooking.id,)));
+                          builder: (context) => BlocProvider(
+                                create: (context) => PaymentBloc(),
+                                child: AddPaymentScreen(
+                                  bookingID: widget.tenant.activeBooking.id,
+                                ),
+                              )));
                 },
                 icon: const Icon(
                   Icons.add_circle_outline,

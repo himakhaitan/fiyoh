@@ -9,7 +9,6 @@
       "check_in": "Date",
       "check_out": "Date",
       "status": "String",
-      "transactions": [],
       "created_at": "Date",
       "updated_at": "Date"
     }
