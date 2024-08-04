@@ -15,7 +15,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
     on<GetTenants>((event, emit) => _onGetTenants(event, emit));
   }
 
-  Future<Tenant> fetchTenant(String userId, String bookingId) async {
+  Future<Tenant> fetchTenant(String bookingId) async {
     // Fetch transactions using transaction ids stored in the booking
     QuerySnapshot transactionSnapshot = await _firestore
         .collection('transactions')
@@ -39,7 +39,7 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
 
     // Fetch the tenant details from the tenant collection
     DocumentSnapshot tenantSnapshot =
-        await _firestore.collection('users').doc(userId).get();
+        await _firestore.collection('users').doc(bookingObject.tenantId).get();
 
     // Create Tenant object from the snapshot
     Tenant tenant = Tenant.fromDocumentSnapshot(tenantSnapshot, bookingObject);
@@ -54,10 +54,9 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
       List<Tenant> tenants = [];
       for (var tenant in event.room.tenants) {
         // Get user_id and booking_id from the map
-        String userId = tenant['tenant_id']!;
         String bookingId = tenant['booking_id']!;
 
-        tenants.add(await fetchTenant(userId, bookingId));
+        tenants.add(await fetchTenant(bookingId));
       }
       emit(RoomLoaded(tenants: tenants));
     } catch (e) {

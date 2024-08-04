@@ -52,37 +52,11 @@ class _DashboardState extends State<Dashboard> {
       body: PageView(
         controller: _pageController,
         onPageChanged: onPageChanged,
-        children: [
-          MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => AuthBloc(),
-              ),
-              BlocProvider(
-                create: (context) => PropertyBloc(),
-              ),
-            ],
-            child: const HomeScreen(),
-          ),
-          BlocProvider(
-            create: (context) => PropertyBloc(),
-            child: const RoomsScreen(),
-          ),
-          MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => PropertyBloc(),
-              ),
-              BlocProvider(
-                create: (context) => TenantBloc(),
-              ),
-            ],
-            child: const TenantsScreen(),
-          ),
-          BlocProvider(
-            create: (context) => PropertyBloc(),
-            child: const ManageScreen(),
-          ),
+        children: const [
+           HomeScreen(),
+           RoomsScreen(),
+           TenantsScreen(),
+           ManageScreen(),
         ],
       ),
       bottomNavigationBar: CustomBottomBar(

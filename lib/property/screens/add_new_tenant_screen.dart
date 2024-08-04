@@ -27,6 +27,12 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
 
     if (propertyState is! PropertyLoaded) {
       context.read<PropertyBloc>().add(GetProperties());
+    } else {
+      setState(() {
+        propertyItems = propertyState.properties
+            .map((property) => property.propertyName)
+            .toList();
+      });
     }
   }
 
@@ -85,7 +91,7 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
           setState(() {
             _isLoading = false;
           });
-          Navigator.pop(context);
+          Navigator.pushReplacementNamed(context, '/home');
         } else if (state is PropertyFailed) {
           setState(() {
             _isLoading = false;

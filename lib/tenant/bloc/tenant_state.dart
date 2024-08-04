@@ -24,9 +24,10 @@ final class TenantFailed extends TenantState {
 
 final class TenantLoaded extends TenantState {
   final List<Tenant> tenants;
+  final String propertyId;
 
-  TenantLoaded({required this.tenants});
+  TenantLoaded({required this.tenants, required this.propertyId});
 
   @override
-  List<Object> get props => [tenants];
+  List<Object> get props => [tenants, propertyId];
 }

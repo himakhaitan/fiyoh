@@ -55,7 +55,7 @@ class TenantBloc extends Bloc<TenantEvent, TenantState> {
       for (var booking in bookingSnapshot.docs) {
         tenants.add(await fetchTenant(booking));
       }
-      emit(TenantLoaded(tenants: tenants));
+      emit(TenantLoaded(tenants: tenants, propertyId: event.propertyId));
     } catch (e) {
       print(e);
       emit(TenantFailed(error: "Failed to load tenants"));

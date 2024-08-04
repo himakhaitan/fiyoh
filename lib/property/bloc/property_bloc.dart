@@ -149,11 +149,12 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
           'updated_at': FieldValue.serverTimestamp(),
         },
       );
-      await _firestore.collection('users').doc(user.uid).update({
+      await _firestore.collection('properties').doc(event.propertyId).update({
         'tenant_count': FieldValue.increment(1),
         'updated_at': FieldValue.serverTimestamp(),
       });
       emit(PropertyAPICompleted());
+      add(GetProperties());
     } catch (e) {
       emit(PropertyFailed(error: e.toString()));
     }
@@ -347,6 +348,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
         } else {
           emit(PropertyAPICompleted());
         }
+        add(GetProperties());
       }
     } catch (e) {
       emit(PropertyFailed(error: e.toString()));
@@ -367,6 +369,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
         },
       );
       emit(PropertyAPICompleted());
+      add(GetProperties());
     } catch (err) {
       emit(PropertyFailed(error: err.toString()));
     }

@@ -1,7 +1,5 @@
 import 'package:fiyoh/common_widgets/descriptive_text.dart';
 import 'package:fiyoh/common_widgets/long_button.dart';
-import 'package:fiyoh/common_widgets/text_link_button.dart';
-import 'package:fiyoh/constants/colours.dart';
 import 'package:flutter/material.dart';
 
 class NoProperty extends StatelessWidget {

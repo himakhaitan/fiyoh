@@ -49,14 +49,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Fiyoh',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => PropertyBloc(),
+        ),
+        BlocProvider(
+          create: (context) => AuthBloc(),
+        ),
+        BlocProvider(
+          create: (context) => TenantBloc(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Fiyoh',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const AuthWrapper(),
+        onGenerateRoute: (settings) => generateRoute(settings),
       ),
-      home: const AuthWrapper(),
-      onGenerateRoute: (settings) => generateRoute(settings),
     );
   }
 
@@ -64,55 +77,27 @@ class MyApp extends StatelessWidget {
     switch (settings.name) {
       case '/login':
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => AuthBloc(),
-            child: const LoginScreen(),
-          ),
+          builder: (context) => const LoginScreen(),
         );
       case '/signup':
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => AuthBloc(),
-            child: const SignupScreen(),
-          ),
+          builder: (context) => const SignupScreen(),
         );
       case '/forgot_password':
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => AuthBloc(),
-            child: const ForgotPasswordScreen(),
-          ),
+          builder: (context) => const ForgotPasswordScreen(),
         );
       case '/home':
         return MaterialPageRoute(
-          builder: (context) => MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => PropertyBloc(),
-              ),
-              BlocProvider(
-                create: (context) => AuthBloc(),
-              ),
-              BlocProvider(
-                create: (context) => TenantBloc(),
-              ),
-            ],
-            child: const Dashboard(),
-          ),
+          builder: (context) => const Dashboard(),
         );
       case '/property/add':
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => PropertyBloc(),
-            child: const AddNewPropertyScreen(),
-          ),
+          builder: (context) => const AddNewPropertyScreen(),
         );
       case '/tenant/add':
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => PropertyBloc(),
-            child: const AddNewTenantScreen(),
-          ),
+          builder: (context) => const AddNewTenantScreen(),
         );
       // case '/tenant/details':
       //   return MaterialPageRoute(
@@ -120,24 +105,15 @@ class MyApp extends StatelessWidget {
       //   );
       case '/onboarding/user_type':
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => AuthBloc(),
-            child: const CheckUserTypeScreen(),
-          ),
+          builder: (context) => const CheckUserTypeScreen(),
         );
       case '/profile':
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => AuthBloc(),
-            child: const ProfileScreen(),
-          ),
+          builder: (context) => const ProfileScreen(),
         );
       case '/support':
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => AuthBloc(),
-            child: const SupportScreen(),
-          ),
+          builder: (context) => const SupportScreen(),
         );
       default:
         return MaterialPageRoute(

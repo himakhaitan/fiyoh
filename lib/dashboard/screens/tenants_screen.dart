@@ -2,6 +2,7 @@ import 'package:fiyoh/common_widgets/progress_loader.dart';
 import 'package:fiyoh/models/tenant.dart';
 import 'package:fiyoh/property/widgets/no_property.dart';
 import 'package:fiyoh/tenant/bloc/tenant_bloc.dart';
+import 'package:fiyoh/tenant/widgets/no_tenant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fiyoh/common_widgets/dropdown.dart';
@@ -65,11 +66,27 @@ class _TenantsScreenState extends State<TenantsScreen> {
       tenantItems = [];
     });
     if (propertyItems.isNotEmpty) {
-      context.read<TenantBloc>().add(
-            GetTenants(
-              propertyId: state.properties.first.id,
-            ),
-          );
+      // Check if TenantBloc has already loaded tenants for the first property
+      final tenantState = context.read<TenantBloc>().state;
+      if (tenantState is! TenantLoaded) {
+        context.read<TenantBloc>().add(
+              GetTenants(
+                propertyId: propertyIds.first,
+              ),
+            );
+      } else {
+        if (tenantState.propertyId != propertyIds.first) {
+          context.read<TenantBloc>().add(
+                GetTenants(
+                  propertyId: propertyIds.first,
+                ),
+              );
+        } else {
+          setState(() {
+            tenantItems = tenantState.tenants;
+          });
+        }
+      }
     }
   }
 
@@ -196,14 +213,16 @@ class _TenantsScreenState extends State<TenantsScreen> {
               ? const ProgressLoader()
               : (propertyItems.isEmpty)
                   ? const NoProperty()
-                  : Expanded(
-                      child: ListView.builder(
-                        itemCount: tenantItems.length,
-                        itemBuilder: (context, index) {
-                          return TenantTile(tenant: tenantItems[index]);
-                        },
-                      ),
-                    ),
+                  : (tenantItems.isEmpty)
+                      ? const NoTenant()
+                      : Expanded(
+                          child: ListView.builder(
+                            itemCount: tenantItems.length,
+                            itemBuilder: (context, index) {
+                              return TenantTile(tenant: tenantItems[index]);
+                            },
+                          ),
+                        ),
         ],
       ),
     );
