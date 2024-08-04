@@ -1,16 +1,9 @@
 import 'package:fiyoh/common_widgets/date_picker.dart';
 import 'package:fiyoh/common_widgets/dropdown.dart';
 import 'package:fiyoh/common_widgets/long_button.dart';
-import 'package:fiyoh/constants/colours.dart';
 import 'package:fiyoh/layouts/form/form_layout.dart';
+import 'package:fiyoh/utils/date_handler.dart';
 import 'package:flutter/material.dart';
-
-DateTime getLastDayOfMonth(DateTime date) {
-  DateTime firstDayOfNextMonth = DateTime(date.year, date.month + 1, 1);
-  DateTime lastDayOfCurrentMonth = firstDayOfNextMonth.subtract(const Duration(days: 1));
-  return lastDayOfCurrentMonth;
-}
-
 
 class AddPaymentScreen extends StatefulWidget {
   const AddPaymentScreen({super.key});
@@ -49,64 +42,66 @@ class _AddPaymentScreenState extends State<AddPaymentScreen> {
   @override
   Widget build(BuildContext context) {
     return FormLayout(
-        title: 'Add Payment',
-        description: 'Track your payments',
-        form: Column(
-          children: [
-            DropdownInput(
-              labelText: 'Payment Type',
-              items: const ['DEPOSIT'],
-              onChanged: (value) {
-                setState(() {
-                  paymentType = value;
-                });
-              },
-              starter: 'RENT',
+      title: 'Add Payment',
+      description: 'Track your payments',
+      form: Column(
+        children: [
+          DropdownInput(
+            labelText: 'Payment Type',
+            items: const ['DEPOSIT'],
+            onChanged: (value) {
+              setState(() {
+                paymentType = value;
+              });
+            },
+            starter: 'RENT',
+          ),
+          if (paymentType == 'RENT')
+            Row(
+              children: [
+                DatePickerInput(
+                  labelText: 'Start Date',
+                  hintText: 'Select Start Date',
+                  controller: _startDateController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please select a start date';
+                    }
+                    return null;
+                  },
+                  initialDate: getFirstDayOfMonth(DateTime.now()),
+                  onChanged: (DateTime newDate) {
+                    // Update end date when start date changes
+                    _updateEndDate(newDate);
+                  },
+                ),
+                const SizedBox(width: 20),
+                DatePickerInput(
+                  labelText: 'End Date',
+                  hintText: 'Select End Date',
+                  controller: _endDateController,
+                  validator: (value) {
+                    DateTime startDate =
+                        DateTime.parse(_startDateController.text);
+                    DateTime endDate = DateTime.parse(value ?? '');
+                    if (value == null || value.isEmpty) {
+                      return 'Please select an end date';
+                    } else if (endDate.isBefore(startDate)) {
+                      return 'End date cannot be before start date';
+                    }
+                    return null;
+                  },
+                  initialDate: getLastDayOfMonth(DateTime.now()),
+                ),
+              ],
             ),
-            if (paymentType == 'RENT')
-              Row(
-                children: [
-                 DatePickerInput(
-              labelText: 'Start Date',
-              hintText: 'Select Start Date',
-              controller: _startDateController,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please select a start date';
-                }
-                return null;
-              },
-              initialDate: DateTime.now(),
-              onChanged: (DateTime newDate) {
-                  // Update end date when start date changes
-                  _updateEndDate(newDate);
-              },
-            ),
-            SizedBox(width: 20),
-            DatePickerInput(
-              labelText: 'End Date',
-              hintText: 'Select End Date',
-              controller: _endDateController,
-              validator: (value) {
-                DateTime startDate = DateTime.parse(_startDateController.text);
-                DateTime endDate = DateTime.parse(value ?? '');
-                if (value == null || value.isEmpty) {
-                  return 'Please select an end date';
-                } else if (endDate.isBefore(startDate)) {
-                  return 'End date cannot be before start date';
-                }
-                return null;
-              },
-              initialDate: getLastDayOfMonth(DateTime.now()),
-            ),
-                ],
-              ),
-          ],
-        ),
-        buttonContainer: LongButton(
-          text: 'Add Payment',
-          onPressed: () {},
-        ),
-        formKey: _formKey);
+        ],
+      ),
+      buttonContainer: LongButton(
+        text: 'Add Payment',
+        onPressed: () {},
+      ),
+      formKey: _formKey,
+    );
   }
 }

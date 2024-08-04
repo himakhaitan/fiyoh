@@ -34,7 +34,8 @@ class _DatePickerInputState extends State<DatePickerInput> {
     super.initState();
     // Initialize the text controller with the formatted initial date
     if (widget.initialDate != null) {
-      widget.controller.text = widget.initialDate!.toLocal().toString().split(' ')[0];
+      widget.controller.text =
+          widget.initialDate!.toLocal().toString().split(' ')[0];
     }
   }
 
@@ -52,20 +53,35 @@ class _DatePickerInputState extends State<DatePickerInput> {
               initialDate: widget.initialDate ?? DateTime.now(),
               firstDate: widget.firstDate ?? DateTime(2000),
               lastDate: widget.lastDate ?? DateTime(2101),
+              builder: (BuildContext context, Widget? child) {
+                return Theme(
+                  data: ThemeData.light().copyWith(
+                    primaryColor: MyConstants.brand100, 
+                    colorScheme: const ColorScheme.light(
+                      primary: MyConstants.brand100,
+                      onSurface: MyConstants.text100, 
+                    ),
+                    dialogBackgroundColor: MyConstants.bg400, // background color
+                  ),
+                  child: child!,
+                );
+              },
             );
-            
+
             if (pickedDate != null) {
               setState(() {
-                widget.controller.text = pickedDate.toLocal().toString().split(' ')[0];
+                widget.controller.text =
+                    pickedDate.toLocal().toString().split(' ')[0];
                 if (widget.onChanged != null) {
-                  widget.onChanged!(pickedDate); // Trigger the onChanged callback
+                  widget
+                      .onChanged!(pickedDate); // Trigger the onChanged callback
                 }
               });
             }
           },
           decoration: InputDecoration(
-            icon: Icon(
-              Icons.calendar_today, // Calendar icon
+            icon: const Icon(
+              Icons.calendar_month_outlined, // Calendar icon
               color: MyConstants.primary100,
             ),
             labelText: widget.labelText,
@@ -81,7 +97,8 @@ class _DatePickerInputState extends State<DatePickerInput> {
               color: Colors.grey,
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: MyConstants.accent200, width: 2.0),
+              borderSide:
+                  const BorderSide(color: MyConstants.accent200, width: 2.0),
               borderRadius: BorderRadius.circular(5.0),
             ),
             enabledBorder: const UnderlineInputBorder(

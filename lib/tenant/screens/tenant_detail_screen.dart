@@ -7,7 +7,7 @@ import 'package:fiyoh/common_widgets/section_header.dart';
 import 'package:fiyoh/constants/colours.dart';
 import 'package:fiyoh/layouts/detail/detail_layout.dart';
 import 'package:fiyoh/tenant/widgets/transaction_tile.dart';
-import 'package:fiyoh/utils/format_date.dart';
+import 'package:fiyoh/utils/date_handler.dart';
 
 class TenantDetailScreen extends StatefulWidget {
   final Tenant tenant;
