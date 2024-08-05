@@ -30,21 +30,8 @@ class PropertyTile extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => BlocProvider(
-                create: (context) => PropertyBloc(),
-                child: MultiBlocProvider(
-                  providers: [
-                    BlocProvider(
-                      create: (context) => PropertyBloc(),
-                    ),
-                    BlocProvider(
-                      create: (context) => AuthBloc(),
-                    ),
-                  ],
-                  child: PropertyDetailScreen(
-                    property: property,
-                  ),
-                ),
+              builder: (context) => PropertyDetailScreen(
+                property: property,
               ),
             ),
           );
