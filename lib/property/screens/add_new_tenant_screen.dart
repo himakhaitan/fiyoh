@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiyoh/common_widgets/date_picker.dart';
 import 'package:fiyoh/tenant/bloc/tenant_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:fiyoh/common_widgets/dropdown.dart';
@@ -42,8 +43,10 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _startDateController = TextEditingController();
   String _selectedPropertyId = "";
   String _selectedFloor = "";
+  String _selectedGender = "";
   String _selectedProperty = "";
   String _selectedRoom = "";
   String _error = "";
@@ -179,6 +182,25 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
                 return null;
               },
             ),
+            DatePickerInput(
+                    labelText: 'Start Date',
+                    hintText: 'Select Start Date',
+                    controller: _startDateController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please select a start date';
+                      }
+                      return null;
+                    },
+                    initialDate: DateTime.now(),
+                    lastDate: DateTime.now(),
+                  ),
+                  const SizedBox(width: 20),
+            DropdownInput(labelText: 'Gender', items: const['Male','Female'], onChanged: (value) {
+              setState(() {
+                _selectedGender = value;
+              });
+            }, starter: 'Select Gender'),
             DropdownInput(
               labelText: "Property",
               items: propertyItems,
@@ -316,6 +338,8 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
                                     tenantPhone: _phoneController.text,
                                     tenantRoom: selectedRoomID,
                                     propertyId: selectedProperty.id,
+                                    gender: _selectedGender,
+                                    joiningDate: DateTime.parse(_startDateController.text),
                                     tenantFirstName: _firstNameController.text,
                                     tenantLastName: _lastNameController.text,
                                   ),

@@ -152,39 +152,43 @@ class _AddPaymentScreenState extends State<AddPaymentScreen> {
             if (paymentType == 'RENT')
               Row(
                 children: [
-                  DatePickerInput(
-                    labelText: 'Start Date',
-                    hintText: 'Select Start Date',
-                    controller: _startDateController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please select a start date';
-                      }
-                      return null;
-                    },
-                    initialDate: getFirstDayOfMonth(DateTime.now()),
-                    onChanged: (DateTime newDate) {
-                      // Update end date when start date changes
-                      _updateEndDate(newDate);
-                    },
+                  Expanded(
+                    child: DatePickerInput(
+                      labelText: 'Start Date',
+                      hintText: 'Select Start Date',
+                      controller: _startDateController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please select a start date';
+                        }
+                        return null;
+                      },
+                      initialDate: getFirstDayOfMonth(DateTime.now()),
+                      onChanged: (DateTime newDate) {
+                        // Update end date when start date changes
+                        _updateEndDate(newDate);
+                      },
+                    ),
                   ),
                   const SizedBox(width: 20),
-                  DatePickerInput(
-                    labelText: 'End Date',
-                    hintText: 'Select End Date',
-                    controller: _endDateController,
-                    validator: (value) {
-                      DateTime startDate =
-                          DateTime.parse(_startDateController.text);
-                      DateTime endDate = DateTime.parse(value ?? '');
-                      if (value == null || value.isEmpty) {
-                        return 'Please select an end date';
-                      } else if (endDate.isBefore(startDate)) {
-                        return 'End date cannot be before start date';
-                      }
-                      return null;
-                    },
-                    initialDate: getLastDayOfMonth(DateTime.now()),
+                  Expanded(
+                    child: DatePickerInput(
+                      labelText: 'End Date',
+                      hintText: 'Select End Date',
+                      controller: _endDateController,
+                      validator: (value) {
+                        DateTime startDate =
+                            DateTime.parse(_startDateController.text);
+                        DateTime endDate = DateTime.parse(value ?? '');
+                        if (value == null || value.isEmpty) {
+                          return 'Please select an end date';
+                        } else if (endDate.isBefore(startDate)) {
+                          return 'End date cannot be before start date';
+                        }
+                        return null;
+                      },
+                      initialDate: getLastDayOfMonth(DateTime.now()),
+                    ),
                   ),
                 ],
               ),

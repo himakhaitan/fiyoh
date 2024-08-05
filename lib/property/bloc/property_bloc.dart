@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiyoh/models/booking.dart';
+import 'package:fiyoh/utils/string_handler.dart';
 import 'package:meta/meta.dart';
 import 'package:fiyoh/constants/enums.dart';
 import 'package:fiyoh/models/property.dart';
@@ -137,7 +138,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
         'property_id': event.propertyId,
         'room_id': event.tenantRoom,
         'tenant_id': event.tenantEmail,
-        'check_in': FieldValue.serverTimestamp(),
+        'check_in': event.joiningDate,
         'check_out': null,
         'status': 'ACTIVE',
         'created_at': FieldValue.serverTimestamp(),
@@ -147,26 +148,27 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
       // Create a new user with email id as the tenant email
       await _firestore.collection('users').doc(event.tenantEmail).set(
         {
-          'first_name': event.tenantFirstName,
-          'last_name': event.tenantLastName,
-          'email': event.tenantEmail,
+          'first_name': capitalize(event.tenantFirstName),
+          'last_name': capitalize(event.tenantLastName),
+          'email': event.tenantEmail.toLowerCase(),
           'phone_number': event.tenantPhone,
           'country_code': '+91',
           'user_type': 'TENANT',
           'bookings': FieldValue.arrayUnion([
             bookingRef.id,
           ]),
+          'gender': event.gender.toUpperCase(),
           'active_booking': bookingRef.id,
           'created_at': FieldValue.serverTimestamp(),
           'updated_at': FieldValue.serverTimestamp(),
         },
       );
 
-      await _firestore.collection('rooms').doc(event.tenantRoom).update(
+      await _firestore.collection('rooms').doc(event.tenantRoom.toLowerCase()).update(
         {
           'tenants': FieldValue.arrayUnion([
             {
-              'tenant_id': event.tenantEmail,
+              'tenant_id': event.tenantEmail.toLowerCase(),
               'booking_id': bookingRef.id,
             }
           ]),

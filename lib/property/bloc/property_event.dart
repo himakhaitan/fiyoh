@@ -82,6 +82,8 @@ class AddTenant extends PropertyEvent {
   final String tenantRoom;
   final String tenantFirstName;
   final String tenantLastName;
+  final String gender;
+  final DateTime joiningDate;
 
   AddTenant({
     required this.propertyId,
@@ -90,10 +92,12 @@ class AddTenant extends PropertyEvent {
     required this.tenantRoom,
     required this.tenantFirstName,
     required this.tenantLastName,
+    required this.gender,
+    required this.joiningDate
   });
 
   @override
-  List<Object> get props => [propertyId, tenantEmail, tenantPhone, tenantRoom];
+  List<Object> get props => [propertyId, tenantEmail, tenantPhone, tenantRoom, gender, joiningDate];
 }
 
 class DeleteProperty extends PropertyEvent {

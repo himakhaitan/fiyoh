@@ -41,77 +41,75 @@ class _DatePickerInputState extends State<DatePickerInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.only(bottom: 15),
-        child: TextFormField(
-          controller: widget.controller,
-          readOnly: true,
-          onTap: () async {
-            DateTime? pickedDate = await showDatePicker(
-              context: context,
-              initialDate: widget.initialDate ?? DateTime.now(),
-              firstDate: widget.firstDate ?? DateTime(2000),
-              lastDate: widget.lastDate ?? DateTime(2101),
-              builder: (BuildContext context, Widget? child) {
-                return Theme(
-                  data: ThemeData.light().copyWith(
-                    primaryColor: MyConstants.brand100, 
-                    colorScheme: const ColorScheme.light(
-                      primary: MyConstants.brand100,
-                      onSurface: MyConstants.text100, 
-                    ),
-                    dialogBackgroundColor: MyConstants.bg400, // background color
+    return Container(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: TextFormField(
+        controller: widget.controller,
+        readOnly: true,
+        onTap: () async {
+          DateTime? pickedDate = await showDatePicker(
+            context: context,
+            initialDate: widget.initialDate ?? DateTime.now(),
+            firstDate: widget.firstDate ?? DateTime(2000),
+            lastDate: widget.lastDate ?? DateTime(2101),
+            builder: (BuildContext context, Widget? child) {
+              return Theme(
+                data: ThemeData.light().copyWith(
+                  primaryColor: MyConstants.brand100, 
+                  colorScheme: const ColorScheme.light(
+                    primary: MyConstants.brand100,
+                    onSurface: MyConstants.text100, 
                   ),
-                  child: child!,
-                );
-              },
-            );
-
-            if (pickedDate != null) {
-              setState(() {
-                widget.controller.text =
-                    pickedDate.toLocal().toString().split(' ')[0];
-                if (widget.onChanged != null) {
-                  widget
-                      .onChanged!(pickedDate); // Trigger the onChanged callback
-                }
-              });
-            }
-          },
-          decoration: InputDecoration(
-            icon: const Icon(
-              Icons.calendar_month_outlined, // Calendar icon
-              color: MyConstants.primary100,
-            ),
-            labelText: widget.labelText,
-            hintText: widget.hintText,
-            labelStyle: GoogleFonts.poppins(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: MyConstants.text100,
-            ),
-            hintStyle: GoogleFonts.poppins(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey,
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide:
-                  const BorderSide(color: MyConstants.accent200, width: 2.0),
-              borderRadius: BorderRadius.circular(5.0),
-            ),
-            enabledBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: MyConstants.accent200, width: 1.5),
-            ),
+                  dialogBackgroundColor: MyConstants.bg400, // background color
+                ),
+                child: child!,
+              );
+            },
+          );
+    
+          if (pickedDate != null) {
+            setState(() {
+              widget.controller.text =
+                  pickedDate.toLocal().toString().split(' ')[0];
+              if (widget.onChanged != null) {
+                widget
+                    .onChanged!(pickedDate); // Trigger the onChanged callback
+              }
+            });
+          }
+        },
+        decoration: InputDecoration(
+          icon: const Icon(
+            Icons.calendar_month_outlined, // Calendar icon
+            color: MyConstants.primary100,
           ),
-          style: GoogleFonts.poppins(
+          labelText: widget.labelText,
+          hintText: widget.hintText,
+          labelStyle: GoogleFonts.poppins(
             fontSize: 16,
             fontWeight: FontWeight.w500,
             color: MyConstants.text100,
           ),
-          validator: widget.validator,
+          hintStyle: GoogleFonts.poppins(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: Colors.grey,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide:
+                const BorderSide(color: MyConstants.accent200, width: 2.0),
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: MyConstants.accent200, width: 1.5),
+          ),
         ),
+        style: GoogleFonts.poppins(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: MyConstants.text100,
+        ),
+        validator: widget.validator,
       ),
     );
   }
