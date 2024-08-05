@@ -32,9 +32,9 @@ class RoomTile extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(15),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: MyConstants.primaryColor.withOpacity(0.8),
+              color: MyConstants.primary100,
             ),
             child: Center(
               child: DescriptiveText(
