@@ -10,16 +10,15 @@ import 'package:fiyoh/common_widgets/progress_loader.dart';
 import 'package:fiyoh/constants/colours.dart';
 import 'package:fiyoh/layouts/form/form_layout.dart';
 
-class SupportScreen extends StatefulWidget {
-  const SupportScreen({super.key});
+class ReportScreen extends StatefulWidget {
+  const ReportScreen({super.key});
 
   @override
-  State<SupportScreen> createState() => _SupportScreenState();
+  State<ReportScreen> createState() => _ReportScreenState();
 }
 
-class _SupportScreenState extends State<SupportScreen> {
+class _ReportScreenState extends State<ReportScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _descriptionController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   bool isLoading = false;
@@ -35,18 +34,17 @@ class _SupportScreenState extends State<SupportScreen> {
         success = "";
         isLoading = true;
       });
-      // Call the API to submit the support ticket
+      // Call the API to submit the Report ticket
       try {
         await _firestore.collection('tickets').doc().set({
-          'category': category,
-          'description': _descriptionController.text,
+          'category': 'Request > Owner > Report > $category',
           'status': 'OPEN',
           'userId': _auth.currentUser!.uid,
           'createdAt': FieldValue.serverTimestamp(),
         });
 
         setState(() {
-          success = "Your support ticket has been submitted successfully.";
+          success = "Your report request has been submitted successfully. We will send you an email with the final statements in the next 24-48 hours.";
           isLoading = false;
         });
       } catch (err) {
@@ -61,41 +59,26 @@ class _SupportScreenState extends State<SupportScreen> {
   @override
   Widget build(BuildContext context) {
     return FormLayout(
-      title: "Create Support Ticket",
+      title: "Request Final Statements",
       description:
-          "If you're experiencing any issues or have questions, please fill out the form below to create a support ticket.",
+          "Select a date range to generate and view your final statements.",
       form: Column(
         children: [
           DropdownInput(
             labelText: "Category",
             items: const [
-              "ACCOUNT_ISSUES",
-              "DATA_ISSUES",
-              "FEEDBACK",
-              "GENERAL",
-              "BILLING_ISSUES",
-              "TECHNICAL_ISSUES",
-              "OTHER"
+              "Last Month",
+              "Last 3 Months",
+              "Last 6 Months",
+              "Last Year",
+              "Last Financial Year",
             ],
             onChanged: (value) {
               setState(() {
                 category = value;
               });
             },
-            starter: "Select a category",
-          ),
-          FormInput(
-            labelText: "Issue",
-            obscureText: false,
-            hintText: "Enter a detailed description of your request",
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Please enter a detailed description of your request";
-              }
-              return null;
-            },
-            controller: _descriptionController,
-            maxLines: 3,
+            starter: "Select Duration",
           ),
           const SizedBox(height: 20),
           DescriptiveText(

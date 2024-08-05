@@ -38,11 +38,18 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       Navigator.pushNamed(context, '/profile');
                     },
                   ),
+                   CustomListTitle(
+                    title: "Reports",
+                    icon: Icons.table_chart_outlined,
+                    onTap: () {
+                      Navigator.pushNamed(context, '/request/report');
+                    },
+                  ),
                   CustomListTitle(
                     title: "Support",
                     icon: Icons.support_agent_outlined,
                     onTap: () {
-                      Navigator.pushNamed(context, '/support');
+                      Navigator.pushNamed(context, '/request/support');
                     },
                   ),
                   CustomListTitle(

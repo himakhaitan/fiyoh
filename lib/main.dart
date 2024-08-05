@@ -10,12 +10,13 @@ import 'package:fiyoh/app_entry/auth/screens/forgot_password_screen.dart';
 import 'package:fiyoh/property/screens/add_new_property_screen.dart';
 import 'package:fiyoh/property/screens/add_new_tenant_screen.dart';
 import 'package:fiyoh/app_entry/auth/bloc/auth_bloc.dart';
+import 'package:fiyoh/request/report_screen.dart';
 import 'package:fiyoh/tenant/bloc/tenant_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fiyoh/support/support_screen.dart';
+import 'package:fiyoh/request/support_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -111,9 +112,13 @@ class MyApp extends StatelessWidget {
         return MaterialPageRoute(
           builder: (context) => const ProfileScreen(),
         );
-      case '/support':
+      case '/request/support':
         return MaterialPageRoute(
           builder: (context) => const SupportScreen(),
+        );
+      case '/request/report':
+        return MaterialPageRoute(
+          builder: (context) => const ReportScreen(),
         );
       default:
         return MaterialPageRoute(
