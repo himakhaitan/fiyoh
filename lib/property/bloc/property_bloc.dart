@@ -2,6 +2,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiyoh/models/booking.dart';
 import 'package:meta/meta.dart';
 import 'package:fiyoh/constants/enums.dart';
 import 'package:fiyoh/models/property.dart';
@@ -35,6 +36,20 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
 
     // Register AddTenant event handler
     on<AddTenant>((event, emit) => _handleAddTenant(event, emit));
+
+    // Register RemoveTenant event handler
+    on<RemoveTenant>((event, emit) => _handleRemoveTenant(event, emit));
+  }
+
+  // Handle Remove Tenant event
+  Future<void> _handleRemoveTenant(RemoveTenant event, Emitter<PropertyState> emit) async {
+    emit(PropertyLoading());
+    try {
+      
+    } catch(err) {
+      print(err.toString());
+      emit(PropertyFailed(error: err.toString()));
+    }
   }
 
   // Function to fetch properties from Firestore

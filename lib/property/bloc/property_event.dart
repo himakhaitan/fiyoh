@@ -1,8 +1,7 @@
 part of 'property_bloc.dart';
 
 @immutable
-sealed class PropertyEvent {
-}
+sealed class PropertyEvent {}
 
 class GetProperties extends PropertyEvent {
   GetProperties();
@@ -61,6 +60,15 @@ class AdjustProperty extends PropertyEvent {
 
   @override
   List<Object> get props => [propertyId, rooms, occupancy];
+}
+
+class RemoveTenant extends PropertyEvent {
+  final Booking booking;
+
+  RemoveTenant({required this.booking});
+
+  @override
+  List<Object> get props => [booking];
 }
 
 class AddTenant extends PropertyEvent {
