@@ -41,20 +41,21 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
     on<RemoveTenant>((event, emit) => _handleRemoveTenant(event, emit));
 
     // Register ResetPropertyState event handler
-    on<ResetPropertyState>((event, emit) => _handleResetPropertyState(event, emit));
+    on<ResetPropertyState>(
+        (event, emit) => _handleResetPropertyState(event, emit));
   }
 
   // Handle ResetPropertyState event
-  void _handleResetPropertyState(ResetPropertyState event, Emitter<PropertyState> emit) {
+  void _handleResetPropertyState(
+      ResetPropertyState event, Emitter<PropertyState> emit) {
     emit(PropertyInitial());
   }
 
   // Handle Remove Tenant event
-  Future<void> _handleRemoveTenant(RemoveTenant event, Emitter<PropertyState> emit) async {
+  Future<void> _handleRemoveTenant(
+      RemoveTenant event, Emitter<PropertyState> emit) async {
     emit(PropertyLoading());
-    try {
-      
-    } catch(err) {
+    try {} catch (err) {
       print(err.toString());
       emit(PropertyFailed(error: err.toString()));
     }
@@ -228,6 +229,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
         'pincode': event.pincode,
         'owner_id': user.uid,
         'manager_id': null,
+        'is_active': true,
         'facilities': {
           'is_wifi': event.selectedFacilities[0],
           'is_laundry': event.selectedFacilities[1],
@@ -385,9 +387,15 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
   ) async {
     emit(PropertyLoading());
     try {
-      _firestore.collection('users').doc(_auth.currentUser!.uid).update(
+      await _firestore.collection('users').doc(_auth.currentUser!.uid).update(
         {
           'properties': FieldValue.arrayRemove([event.propertyId]),
+          'updated_at': FieldValue.serverTimestamp(),
+        },
+      );
+      await _firestore.collection('properties').doc(event.propertyId).update(
+        {
+          'is_active': false,
           'updated_at': FieldValue.serverTimestamp(),
         },
       );
