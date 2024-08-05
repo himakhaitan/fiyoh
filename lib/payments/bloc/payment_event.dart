@@ -50,3 +50,9 @@ class RentTransaction extends PaymentEvent {
     required this.misc,
   });
 }
+
+class GetPayments extends PaymentEvent {
+  final List<Property> propertyIds;
+
+  GetPayments({required this.propertyIds});
+}

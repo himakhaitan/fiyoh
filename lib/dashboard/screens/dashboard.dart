@@ -1,3 +1,4 @@
+import 'package:fiyoh/payments/bloc/payment_bloc.dart';
 import 'package:fiyoh/tenant/bloc/tenant_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fiyoh/app_entry/auth/bloc/auth_bloc.dart';
@@ -52,11 +53,14 @@ class _DashboardState extends State<Dashboard> {
       body: PageView(
         controller: _pageController,
         onPageChanged: onPageChanged,
-        children: const [
-           HomeScreen(),
-           RoomsScreen(),
-           TenantsScreen(),
-           ManageScreen(),
+        children: [
+          BlocProvider(
+            create: (context) => PaymentBloc(),
+            child: const HomeScreen(),
+          ),
+          const RoomsScreen(),
+          const TenantsScreen(),
+          const ManageScreen(),
         ],
       ),
       bottomNavigationBar: CustomBottomBar(

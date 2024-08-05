@@ -25,13 +25,6 @@ class _TenantDetailScreenState extends State<TenantDetailScreen> {
   Widget build(BuildContext context) {
     return DetailLayout(
       actions: [
-        // IconButton(
-        //   onPressed: () {},
-        //   icon: const Icon(
-        //     Icons.transfer_within_a_station_outlined,
-        //     color: MyConstants.primary100,
-        //   ),
-        // ),
         IconButton(
           icon: const Icon(
             Icons.delete_outline,

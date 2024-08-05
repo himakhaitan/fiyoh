@@ -9,6 +9,7 @@ import 'package:fiyoh/constants/colours.dart';
 import 'package:fiyoh/layouts/form/form_layout.dart';
 import 'package:fiyoh/payments/bloc/payment_bloc.dart';
 import 'package:fiyoh/payments/widgets/transaction_entry.dart';
+import 'package:fiyoh/tenant/bloc/tenant_bloc.dart';
 import 'package:fiyoh/utils/date_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AddPaymentScreen extends StatefulWidget {
   final String bookingID;
   final String propertyID;
-  const AddPaymentScreen({super.key, required this.bookingID, required this.propertyID});
+  const AddPaymentScreen(
+      {super.key, required this.bookingID, required this.propertyID});
 
   @override
   State<AddPaymentScreen> createState() => _AddPaymentScreenState();
@@ -111,6 +113,9 @@ class _AddPaymentScreenState extends State<AddPaymentScreen> {
           setState(() {
             _loading = false;
           });
+          context
+              .read<TenantBloc>()
+              .add(GetTenants(propertyId: widget.propertyID));
           Navigator.pushReplacementNamed(context, '/home');
         } else if (state is PaymentFailed) {
           setState(() {
@@ -290,7 +295,8 @@ class _AddPaymentScreenState extends State<AddPaymentScreen> {
                                   paymentMethod: paymentMethod,
                                   status: 'PAID',
                                   refundableAmount: _refundableController.text,
-                                  nonRefundableAmount: _nonRefundableController.text,
+                                  nonRefundableAmount:
+                                      _nonRefundableController.text,
                                 ));
                           }
                         }

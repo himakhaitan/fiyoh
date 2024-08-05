@@ -22,6 +22,16 @@ final class PaymentFailed extends PaymentState {
   List<Object> get props => [error];
 }
 
+final class PaymentLoaded extends PaymentState {
+  final String total;
+  final List<Payment> payments;
+
+  PaymentLoaded({required this.total, required this.payments});
+
+  @override
+  List<Object> get props => [total, payments];
+}
+
 final class PaymentSuccess extends PaymentState {
   PaymentSuccess();
 

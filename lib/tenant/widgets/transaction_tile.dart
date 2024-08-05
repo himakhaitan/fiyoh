@@ -1,5 +1,6 @@
 import 'package:fiyoh/models/transaction.dart';
 import 'package:fiyoh/utils/date_handler.dart';
+import 'package:fiyoh/utils/format_double.dart';
 import 'package:flutter/material.dart';
 import 'package:fiyoh/common_widgets/descriptive_text.dart';
 import 'package:fiyoh/common_widgets/info_item.dart';
@@ -48,7 +49,7 @@ class TransactionTile extends StatelessWidget {
               const Icon(
                 Icons.currency_rupee_outlined,
               ),
-              DescriptiveText(text: transaction.amount.toString()),
+              DescriptiveText(text: formatDouble(transaction.amount)),
             ],
           ),
         ],

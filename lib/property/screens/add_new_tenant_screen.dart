@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiyoh/tenant/bloc/tenant_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:fiyoh/common_widgets/dropdown.dart';
 import 'package:fiyoh/common_widgets/error_message.dart';
@@ -41,7 +42,7 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
-
+  String _selectedPropertyId = "";
   String _selectedFloor = "";
   String _selectedProperty = "";
   String _selectedRoom = "";
@@ -91,6 +92,7 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
           setState(() {
             _isLoading = false;
           });
+          context.read<TenantBloc>().add(GetTenants(propertyId: _selectedPropertyId));
           Navigator.pushReplacementNamed(context, '/home');
         } else if (state is PropertyFailed) {
           setState(() {
@@ -303,6 +305,11 @@ class _AddNewTenantScreenState extends State<AddNewTenantScreen> {
                                 .firstWhere(
                                     (room) => room.roomNumber == _selectedRoom)
                                 .id;
+
+                            setState(() {
+                              _selectedPropertyId = selectedProperty.id;
+                            });
+
                             context.read<PropertyBloc>().add(
                                   AddTenant(
                                     tenantEmail: _emailController.text,
