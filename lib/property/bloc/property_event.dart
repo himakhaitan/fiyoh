@@ -7,6 +7,10 @@ class GetProperties extends PropertyEvent {
   GetProperties();
 }
 
+class ResetPropertyState extends PropertyEvent {
+  ResetPropertyState();
+}
+
 class AddProperty extends PropertyEvent {
   final String propertyName;
   final String streetAddress;

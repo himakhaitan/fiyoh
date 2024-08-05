@@ -1,3 +1,5 @@
+import 'package:fiyoh/property/bloc/property_bloc.dart';
+import 'package:fiyoh/tenant/bloc/tenant_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fiyoh/app_entry/auth/bloc/auth_bloc.dart';
 import 'package:fiyoh/common_widgets/descriptive_text.dart';
@@ -56,6 +58,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     title: "Sign Out",
                     icon: Icons.logout_outlined,
                     onTap: () {
+                      // Set property state to Initial
+                      context.read<PropertyBloc>().add(ResetPropertyState());
+                      // Set Tenant state to Initial
+                      context.read<TenantBloc>().add(ResetTenantState());
+
                       context.read<AuthBloc>().add(SignOutEvent());
                       Navigator.pushNamed(context, '/');
                     },

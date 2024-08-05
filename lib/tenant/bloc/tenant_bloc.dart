@@ -12,6 +12,12 @@ class TenantBloc extends Bloc<TenantEvent, TenantState> {
 
   TenantBloc() : super(TenantInitial()) {
     on<GetTenants>((event, emit) => _handleGetTenants(event, emit));
+
+    on<ResetTenantState>((event, emit) => _handleResetTenantState(event, emit));
+  }
+
+  void _handleResetTenantState(ResetTenantState event, Emitter<TenantState> emit) {
+    emit(TenantInitial());
   }
 
   Future<Tenant> fetchTenant(DocumentSnapshot booking) async {

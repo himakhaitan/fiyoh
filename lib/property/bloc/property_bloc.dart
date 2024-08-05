@@ -39,6 +39,14 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
 
     // Register RemoveTenant event handler
     on<RemoveTenant>((event, emit) => _handleRemoveTenant(event, emit));
+
+    // Register ResetPropertyState event handler
+    on<ResetPropertyState>((event, emit) => _handleResetPropertyState(event, emit));
+  }
+
+  // Handle ResetPropertyState event
+  void _handleResetPropertyState(ResetPropertyState event, Emitter<PropertyState> emit) {
+    emit(PropertyInitial());
   }
 
   // Handle Remove Tenant event

@@ -6,6 +6,10 @@ sealed class TenantEvent {
   List<Object> get props => [];
 }
 
+class ResetTenantState extends TenantEvent {
+  ResetTenantState();
+}
+
 class GetTenants extends TenantEvent {
   final String propertyId;
   GetTenants({required this.propertyId});
