@@ -21,7 +21,8 @@ class MyConstants {
   static const Color blueMetallic = Color.fromRGBO(215, 216, 255, 1);
   static const Color errorMetallic = Color.fromRGBO(250, 192, 192, 1);
   static const Color lightGreyColor = Color.fromRGBO(228, 228, 228, 1);
-
+  static const Color male = Color(0xFF5271ff);
+  static const Color female = Color.fromARGB(255, 255, 82, 151);
   // Primary Colors
   static const Color primary100 = Color(0xFF1e2022);
   static const Color primary200 = Color(0xFF34373b);

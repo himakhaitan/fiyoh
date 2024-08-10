@@ -1,4 +1,6 @@
+import 'package:fiyoh/common_widgets/info_item.dart';
 import 'package:fiyoh/models/tenant.dart';
+import 'package:fiyoh/utils/string_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fiyoh/common_widgets/descriptive_text.dart';
@@ -145,7 +147,10 @@ class _RoomDetailScreenState extends State<RoomDetailScreen> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: tenants.length,
                         itemBuilder: (context, index) {
-                          return TenantItem(tenant: tenants[index], roomNumber: widget.room.roomNumber,);
+                          return TenantItem(
+                            tenant: tenants[index],
+                            roomNumber: widget.room.roomNumber,
+                          );
                         },
                       ),
           ],
@@ -183,10 +188,10 @@ class TenantItem extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: MyConstants.primaryColor,
+              color: MyConstants.accent100
             ),
-            child: const Icon(
-              Icons.person_4_rounded,
+            child:  Icon(
+              tenant.gender == 'MALE' ? Icons.male : Icons.female,
               color: MyConstants.whiteColor,
             ),
           ),
@@ -199,7 +204,10 @@ class TenantItem extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => TenantDetailScreen(tenant: tenant, roomNumber: roomNumber,),
+                  builder: (context) => TenantDetailScreen(
+                    tenant: tenant,
+                    roomNumber: roomNumber,
+                  ),
                 ),
               );
             },

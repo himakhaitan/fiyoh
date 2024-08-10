@@ -56,7 +56,45 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
   Future<void> _handleRemoveTenant(
       RemoveTenant event, Emitter<PropertyState> emit) async {
     emit(PropertyLoading());
-    try {} catch (err) {
+    try {
+      final user = _auth.currentUser;
+
+      if (user == null) {
+        emit(PropertyFailed(error: 'Unauthenticated User'));
+        return;
+      }
+      DocumentReference bookingRef =
+          _firestore.collection('bookings').doc(event.booking.id);
+
+      await _firestore.collection('users').doc(event.booking.tenantId).update({
+        'active_booking': null,
+        'updated_at': FieldValue.serverTimestamp(),
+      });
+
+      await _firestore.collection('rooms').doc(event.booking.roomId).update({
+        'tenants': FieldValue.arrayRemove([
+          {
+            'tenant_id': event.booking.tenantId,
+            'booking_id': event.booking.id,
+          }
+        ]),
+        'updated_at': FieldValue.serverTimestamp(),
+      });
+
+      await _firestore.collection('properties').doc(event.booking.propertyId).update({
+        'tenant_count': FieldValue.increment(-1),
+        'updated_at': FieldValue.serverTimestamp(),
+      });
+
+      await bookingRef.update({
+        'status': 'COMPLETED',
+        'check_out': FieldValue.serverTimestamp(),
+        'updated_at': FieldValue.serverTimestamp(),
+      });
+
+      emit(PropertyAPICompleted());
+      add(GetProperties());
+    } catch (err) {
       print(err.toString());
       emit(PropertyFailed(error: err.toString()));
     }
@@ -164,7 +202,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
         },
       );
 
-      await _firestore.collection('rooms').doc(event.tenantRoom.toLowerCase()).update(
+      await _firestore.collection('rooms').doc(event.tenantRoom).update(
         {
           'tenants': FieldValue.arrayUnion([
             {
@@ -182,6 +220,7 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
       emit(PropertyAPICompleted());
       add(GetProperties());
     } catch (e) {
+      print(e);
       emit(PropertyFailed(error: e.toString()));
     }
   }
@@ -372,10 +411,11 @@ class PropertyBloc extends Bloc<PropertyEvent, PropertyState> {
           emit(PropertyFailed(
               error:
                   'These rooms have more tenants than occupancy : ${roomNumbers.join(', ')}'));
+                  add(GetProperties());
         } else {
           emit(PropertyAPICompleted());
+          add(GetProperties());
         }
-        add(GetProperties());
       }
     } catch (e) {
       emit(PropertyFailed(error: e.toString()));

@@ -1,6 +1,7 @@
 import 'package:fiyoh/app_entry/auth/bloc/auth_bloc.dart';
 import 'package:fiyoh/common_ui/alert_dialoge.dart';
 import 'package:fiyoh/property/bloc/property_bloc.dart';
+import 'package:fiyoh/property/screens/assign_manager_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fiyoh/common_widgets/descriptive_text.dart';
 import 'package:fiyoh/common_widgets/header_text.dart';
@@ -47,15 +48,6 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
         }
       },
       child: DetailLayout(
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.ios_share_outlined,
-              color: MyConstants.primaryColor,
-            ),
-          ),
-        ],
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +58,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: MyConstants.purpleMetallic,
+                      color: MyConstants.brand400,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: const Icon(
@@ -336,7 +328,15 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                           widget.property.managerId == null) {
                         return LongButton(
                           text: "Assign Manager",
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return AssignManagerScreen(
+                                  property: widget.property,
+                                );
+                              },
+                            ));
+                          },
                           textColor: MyConstants.whiteColor,
                           buttonColor: MyConstants.primaryColor,
                         );

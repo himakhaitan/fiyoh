@@ -54,11 +54,13 @@ class RoomTile extends StatelessWidget {
                   icon: Icons.apartment_outlined,
                 ),
                 InfoItem(
-                  text: (room.occupancy > room.tenants!.length)
+                  text: (room.occupancy > room.tenants.length)
                       ? "Empty"
                       : "Filled",
                   icon: Icons.king_bed_outlined,
-                  color: MyConstants.yellowMetallic,
+                  color: (room.occupancy > room.tenants.length)
+                      ? MyConstants.brand400
+                      : MyConstants.dangerLightest,
                 ),
               ],
             ),

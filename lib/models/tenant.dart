@@ -8,6 +8,7 @@ class Tenant {
   final String firstName;
   final String lastName;
   final String email;
+  final String gender;
   final String countryCode;
   final String phoneNumber;
   final Booking activeBooking;
@@ -21,6 +22,7 @@ class Tenant {
     required this.countryCode,
     required this.phoneNumber,
     required this.activeBooking,
+    required this.gender,
   });
 
   // Instanciate the Tenant class from a DocumentSnapshot
@@ -31,6 +33,7 @@ class Tenant {
       firstName: doc['first_name'],
       lastName: doc['last_name'],
       email: doc['email'],
+      gender: doc['gender'],
       countryCode: doc['country_code'],
       phoneNumber: doc['phone_number'] ?? '',
       activeBooking: activeBooking,

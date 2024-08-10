@@ -81,8 +81,8 @@ class PropertyTile extends StatelessWidget {
                 color: (property.propertyType == PropertyType.female)
                     ? MyConstants.pinkMetallic
                     : (property.propertyType == PropertyType.male)
-                        ? MyConstants.blueMetallic
-                        : MyConstants.yellowMetallic,
+                        ? MyConstants.male
+                        : MyConstants.female,
               ),
               const SizedBox(
                 height: 20,

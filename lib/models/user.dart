@@ -51,7 +51,7 @@ class User {
       userType: UserTypeExtension.fromString(doc['user_type']),
       properties: properties,
       profileUrl: doc['photo_url'],
-      joinedAt: doc['created_at'].toDate(),
+      joinedAt: (doc['created_at'] as Timestamp).toDate(),
     );
   }
 }

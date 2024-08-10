@@ -197,6 +197,12 @@ class _ConfigureRoomsState extends State<ConfigureRooms> {
                     text: "Configure Room",
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        if (addedRooms.isEmpty) {
+                          setState(() {
+                            _error = "Please add at least one room";
+                          });
+                          return;
+                        }
                         // Call the bloc to update the rooms
                         context.read<PropertyBloc>().add(
                               AdjustProperty(

@@ -18,7 +18,7 @@ class NoTenant extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40.0),
-            child: const DescriptiveText(text: "You have no tenants in this property yet", fontWeight: FontWeight.w600,),
+            child: const DescriptiveText(text: "No Tenants Found", fontWeight: FontWeight.w600,),
           ),
           const SizedBox(height: 20),
           Padding(

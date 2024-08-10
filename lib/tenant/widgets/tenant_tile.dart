@@ -48,11 +48,6 @@ class TenantTile extends StatelessWidget {
                   text: "Room 101",
                   icon: Icons.meeting_room_outlined,
                 ),
-                InfoItem(
-                  text: "Paid",
-                  icon: Icons.currency_rupee_outlined,
-                  color: MyConstants.successLightest,
-                ),
               ],
             ),
           ),

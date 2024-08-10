@@ -24,6 +24,7 @@ class FormLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
+      resizeToAvoidBottomInset: false,
       backgroundColor: MyConstants.bg400,
       body: SafeArea(
         child: Column(
@@ -46,6 +47,7 @@ class FormLayout extends StatelessWidget {
             ),
             Expanded(
               child: SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
                 padding: const EdgeInsets.all(20),
                 child: Form(
                   key: formKey,

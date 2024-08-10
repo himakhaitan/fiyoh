@@ -27,6 +27,7 @@ class AuthLayout extends StatelessWidget {
       appBar: CustomAppBar(
         showLeading: showLeading,
       ),
+      resizeToAvoidBottomInset: false,
       backgroundColor: MyConstants.bg400,
       body: SafeArea(
         child: Column(
@@ -51,6 +52,8 @@ class AuthLayout extends StatelessWidget {
             ),
             Expanded(
               child: SingleChildScrollView(
+                
+                physics: const ClampingScrollPhysics(),
                 padding: const EdgeInsets.all(20),
                 child: container,
               ),

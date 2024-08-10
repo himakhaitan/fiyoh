@@ -93,7 +93,7 @@ class AddTenant extends PropertyEvent {
     required this.tenantFirstName,
     required this.tenantLastName,
     required this.gender,
-    required this.joiningDate
+    required this.joiningDate,
   });
 
   @override

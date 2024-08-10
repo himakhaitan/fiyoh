@@ -1,8 +1,10 @@
 import 'package:fiyoh/common_widgets/progress_loader.dart';
 import 'package:fiyoh/models/tenant.dart';
+import 'package:fiyoh/models/transaction.dart';
 import 'package:fiyoh/property/widgets/no_property.dart';
 import 'package:fiyoh/tenant/bloc/tenant_bloc.dart';
 import 'package:fiyoh/tenant/widgets/no_tenant.dart';
+import 'package:fiyoh/utils/date_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fiyoh/common_widgets/dropdown.dart';
@@ -20,6 +22,7 @@ class TenantsScreen extends StatefulWidget {
 class _TenantsScreenState extends State<TenantsScreen> {
   List<String> propertyItems = [];
   List<String> propertyIds = [];
+  List<Tenant> tenantBuffer = [];
   List<Tenant> tenantItems = [];
   String _error = "";
   bool _isLoading = false;
@@ -44,13 +47,76 @@ class _TenantsScreenState extends State<TenantsScreen> {
     setState(() {
       _isLoading = true;
     });
-    if (_selectedPeriod == "Select Period" &&
-        _selectedStatus == "Select Status") {
+    // If the user selects "All" and no specific period
+    if (_selectedStatus == "All" && _selectedPeriod == "Select Period") {
       setState(() {
-        _error = "Please select a period and status";
+        tenantItems = tenantBuffer; // Show all tenants
+        _error = "";
+        _isLoading = false;
       });
       return;
     }
+
+    if (_selectedPeriod == "Select Period" ||
+        _selectedStatus == "Select Status") {
+      setState(() {
+        _error = "Please select a period and status";
+        _isLoading = false;
+      });
+      return;
+    }
+    DateTime now = DateTime.now();
+    DateTime startOfMonth;
+    DateTime endOfMonth;
+
+    if (_selectedPeriod == "Current Month") {
+      startOfMonth = getFirstDayOfMonth(now);
+      endOfMonth = getLastDayOfMonth(now);
+    } else if (_selectedPeriod == "Last Month") {
+      startOfMonth = DateTime(now.year, now.month - 1, 1);
+      endOfMonth = DateTime(now.year, now.month, 0);
+    } else {
+      setState(() {
+        _error = "Please select a valid period";
+        _isLoading = false;
+      });
+      return;
+    }
+
+    List<Tenant> filteredTenants = tenantBuffer.where((tenant) {
+      // Filter transactions based on the period
+      List<Transaction> transactionsInPeriod =
+          tenant.activeBooking.transactions.where((transaction) {
+        bool withinPeriod =
+            (transaction.startDate?.isAtSameMomentAs(startOfMonth) ?? false) &&
+                (transaction.endDate?.isAtSameMomentAs(endOfMonth) ?? false);
+        return withinPeriod;
+      }).toList();
+
+      if (_selectedStatus == "Paid") {
+        return transactionsInPeriod.isNotEmpty;
+      } else if (_selectedStatus == "Unpaid") {
+        return transactionsInPeriod.isEmpty;
+      } else if (_selectedStatus == "All") {
+        return true; // Include all tenants regardless of payment status
+      } else {
+        return false;
+      }
+    }).toList();
+
+    if (filteredTenants.isEmpty) {
+      setState(() {
+        tenantItems = [];
+        _isLoading = false;
+      });
+    } else {
+      setState(() {
+        tenantItems = filteredTenants;
+        _error = "";
+        _isLoading = false;
+      });
+    }
+
     setState(() {
       _isLoading = false;
     });
@@ -63,6 +129,7 @@ class _TenantsScreenState extends State<TenantsScreen> {
       _error = "";
       _selectedProperty =
           (propertyItems.isNotEmpty) ? propertyItems.first : "Select Property";
+      tenantBuffer = [];
       tenantItems = [];
     });
     if (propertyItems.isNotEmpty) {
@@ -83,7 +150,8 @@ class _TenantsScreenState extends State<TenantsScreen> {
               );
         } else {
           setState(() {
-            tenantItems = tenantState.tenants;
+            tenantItems = [];
+            tenantBuffer = tenantState.tenants;
           });
         }
       }
@@ -213,7 +281,10 @@ class _TenantsScreenState extends State<TenantsScreen> {
               ? const ProgressLoader()
               : (propertyItems.isEmpty)
                   ? const NoProperty()
-                  : (tenantItems.isEmpty)
+                  : (tenantItems.isEmpty &&
+                          _selectedProperty != "Select Property" &&
+                          _selectedPeriod != "Select Period" &&
+                          _selectedStatus != "Select Status")
                       ? const NoTenant()
                       : Expanded(
                           child: ListView.builder(
