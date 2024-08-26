@@ -1,13 +1,15 @@
+// Packages: Imports
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rentwise/constants/colours.dart';
+import 'package:fiyoh/constants/colours.dart';
 
 class DropdownInput extends StatefulWidget {
   final String labelText;
   final List<String> items;
   final String starter;
-
   final void Function(String) onChanged;
+
+  final String? initialValue;
 
   const DropdownInput({
     super.key,
@@ -15,6 +17,7 @@ class DropdownInput extends StatefulWidget {
     required this.items,
     required this.onChanged,
     required this.starter,
+    this.initialValue,
   });
 
   @override
@@ -27,7 +30,7 @@ class _DropdownInputState extends State<DropdownInput> {
 
   void _updateItems() {
     setState(() {
-      _selectedItem = widget.starter;
+      _selectedItem = widget.initialValue ?? widget.starter;
       _items = widget.items.toList();
     });
   }
@@ -41,7 +44,7 @@ class _DropdownInputState extends State<DropdownInput> {
   @override
   void didUpdateWidget(DropdownInput oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.items != oldWidget.items) {
+    if (widget.items != oldWidget.items ||  widget.initialValue != oldWidget.initialValue) {
       _updateItems();
     }
   }
@@ -59,17 +62,17 @@ class _DropdownInputState extends State<DropdownInput> {
         },
         value: _selectedItem,
         borderRadius: BorderRadius.circular(10),
-        dropdownColor: MyConstants.whiteColor,
+        dropdownColor: MyConstants.bg400,
         decoration: InputDecoration(
           labelText: widget.labelText,
           labelStyle: GoogleFonts.poppins(
             fontSize: 16,
             fontWeight: FontWeight.w500,
-            color: MyConstants.primaryColor,
+            color: MyConstants.text100,
           ),
           focusedBorder: OutlineInputBorder(
             borderSide:
-                const BorderSide(color: MyConstants.accentColor, width: 2.0),
+                const BorderSide(color: MyConstants.accent200, width: 2.0),
             borderRadius: BorderRadius.circular(5.0),
           ),
           enabledBorder: const UnderlineInputBorder(
@@ -79,7 +82,7 @@ class _DropdownInputState extends State<DropdownInput> {
         style: GoogleFonts.poppins(
           fontSize: 16,
           fontWeight: FontWeight.w500,
-          color: MyConstants.primaryColor,
+          color: MyConstants.text100,
         ),
         items: [
           DropdownMenuItem<String>(
@@ -94,7 +97,7 @@ class _DropdownInputState extends State<DropdownInput> {
                   style: GoogleFonts.poppins(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: MyConstants.primaryColor,
+                    color: MyConstants.text100,
                   ),
                 ));
           }),

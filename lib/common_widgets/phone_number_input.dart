@@ -1,7 +1,7 @@
-import 'package:rentwise/constants/colours.dart';
+import 'package:fiyoh/constants/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rentwise/common_widgets/form_input.dart';
+import 'package:fiyoh/common_widgets/form_input.dart';
 
 class PhoneNumberInput extends StatelessWidget {
   final String labelText;
@@ -35,15 +35,15 @@ class PhoneNumberInput extends StatelessWidget {
               style: GoogleFonts.poppins(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: MyConstants.primaryColor,
+                color: MyConstants.text100,
               ),
             ),
             decoration: BoxDecoration(
-              color: MyConstants.primaryColor.withOpacity(0.1), // Background color
+              color: MyConstants.bg300, // Background color
               borderRadius: BorderRadius.circular(5), // Rounded corners
             ),
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           Expanded(
             child: FormInput(
               labelText: labelText,
@@ -51,6 +51,7 @@ class PhoneNumberInput extends StatelessWidget {
               obscureText: obscureText,
               controller: controller,
               validator: validator,
+              keyboardType: TextInputType.phone,
             ),
           ),
         ],

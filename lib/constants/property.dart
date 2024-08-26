@@ -1,14 +1,10 @@
 // List of Cities
 const List<String> cities = [
   "Bangalore",
-  "Chennai",
   "Delhi",
   "Hyderabad",
-  "Kolkata",
   "Mumbai",
   "Pune",
-  "Kota",
-  "Gurugram",
 ];
 
 // List of Property Types
@@ -21,13 +17,9 @@ const List<String> propertyTypes = [
 // List of States
 const List<String> states = [
   "Karnataka",
-  "Tamil Nadu",
   "Delhi",
   "Telangana",
-  "West Bengal",
   "Maharashtra",
-  "Rajasthan",
-  "Haryana",
 ];
 
 // List of Facilities
@@ -56,11 +48,12 @@ const List<String> paymentOptions = [
 // List of Amenities
 const List<String> amenities = [
   "Mattress",
-  "Cupboard",
+  "Wardrobe",
   "Fridge",
   "Table",
   "Chair",
   "AC",
   "Geyser",
   "TV",
+  "Washing Machine",
 ];

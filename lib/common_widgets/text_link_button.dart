@@ -1,32 +1,43 @@
-import "package:rentwise/constants/colours.dart";
+import "package:fiyoh/constants/colours.dart";
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 
 class TextLinkButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String text;
+  final Color color;
+  final Color bgColor;
+  final Widget? icon;
+  final double? fontSize;
 
-  const TextLinkButton(
-      {super.key, required this.onPressed, required this.text});
+  const TextLinkButton({
+    super.key,
+    required this.onPressed,
+    required this.text,
+    this.color = MyConstants.brand100,
+    this.bgColor = Colors.transparent,
+    this.icon,
+    this.fontSize = 16,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return TextButton.icon(
+      icon: icon,
       style: TextButton.styleFrom(
-        backgroundColor: Colors.transparent,
+        backgroundColor: bgColor,
         foregroundColor: Colors.transparent,
-        overlayColor: MyConstants.accentColor,
+        overlayColor: MyConstants.bg100,
       ),
       onPressed: onPressed,
-      child: Text(
+      label: Text(
         text,
         style: GoogleFonts.poppins(
-          color: Colors.blue,
-          fontSize: 16,
+          color: color,
+          fontSize: fontSize,
           fontWeight: FontWeight.w500,
         ),
         textAlign: TextAlign.right,
-        
       ),
     );
   }

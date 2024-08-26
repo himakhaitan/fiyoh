@@ -1,14 +1,18 @@
-import 'package:rentwise/common_widgets/checkbox_list.dart';
-import 'package:rentwise/common_widgets/dropdown.dart';
-import 'package:rentwise/common_widgets/form_input.dart';
-import 'package:rentwise/common_widgets/long_button.dart';
-import 'package:rentwise/constants/colours.dart';
-import 'package:rentwise/property/widgets/multi_input.dart';
-import 'package:rentwise/property/widgets/property_rules.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fiyoh/common_widgets/checkbox_list.dart';
+import 'package:fiyoh/common_widgets/dropdown.dart';
+import 'package:fiyoh/common_widgets/error_message.dart';
+import 'package:fiyoh/common_widgets/form_input.dart';
+import 'package:fiyoh/common_widgets/long_button.dart';
+import 'package:fiyoh/common_widgets/progress_loader.dart';
+import 'package:fiyoh/constants/colours.dart';
+import 'package:fiyoh/constants/enums.dart';
+import 'package:fiyoh/property/bloc/property_bloc.dart';
+import 'package:fiyoh/property/widgets/floor_input.dart';
+import 'package:fiyoh/property/widgets/property_rules.dart';
 import 'package:flutter/material.dart';
-import 'package:rentwise/layouts/form/form_layout.dart';
-import 'package:rentwise/constants/property.dart';
-import 'package:rentwise/services/property/property_service.dart';
+import 'package:fiyoh/layouts/form/form_layout.dart';
+import 'package:fiyoh/constants/property.dart';
 
 class AddNewPropertyScreen extends StatefulWidget {
   const AddNewPropertyScreen({super.key});
@@ -26,15 +30,14 @@ class _AddNewPropertyScreenState extends State<AddNewPropertyScreen> {
   String _selectedCity = "Select City";
   String _selectedState = "Select State";
   String _selectedPropertyType = "Select Property Type";
-  List<String> startRooms = [];
-  List<String> endRooms = [];
+  List<List<String>> floors = [];
   List<String> rules = [];
   List<bool> selectedFacilities = List<bool>.filled(facilities.length, false);
   List<bool> selectedPaymentOptions =
       List<bool>.filled(paymentOptions.length, false);
   List<bool> selectedAmenities = List<bool>.filled(amenities.length, false);
-  final PropertyService _propertyService = PropertyService();
-
+  bool _isError = false;
+  bool _isLoading = false;
   void onValueChangeCity(String newValue) {
     setState(() {
       _selectedCity = newValue;
@@ -53,56 +56,82 @@ class _AddNewPropertyScreenState extends State<AddNewPropertyScreen> {
     });
   }
 
-  void handleAddProperty() async {
-    if (_formKey.currentState!.validate()) {
-      await _propertyService.createProperty(
-        _propertyNameController.text,
-        _streetAddressController.text,
-        _pincodeController.text,
-        _selectedCity,
-        _selectedState,
-        _selectedPropertyType,
-        startRooms,
-        endRooms,
-        rules,
-        selectedFacilities,
-        selectedPaymentOptions,
-        selectedAmenities,
-      );
-    }
-    print("Property Added");
-  }
-
   @override
   Widget build(BuildContext context) {
-    return FormLayout(
-      title: "Add new Property",
-      formKey: _formKey,
-      description: "Fill in the property info to get started with your new PG",
-      form: AddNewPropertyOptions(
-        propertyNameController: _propertyNameController,
-        streetAddressController: _streetAddressController,
-        pincodeController: _pincodeController,
-        selectedCity: _selectedCity,
-        selectedState: _selectedState,
-        selectedPropertyType:_selectedPropertyType,
-        startRooms: startRooms,
-        endRooms: endRooms,
-        selectedFacilities: selectedFacilities,
-        selectedPaymentOptions: selectedPaymentOptions,
-        selectedAmenities: selectedAmenities,
-        rules: rules,
-        onCityChange: onValueChangeCity,
-        onStateChange: onValueChangeState,
-        onPropertyTypeChange: onValueChangePropertyType,
-      ),
-      buttonContainer: LongButton(
-        text: "Add Property",
-        onPressed: () {
-          handleAddProperty();
-        },
-        buttonColor: MyConstants.accentColor,
-        textColor: MyConstants.whiteColor,
+    return BlocListener<PropertyBloc, PropertyState>(
+      listener: (context, state) {
+        if (state is PropertyLoading) {
+          setState(() {
+            _isLoading = true;
+          });
+        } else if (state is PropertyLoaded) {
+          setState(() {
+            _isLoading = false;
+          });
+          Navigator.pushReplacementNamed(context, '/home');
+        } else if (state is PropertyFailed) {
+          setState(() {
+            _isLoading = false;
+            _isError = true;
+          });
+        }
+      },
+      child: FormLayout(
+        title: "Add new Property",
+        formKey: _formKey,
+        description:
+            "Fill in the property info to get started with your new PG",
+        form: AddNewPropertyOptions(
+          propertyNameController: _propertyNameController,
+          streetAddressController: _streetAddressController,
+          pincodeController: _pincodeController,
+          selectedCity: _selectedCity,
+          selectedState: _selectedState,
+          selectedPropertyType: _selectedPropertyType,
+          floors: floors,
+          selectedFacilities: selectedFacilities,
+          selectedPaymentOptions: selectedPaymentOptions,
+          selectedAmenities: selectedAmenities,
+          rules: rules,
+          onCityChange: onValueChangeCity,
+          onStateChange: onValueChangeState,
+          onPropertyTypeChange: onValueChangePropertyType,
+        ),
+        buttonContainer: _isLoading
+            ? const ProgressLoader()
+            : Column(
+                children: [
+                  LongButton(
+                    text: "Add Property",
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        context.read<PropertyBloc>().add(
+                              AddProperty(
+                                propertyName: _propertyNameController.text,
+                                streetAddress: _streetAddressController.text,
+                                pincode: _pincodeController.text,
+                                city: _selectedCity,
+                                state: _selectedState,
+                                propertyType: PropertyTypeExtension.fromString(
+                                    _selectedPropertyType)!,
+                                floors: floors,
+                                rules: rules,
+                                selectedFacilities: selectedFacilities,
+                                selectedPaymentOptions: selectedPaymentOptions,
+                                selectedAmenities: selectedAmenities,
+                              ),
+                            );
+                      }
+                    },
+                    buttonColor: MyConstants.accentColor,
+                    textColor: MyConstants.whiteColor,
+                  ),
+                  if (_isError) const SizedBox(height: 10),
+                  if (_isError)
+                    const ErrorMessage(
+                        message: "An error occurred. Please try again"),
+                ],
+              ),
       ),
     );
   }
@@ -115,8 +144,7 @@ class AddNewPropertyOptions extends StatefulWidget {
   final String selectedCity;
   final String selectedState;
   final String selectedPropertyType;
-  List<String> startRooms;
-  List<String> endRooms;
+  List<List<String>> floors;
   List<String> rules;
   List<bool> selectedFacilities;
   List<bool> selectedPaymentOptions;
@@ -133,8 +161,7 @@ class AddNewPropertyOptions extends StatefulWidget {
     required this.selectedCity,
     required this.selectedState,
     required this.selectedPropertyType,
-    required this.startRooms,
-    required this.endRooms,
+    required this.floors,
     required this.rules,
     required this.selectedFacilities,
     required this.selectedPaymentOptions,
@@ -160,6 +187,12 @@ class _AddNewPropertyOptionsState extends State<AddNewPropertyOptions> {
           icon: Icons.home_work_outlined,
           controller: widget.propertyNameController,
           validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter your property name';
+            }
+            if (value.length < 5) {
+              return 'Property name must be at least 3 characters';
+            }
             return null;
           },
         ),
@@ -170,6 +203,12 @@ class _AddNewPropertyOptionsState extends State<AddNewPropertyOptions> {
           icon: Icons.location_history_outlined,
           controller: widget.streetAddressController,
           validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter your street address';
+            }
+            if (value.length < 5) {
+              return 'Street address must be at least 5 characters';
+            }
             return null;
           },
         ),
@@ -201,8 +240,15 @@ class _AddNewPropertyOptionsState extends State<AddNewPropertyOptions> {
           hintText: "What's your Pincode?",
           obscureText: false,
           icon: Icons.location_on_outlined,
+          keyboardType: TextInputType.number,
           controller: widget.pincodeController,
           validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter your pincode';
+            }
+            if (value.length != 6) {
+              return 'Pincode must be 6 characters';
+            }
             return null;
           },
         ),
@@ -213,12 +259,10 @@ class _AddNewPropertyOptionsState extends State<AddNewPropertyOptions> {
           onChanged: widget.onPropertyTypeChange,
         ),
         // Room Details including beds
-        MultiInput<String>(
-          label: "Add Floors",
-          description: "Add rooms to your property",
-          startRooms: widget.startRooms,
-          endRooms: widget.endRooms,
-        ),
+        FloorInput(
+            label: "Add Floors",
+            description: "Add rooms to your property",
+            floors: widget.floors),
         // Available Facilities
         CheckboxListFormField(
           options: facilities,
@@ -253,7 +297,7 @@ class _AddNewPropertyOptionsState extends State<AddNewPropertyOptions> {
           selectedOptions: widget.selectedAmenities,
           label: "Room Amenities",
         ),
-        PropertyRules<String>(
+        PropertyRules(
           label: "Property Rules",
           description: "Let us know your property rules",
           rules: widget.rules,

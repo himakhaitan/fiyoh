@@ -1,4 +1,4 @@
-import 'package:rentwise/constants/colours.dart';
+import 'package:fiyoh/constants/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,8 +15,8 @@ class LongButton extends StatelessWidget {
     required this.onPressed,
     this.borderRadius = 5.0,
     this.textStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-    this.buttonColor = MyConstants.whiteColor,
-    this.textColor = MyConstants.primaryColor,
+    this.buttonColor = MyConstants.primary100,
+    this.textColor = MyConstants.text400,
   });
 
   @override
@@ -33,7 +33,7 @@ class LongButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(borderRadius),
             ),
           ),
-          overlayColor: WidgetStateProperty.all(MyConstants.whiteColor.withOpacity(0.2)),
+          overlayColor: WidgetStateProperty.all(MyConstants.colorGray800),
         ),
         label: Padding(
           padding: const EdgeInsets.symmetric(vertical: 14),

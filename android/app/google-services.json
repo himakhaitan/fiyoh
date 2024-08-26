@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "45593094888",
+    "project_id": "pg-connect-8ce02",
+    "storage_bucket": "pg-connect-8ce02.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45593094888:android:96e949d6eee0e08960f75d",
+        "android_client_info": {
+          "package_name": "com.fiyoh.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45593094888-kih1j3hstq51sv4ln3gt3r699o9i8ivn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fiyoh.app",
+            "certificate_hash": "ceb32821d35edf03df57c0e5e01523f204badca9"
+          }
+        },
+        {
+          "client_id": "45593094888-vpit7j3dsgphq9md4dvp8j34t5iqinr7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fiyoh.app",
+            "certificate_hash": "9502b770d17a44d0491a32be73da08f5b0aa271a"
+          }
+        },
+        {
+          "client_id": "45593094888-8cv8lm7t80ibasjetcerte0mbk9ojd6g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGy_vYVxqs2-SfXqSplq2A0gHqgpgxX3A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "45593094888-1jfe4kt914gp0mfu4358on1rugb3g10o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "45593094888-24r7ebicvc4065cq94vt55v8pm02q9dv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rentwise.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

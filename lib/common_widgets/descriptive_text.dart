@@ -1,5 +1,7 @@
+// Packages: Imports
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:fiyoh/constants/colours.dart';
 
 class DescriptiveText extends StatelessWidget {
   final String text;
@@ -10,7 +12,7 @@ class DescriptiveText extends StatelessWidget {
   const DescriptiveText({
     super.key,
     required this.text,
-    this.color = Colors.white,
+    this.color = MyConstants.primary100,
     this.fontSize = 16,
     this.fontWeight = FontWeight.w400,
   });
