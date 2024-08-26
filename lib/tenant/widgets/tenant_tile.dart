@@ -45,8 +45,8 @@ class TenantTile extends StatelessWidget {
                   icon: Icons.person_2_outlined,
                 ),
                 InfoItem(
-                  text: "Room 101",
-                  icon: Icons.meeting_room_outlined,
+                  text: tenant.gender,
+                  icon: tenant.gender == 'MALE'? Icons.male_outlined : Icons.female,
                 ),
               ],
             ),

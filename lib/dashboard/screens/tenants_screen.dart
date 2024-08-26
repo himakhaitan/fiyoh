@@ -235,6 +235,7 @@ class _TenantsScreenState extends State<TenantsScreen> {
                         onChanged: (value) {
                           setState(() {
                             _selectedPeriod = value;
+                            _error = "";
                           });
                           _handleFilters();
                         },
@@ -250,6 +251,7 @@ class _TenantsScreenState extends State<TenantsScreen> {
                         onChanged: (value) {
                           setState(() {
                             _selectedStatus = value;
+                            _error = "";
                           });
                           _handleFilters();
                         },

@@ -18,6 +18,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fiyoh/request/support_screen.dart';
 import 'firebase_options.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 void main() async {
   // Ensures that the Flutter binding system is fully set up before
@@ -28,6 +30,12 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+    // Enable Crashlytics collection
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+  // Optionally, you can enable Crashlytics logging for non-fatal errors
+  FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
 
   // System Chrome Settings
   SystemChrome.setSystemUIOverlayStyle(
@@ -69,6 +77,9 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: const AuthWrapper(),
+        navigatorObservers: [
+          FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+        ],
         onGenerateRoute: (settings) => generateRoute(settings),
       ),
     );
