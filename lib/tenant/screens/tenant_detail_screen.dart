@@ -54,15 +54,17 @@ class _TenantDetailScreenState extends State<TenantDetailScreen> {
             ),
             onPressed: () {
               showAlertDialog(
-                  context: context,
-                  title: 'Remove Tenant',
-                  content: 'Are you sure you want to remove this tenant?',
-                  okayAction: () {
-                    context.read<PropertyBloc>().add(
-                        RemoveTenant(booking: widget.tenant.activeBooking));
-                    // Navigator.pop(context);
-                  },
-                  okayText: 'Remove');
+                context: context,
+                title: 'Remove Tenant',
+                content: 'Are you sure you want to remove this tenant?',
+                okayAction: () {
+                  context
+                      .read<PropertyBloc>()
+                      .add(RemoveTenant(booking: widget.tenant.activeBooking));
+                  // Navigator.pop(context);
+                },
+                okayText: 'Remove',
+              );
             },
           ),
         ],

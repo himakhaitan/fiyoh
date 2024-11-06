@@ -75,7 +75,8 @@ class _SupportScreenState extends State<SupportScreen> {
               "General",
               "Billing Issues",
               "Technical Issues",
-              "Monthly Reminder"
+              "Monthly Reminder",
+              "Request Call",
               "Other",
             ],
             onChanged: (value) {
